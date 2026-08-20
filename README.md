@@ -46,12 +46,12 @@ Participants should be able to:
 -	Windows Laptop with administrator permissions
 -	Modern web browser such as Microsoft Edge or Google Chrome
 -	Access to a Fabric-enabled tenant (Microsoft workshop provided)
-  - [XMLA Endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#security) must be enabled in tenant and capacity
-  - [Fabric Apps](https://learn.microsoft.com/en-us/fabric/apps/create-app#enable-fabric-app-in-tenant-admin-settings) must be enabled in tenant
-  - Admin permission to a Fabric workspace in this tenant
+    - [XMLA Endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#security) must be enabled in tenant and capacity
+    - [Fabric Apps](https://learn.microsoft.com/en-us/fabric/apps/create-app#enable-fabric-app-in-tenant-admin-settings) must be enabled in tenant
+    - Admin permission to a Fabric workspace in this tenant
 -	[GitHub personal account](https://github.com/signup) (GitHub enterprise account wont work)
 -	[GitHub Copilot license](https://github.com/features/copilot/plans) (Microsoft workshop-provided your personal GitHub account)
-  - See [sign-up-copilot-license](sign-up-copilot-license.md) for instructions on how to sign-up for a GitHub Copilot license for this workshop.
+    - See [sign-up-copilot-license](sign-up-copilot-license.md) for instructions on how to sign-up for a GitHub Copilot license for this workshop.
 -	[Power BI Desktop](https://pbi.onl/download) (latest release)
 -	[Visual Studio Code](https://code.visualstudio.com/download) (latest release)
 -	[Git for Windows](https://gitforwindows.org/)
