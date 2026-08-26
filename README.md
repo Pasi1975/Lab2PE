@@ -53,6 +53,8 @@ Participants should be able to:
 -	[GitHub Copilot license](https://github.com/features/copilot/plans) (Microsoft workshop-provided your personal GitHub account)
     - See [sign-up-copilot-license](sign-up-copilot-license.md) for instructions on how to sign-up for a GitHub Copilot license for this workshop.
 -	[Power BI Desktop](https://pbi.onl/download) (latest release)
--	[Visual Studio Code](https://code.visualstudio.com/download) (latest release)
+-	[Visual Studio Code](https://code.visualstudio.com/download)
+-   [GitHub Copilot App](https://github.com/features/ai/github-app)
+-   [GitHub Copilot CLI](https://github.com/features/copilot/cli)
 -	[Git for Windows](https://gitforwindows.org/)
 -	[Node.js and npm](https://nodejs.org/en/download/)
