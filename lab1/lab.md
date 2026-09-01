@@ -1,6 +1,8 @@
 # Lab - Agentic Web Modeling with Copilot
 
-⏱️ Duration: ? minutes
+⏱️ **Total duration:** 75-90 minutes, including environment setup
+
+## Overview
 
 In this lab, you inherit a semantic model from another analyst. The model works, but it contains realistic modeling issues such as unclear object names, missing descriptions, and incomplete business measures.
 
@@ -8,8 +10,11 @@ Using **Copilot in Power BI web modeling**, you will explore the model, identify
 
 > **Workshop model:** All participants will use the same semantic model with sample data. The model has been intentionally prepared with realistic modeling issues so that the exercises produce visible, meaningful improvements.
 
+> **Workspace isolation:** Each participant works in a separate Fabric workspace to prevent concurrent editing conflicts. You will create the workspace and upload the workshop model at the start of this lab.
+
 ## What you will learn
 
+- How to create and organize a Fabric workspace for model development
 - How to explore and understand an inherited semantic model
 - How to analyze model structure, naming, and metadata
 - How to improve model names and descriptions
@@ -20,31 +25,84 @@ Using **Copilot in Power BI web modeling**, you will explore the model, identify
 
 ## Lab structure
 
-| # | Section | Notes |
-| - | ------- | ----- |
-| - | [Prerequisites](#️-prerequisites) | Confirm access to the workshop environment |
-| 1 | [1. Explore the model](#1-explore-the-model) | Understand the inherited model |
-| 2 | [2. Analyze the model](#2-analyze-the-model) | Identify naming and metadata issues |
-| 3 | [3. Apply model cleanup](#3-apply-model-cleanup) | Improve approved names and descriptions |
-| 4 | [4. Validate the improvements](#4-validate-the-improvements) | Confirm the intended changes |
-| 5 | [5. Create measures in a batch](#5-create-measures-in-a-batch) | Add business calculations |
-| 6 | [6. Save a clean checkpoint](#6-save-a-clean-checkpoint) | Preserve the completed model |
-| 7 | [7. Recover with version history](#7-recover-with-version-history) | Undo an unwanted change |
+| # | Section | Learning goal | Duration |
+| - | ------- | ------------- | -------- |
+| - | [Prerequisites](#️-prerequisites) | Confirm access and understand workspace isolation | 5 min |
+| 0 | [0. Prepare the environment](#0-prepare-the-environment) | Create your workspace and upload the workshop model | 10 min |
+| 1 | [1. Explore the model](#1-explore-the-model) | Understand the inherited model | 10 min |
+| 2 | [2. Analyze the model](#2-analyze-the-model) | Identify naming and metadata issues | 10 min |
+| 3 | [3. Apply model cleanup](#3-apply-model-cleanup) | Improve approved names and descriptions | 15 min |
+| 4 | [4. Validate the improvements](#4-validate-the-improvements) | Confirm the intended changes | 10 min |
+| 5 | [5. Create measures in a batch](#5-create-measures-in-a-batch) | Add business calculations | 15 min |
+| 6 | [6. Save a clean checkpoint](#6-save-a-clean-checkpoint) | Preserve the completed model | 5 min |
+| 7 | [7. Recover with version history](#7-recover-with-version-history) | Undo an unwanted change | 5 min |
 
 ## 🛠️ Prerequisites
 
 Before beginning the lab, confirm that you have:
 
-* Access to the workshop's Fabric workspace
-* Permission to edit semantic models in the workspace
+* Access to the workshop's Fabric tenant with permission to create a workspace
+* Access to a Copilot-supported Fabric capacity
+* A Power BI Pro license
 * Access to Copilot in Power BI web modeling
-* Access to the sample semantic model provided by the instructor
+* A modern web browser such as Microsoft Edge, Google Chrome, or Mozilla Firefox
+* The workshop PBIX file downloaded to your computer
 
-All participants should use the workshop-provided model rather than uploading or selecting their own model. This ensures that the prompts, expected results, and validation steps remain consistent across the workshop.
+All participants should use the workshop-provided model rather than selecting their own model. This ensures that the prompts, expected results, and validation steps remain consistent across the workshop.
+
+## 0. Prepare the environment
+
+✅ **Goal**: Create an isolated Fabric workspace and upload the workshop model so that you have a private copy to edit.
+
+### Create a workspace
+
+1. Go to [Power BI](https://app.powerbi.com) and sign in.
+2. Select **Workspaces** from the navigation pane.
+3. Select **New workspace**.
+4. Enter a workspace name using this convention:
+
+	```text
+	PBI-Modeling-Lab-[YourInitials]-[Date]
+	```
+
+	For example: `PBI-Modeling-Lab-SP-0926`.
+
+5. Optionally, add this description:
+
+	```text
+	Personal workspace for FabCon 2026 Agentic Web Modeling lab
+	```
+
+6. Assign the workspace to the Copilot-supported Fabric capacity identified by your instructor.
+7. Select **Save** and wait for the workspace to be created.
+
+### Upload the workshop model
+
+1. In your new workspace, select **Upload**.
+2. Select **Browse** and locate the workshop PBIX file provided by your instructor.
+3. Select **Upload** and wait for the semantic model and associated report to appear.
+
+### Verify the model
+
+1. Select the semantic model, not the report.
+2. Select **Edit semantic model**.
+3. Confirm that the model opens without errors and displays its tables, columns, measures, and relationships.
+4. Do not make any changes yet.
+
+### Expected result
+
+You should now have:
+
+* An isolated Fabric workspace assigned to the correct capacity
+* The workshop model uploaded and accessible
+* Confirmation that the model opens without errors
+* A private model ready for the remaining exercises
 
 ## 1. Explore the model
 
 ✅ **Goal**: Understand the purpose and structure of the inherited semantic model before making changes.
+
+### Steps
 
 1. Open the workshop workspace in Power BI.
 2. Locate the semantic model provided by your instructor.
@@ -67,6 +125,9 @@ All participants should use the workshop-provided model rather than uploading or
 	```
 
 8. Review Copilot's response and compare it with the tables, relationships, columns, and measures shown in the model.
+
+	> **Tip:** Note anything Copilot identifies as confusing. These objects are candidates for improvement in the next exercise.
+
 9. Select an unfamiliar table, column, or measure.
 10. Ask a follow-up question to clarify its purpose:
 
@@ -91,6 +152,8 @@ You should have a basic understanding of:
 ## 2. Analyze the model
 
 ✅ **Goal**: Identify naming and metadata issues that make the model harder for report authors and AI experiences to understand.
+
+### Steps
 
 1. Enter the following prompt:
 
@@ -119,6 +182,8 @@ You should have a basic understanding of:
 5. Identify any recommendation that should not be applied.
 6. Record the recommendations you approve and any exceptions you want Copilot to preserve.
 
+	> **Tip:** Keep descriptions concise and place the most important business information first.
+
 ### Expected result
 
 Copilot should identify issues such as:
@@ -132,6 +197,10 @@ Copilot should identify issues such as:
 ## 3. Apply model cleanup
 
 ✅ **Goal**: Improve naming consistency and add useful descriptions through a controlled set of model edits.
+
+Copilot will summarize its intended edits before applying them, giving you an opportunity to review the changes.
+
+### Steps
 
 1. Review the recommendations from the previous exercise.
 2. Identify which recommendations you want to apply.
@@ -159,8 +228,8 @@ Copilot should identify issues such as:
 4. Review the proposed edits before applying them.
 5. Confirm that the proposed changes match the approved list.
 6. Apply the changes.
-7. Save the semantic model.
-8. Inspect several renamed objects and generated descriptions in the properties pane.
+7. Save the semantic model using **Ctrl+S** or **File** > **Save**.
+8. Inspect three to five renamed objects and generated descriptions in the properties pane.
 
 ### Expected result
 
@@ -174,6 +243,8 @@ The model should have:
 ## 4. Validate the improvements
 
 ✅ **Goal**: Confirm that the cleanup was applied as intended without changing model behavior.
+
+### Steps
 
 1. Enter the following prompt:
 
@@ -191,7 +262,7 @@ The model should have:
 
 2. Compare Copilot's response with the changes you approved.
 3. Confirm that renamed objects use clear, consistent, business-friendly wording.
-4. Inspect the descriptions added to several objects.
+4. Inspect the descriptions added to three to five objects.
 5. Open at least one existing measure and confirm that its DAX expression is unchanged.
 6. Review the model relationships and confirm that no unintended relationship changes were applied.
 7. Save the semantic model.
@@ -209,6 +280,8 @@ Consider the following questions:
 ## 5. Create measures in a batch
 
 ✅ **Goal**: Use Copilot to create a related set of business measures and review the generated DAX before applying it.
+
+### Steps
 
 1. Review the sales, order, and date fields in the workshop model.
 2. Confirm that you understand which fields should support each calculation.
@@ -233,7 +306,10 @@ Consider the following questions:
 	Do not create the measures yet.
 	```
 
-4. Review the proposed DAX.
+4. Review the proposed DAX:
+	* Confirm that **Total Sales** sums the intended sales or revenue column.
+	* Confirm that **Average Order Value** divides sales by distinct orders rather than line items.
+	* Confirm that **Year-over-Year Revenue Growth** uses the correct date field and comparison period.
 5. Confirm that Copilot selected the intended tables and columns.
 6. Pay particular attention to the date field and time-intelligence logic used for the year-over-year calculation.
 7. If a recommendation uses an incorrect or ambiguous field, refine the request:
@@ -262,11 +338,21 @@ Consider the following questions:
 
 ### Expected result
 
-The model should contain a related set of documented business measures that use the intended fields in the workshop model.
+The model should contain a related set of documented business measures that:
+
+* Use the intended fields from the workshop model
+* Follow the naming and description standards from the cleanup exercise
+* Use DAX expressions you reviewed before creation
+* Include appropriate format strings
+* Are stored in the approved destination table
 
 ## 6. Save a clean checkpoint
 
 ✅ **Goal**: Preserve a known-good version of the semantic model before intentionally introducing an error.
+
+Version history provides a safety net for experimentation. This checkpoint captures the validated cleanup and approved measures.
+
+### Steps
 
 1. Confirm that the approved cleanup and measures are present.
 2. Confirm that the semantic model is saved.
@@ -278,13 +364,21 @@ The model should contain a related set of documented business measures that use 
 	```
 
 5. Save the version.
-6. Open version history and confirm that the checkpoint appears.
+6. Open **File** > **View version history** and confirm that the checkpoint appears with the expected description and timestamp.
 
 > Do not continue until you can identify the clean checkpoint. You will restore this exact version in the next exercise.
+
+### Expected result
+
+Version history should contain an entry named `Lab checkpoint: Validated cleanup and approved measures`.
 
 ## 7. Recover with version history
 
 ✅ **Goal**: Use semantic model version history as a safety net after making an unwanted change.
+
+In this scenario, you will intentionally introduce a mistake and restore the clean checkpoint.
+
+### Steps
 
 1. Select the table identified by your instructor.
 2. Note its current approved name.
@@ -303,7 +397,7 @@ The model should contain a related set of documented business measures that use 
 	Lab checkpoint: Validated cleanup and approved measures
 	```
 
-8. Restore that version.
+8. Select that version, choose **Restore**, and confirm the operation.
 9. Reopen or refresh the semantic model if needed.
 10. Confirm that the temporary table name is gone.
 11. Confirm that the valid cleanup from the earlier exercises is still present.
@@ -315,10 +409,19 @@ The model should return to the clean checkpoint created after the approved clean
 
 The temporary table name should no longer appear, while the valid work performed earlier in the lab should remain.
 
+### Reflection
+
+Consider the following questions:
+
+* When would you create a manual checkpoint in a production model?
+* What other unwanted changes could version history help you recover from?
+* How does version history support safe experimentation and collaboration?
+
 ## ✅ Wrap-up
 
 You've now:
 
+* Created and organized an isolated Fabric workspace
 * Explored and summarized an inherited semantic model
 * Identified realistic naming and metadata issues
 * Reviewed recommendations before allowing Copilot to apply changes
@@ -337,9 +440,14 @@ You've now:
 * Version history provides a recovery path when an AI-assisted or manual change produces an unwanted result.
 * The quality of the experience depends on the combination of the selected model, its starting state, and the prompts used against it.
 
+## What's next?
+
+Apply the same review, cleanup, and validation principles to other semantic models in your organization. You can also explore additional Copilot capabilities in Power BI web modeling and share the cleaned model with colleagues for feedback.
+
 ## Useful links
 
 * [Copilot in Power BI web modeling](https://learn.microsoft.com/power-bi/transform-model/copilot-web-modeling)
 * [Edit data models in the Power BI service](https://learn.microsoft.com/power-bi/transform-model/service-edit-data-models)
 * [Use Copilot with Power BI](https://learn.microsoft.com/power-bi/create-reports/copilot-introduction)
 * [Semantic model version history](https://learn.microsoft.com/power-bi/transform-model/service-semantic-model-version-history)
+* [Power BI naming conventions and best practices](https://learn.microsoft.com/power-bi/guidance/powerbi-implementation-planning-structure-tier-naming-conventions)
