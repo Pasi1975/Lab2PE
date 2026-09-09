@@ -4,11 +4,11 @@
 
 ## Overview
 
-In this lab, you inherit a semantic model from another analyst. The model works, but it contains realistic modeling issues such as unclear object names, missing descriptions, and incomplete business measures.
+In this lab, you inherit the **ManufacturingOps** semantic model from another analyst. The model already organizes content into Sales, Inventory, Procurement, and Production business domains and includes an established measure library. It also contains an **Ambiguous Names Demo** area with realistic modeling issues such as unclear terminology, abbreviations, naming inconsistencies, and missing descriptions.
 
-Using **Copilot in Power BI web modeling**, you will explore the model, identify areas for improvement, clean up its metadata, create business measures, validate your changes, and recover from an intentional mistake using semantic model version history. The entire lab is completed in the browser with no local installation required.
+Using **Copilot in Power BI web modeling**, you will explore the model, identify areas for improvement, clean up its metadata, document and extend its existing measure library, validate your changes, and recover from an intentional mistake using semantic model version history. The entire lab is completed in the browser with no local installation required.
 
-> **Workshop model:** All participants will use the same semantic model with sample data. The model has been intentionally prepared with realistic modeling issues so that the exercises produce visible, meaningful improvements.
+> **Workshop model:** All participants will use the **ManufacturingOps** semantic model with sample data. Its **Ambiguous Names Demo** area provides a consistent cleanup scenario so that the exercises produce visible, meaningful improvements.
 
 > **Workspace isolation:** Each participant works in a separate Fabric workspace to prevent concurrent editing conflicts. You will create the workspace and upload the workshop model at the start of this lab.
 
@@ -19,7 +19,7 @@ Using **Copilot in Power BI web modeling**, you will explore the model, identify
 - How to analyze model structure, naming, and metadata
 - How to improve model names and descriptions
 - How better metadata can make a semantic model easier for people and AI experiences to understand
-- How to create related business measures with Copilot
+- How to analyze, document, improve, and extend an existing measure library with Copilot
 - How to review and validate AI-assisted model changes
 - How to save a clean version and recover from an unwanted change using version history
 
@@ -33,7 +33,7 @@ Using **Copilot in Power BI web modeling**, you will explore the model, identify
 | 2 | [2. Analyze the model](#2-analyze-the-model) | Identify naming and metadata issues | 10 min |
 | 3 | [3. Apply model cleanup](#3-apply-model-cleanup) | Improve approved names and descriptions | 15 min |
 | 4 | [4. Validate the improvements](#4-validate-the-improvements) | Confirm the intended changes | 10 min |
-| 5 | [5. Create measures in a batch](#5-create-measures-in-a-batch) | Add business calculations | 15 min |
+| 5 | [5. Improve and extend the measure library](#5-improve-and-extend-the-measure-library) | Review and extend existing business calculations | 15 min |
 | 6 | [6. Save a clean checkpoint](#6-save-a-clean-checkpoint) | Preserve the completed model | 5 min |
 | 7 | [7. Recover with version history](#7-recover-with-version-history) | Undo an unwanted change | 5 min |
 
@@ -46,7 +46,7 @@ Before beginning the lab, confirm that you have:
 * A Power BI Pro license
 * Access to Copilot in Power BI web modeling
 * A modern web browser such as Microsoft Edge, Google Chrome, or Mozilla Firefox
-* The workshop PBIX file downloaded to your computer
+* The workshop PBIX file containing the **ManufacturingOps** semantic model downloaded to your computer
 
 All participants should use the workshop-provided model rather than selecting their own model. This ensures that the prompts, expected results, and validation steps remain consistent across the workshop.
 
@@ -79,7 +79,7 @@ All participants should use the workshop-provided model rather than selecting th
 ### Upload the workshop model
 
 1. In your new workspace, select **Upload**.
-2. Select **Browse** and locate the workshop PBIX file provided by your instructor.
+2. Select **Browse** and locate the **ManufacturingOps** workshop PBIX file provided by your instructor.
 3. Select **Upload** and wait for the semantic model and associated report to appear.
 
 ### Verify the model
@@ -87,7 +87,9 @@ All participants should use the workshop-provided model rather than selecting th
 1. Select the semantic model, not the report.
 2. Select **Edit semantic model**.
 3. Confirm that the model opens without errors and displays its tables, columns, measures, and relationships.
-4. Do not make any changes yet.
+4. Confirm that the semantic model is named **ManufacturingOps**.
+5. Confirm that you can find the Sales, Inventory, Procurement, and Production domains, the **Business Measures** table, and the **Ambiguous Names Demo** area.
+6. Do not make any changes yet.
 
 ### Expected result
 
@@ -96,6 +98,7 @@ You should now have:
 * An isolated Fabric workspace assigned to the correct capacity
 * The workshop model uploaded and accessible
 * Confirmation that the model opens without errors
+* Confirmation that the expected business domains, measure library, and cleanup demo are present
 * A private model ready for the remaining exercises
 
 ## 1. Explore the model
@@ -105,7 +108,7 @@ You should now have:
 ### Steps
 
 1. Open the workshop workspace in Power BI.
-2. Locate the semantic model provided by your instructor.
+2. Locate the **ManufacturingOps** semantic model.
 3. Open the model in the web modeling experience.
 4. Switch to **Editing** mode.
 5. Select **Copilot** from the ribbon.
@@ -118,8 +121,9 @@ You should now have:
 	1. List the tables in the model.
 	2. Identify which tables appear to be fact tables and dimension tables.
 	3. Summarize the business purpose of the model.
-	4. Identify the existing measures that support sales and order analysis.
-	5. Call out any parts of the model that may be difficult for a new report author to understand.
+	4. Summarize the measures in the Business Measures table and the business questions they answer.
+	5. Explain how the Sales, Inventory, Procurement, and Production domains are represented.
+	6. Call out any parts of the model that may be difficult for a new report author to understand.
 
 	Do not make any changes yet.
 	```
@@ -155,10 +159,13 @@ You should have a basic understanding of:
 
 ### Steps
 
-1. Enter the following prompt:
+1. Navigate to the **Ambiguous Names Demo** area in the model and review the objects it contains.
+2. Enter the following prompt:
 
 	```text
-	Review the tables, columns, and measures in this semantic model using these standards:
+	Review the tables, columns, and measures in the Ambiguous Names Demo area of
+	this semantic model. Identify unclear business terminology, abbreviations,
+	naming inconsistencies, and missing descriptions using these standards:
 
 	- Use clear English names.
 	- Use spaces instead of underscores.
@@ -167,20 +174,20 @@ You should have a basic understanding of:
 	- Provide concise descriptions for important tables, columns, and measures.
 	- Preserve the existing business meaning of each object.
 
-	Identify the objects that do not follow these standards and propose an improved
-	name or description for each one.
+	For each object that does not follow these standards, propose an improved name
+	or description.
 
 	Group the recommendations by table, column, and measure. Explain the reason for
 	each recommendation.
 
-	Do not apply any changes yet.
+	Limit this review to the Ambiguous Names Demo area. Do not apply any changes yet.
 	```
 
-2. Review the proposed recommendations.
-3. Compare each recommendation with the visible model structure.
-4. Confirm that the proposed names preserve the intended business meaning.
-5. Identify any recommendation that should not be applied.
-6. Record the recommendations you approve and any exceptions you want Copilot to preserve.
+3. Review the proposed recommendations.
+4. Compare each recommendation with the visible objects in **Ambiguous Names Demo**.
+5. Confirm that the proposed names preserve the intended business meaning.
+6. Identify any recommendation that should not be applied.
+7. Record the recommendations you approve and any exceptions you want Copilot to preserve.
 
 	> **Tip:** Keep descriptions concise and place the most important business information first.
 
@@ -207,7 +214,8 @@ Copilot will summarize its intended edits before applying them, giving you an op
 3. Enter the following prompt:
 
 	```text
-	Apply the approved naming recommendations from the previous review.
+	Apply the approved naming recommendations from the previous review to the
+	Ambiguous Names Demo area.
 
 	Also add concise, business-friendly descriptions where descriptions are missing
 	for the relevant tables, columns, and measures.
@@ -221,6 +229,7 @@ Copilot will summarize its intended edits before applying them, giving you an op
 	- Do not change relationship behavior.
 	- Do not delete any model objects.
 	- Respect the exceptions I identified in the previous review.
+	- Do not modify objects outside the Ambiguous Names Demo area.
 
 	Before applying the changes, summarize the edits you intend to make.
 	```
@@ -277,90 +286,92 @@ Consider the following questions:
 * Did Copilot suggest anything that still required human judgment?
 * Which changes would you review more carefully in a production model?
 
-## 5. Create measures in a batch
+## 5. Improve and extend the measure library
 
-✅ **Goal**: Use Copilot to create a related set of business measures and review the generated DAX before applying it.
+✅ **Goal**: Use Copilot to analyze, document, improve, and extend the existing measure library without recreating calculations that are already present.
 
 ### Steps
 
-1. Review the sales, order, and date fields in the workshop model.
-2. Confirm that you understand which fields should support each calculation.
+1. Open the **Business Measures** table and review its existing measures and display folders.
+2. Select one existing measure from a business domain identified by your instructor.
 3. Enter the following prompt:
 
 	```text
-	Using the appropriate columns and existing base measures in this semantic model,
-	propose the following business measures:
+	Analyze the existing measures in the Business Measures table of the
+	ManufacturingOps semantic model.
 
-	- Total Sales
-	- Average Order Value
-	- Year-over-Year Revenue Growth
+	1. Group the measures by the Sales, Inventory, Procurement, and Production
+	   business domains.
+	2. For [SELECTED MEASURE], explain the DAX and business purpose in plain language.
+	3. Review its name, description, format string, and display folder.
+	4. Recommend metadata improvements without changing its business logic.
+	5. Identify one useful calculation that is missing from the same business domain
+	   and can reuse existing measures.
+	6. Provide the proposed DAX, business description, format string, and display
+	   folder for that new calculation.
 
-	For each measure:
-
-	- Provide the proposed DAX expression.
-	- Explain the calculation in plain language.
-	- Add a concise business description.
-	- Recommend an appropriate format string.
-	- Identify the table where the measure should be stored.
-
-	Do not create the measures yet.
+	Do not make any changes yet, and do not recreate an existing measure.
 	```
 
-4. Review the proposed DAX:
-	* Confirm that **Total Sales** sums the intended sales or revenue column.
-	* Confirm that **Average Order Value** divides sales by distinct orders rather than line items.
-	* Confirm that **Year-over-Year Revenue Growth** uses the correct date field and comparison period.
-5. Confirm that Copilot selected the intended tables and columns.
-6. Pay particular attention to the date field and time-intelligence logic used for the year-over-year calculation.
-7. If a recommendation uses an incorrect or ambiguous field, refine the request:
+4. Replace `[SELECTED MEASURE]` with the measure you selected, then review Copilot's response.
+5. Confirm that the explanation of the existing measure matches its DAX and business purpose.
+6. Confirm that the metadata recommendations preserve the measure's name where it is already clear and do not alter its DAX.
+7. Check that the proposed new calculation does not duplicate an existing measure in **Business Measures**.
+8. Confirm that the proposed DAX reuses appropriate existing measures and uses the intended tables, columns, and date context.
+9. If the proposal duplicates an existing measure or uses an incorrect field, refine the request:
 
 	```text
-	Revise the proposed Year-over-Year Revenue Growth measure to use
-	[APPROVED DATE FIELD] from [APPROVED DATE TABLE].
+	Revise the proposed calculation so that it does not duplicate [EXISTING MEASURE].
+	Use [APPROVED BASE MEASURE] and, when needed, [APPROVED DATE FIELD] from
+	[APPROVED DATE TABLE].
 
-	Show the revised DAX before applying it.
+	Show the revised DAX and metadata before applying it.
 	```
 
-	Replace the placeholders with the approved field and table names from the workshop model.
+	Replace the placeholders with the approved objects from **ManufacturingOps**.
 
-8. Once the proposed calculations are correct, enter:
+10. Once the proposed metadata and calculation are correct, enter:
 
 	```text
-	Create the approved measures using the DAX, descriptions, format strings, and
-	destination table we reviewed.
+	Apply the approved metadata improvements to [SELECTED MEASURE] without changing
+	its DAX expression.
 
-	Do not modify any existing measures.
+	Create the approved new measure using the DAX, description, format string, and
+	display folder we reviewed. Store it in the Business Measures table.
+
+	Do not modify any other existing measures.
 	```
 
-9. Review and apply the changes.
-10. Save the semantic model.
-11. Inspect each created measure's name, description, format string, destination table, and DAX expression.
+11. Replace `[SELECTED MEASURE]`, review the proposed changes, and apply them.
+12. Save the semantic model.
+13. Inspect the updated metadata of the existing measure and confirm that its DAX is unchanged.
+14. Inspect the new measure's name, description, format string, display folder, destination table, and DAX expression.
 
 ### Expected result
 
-The model should contain a related set of documented business measures that:
+The model should contain an improved and extended measure library in which:
 
-* Use the intended fields from the workshop model
-* Follow the naming and description standards from the cleanup exercise
-* Use DAX expressions you reviewed before creation
-* Include appropriate format strings
-* Are stored in the approved destination table
+* One existing measure has clearer, reviewed metadata and unchanged DAX
+* One non-duplicate measure extends an existing business domain
+* The new measure reuses the intended model objects and existing measures
+* Both measures follow the approved description, formatting, and organization standards
+* The new measure is stored in the **Business Measures** table
 
 ## 6. Save a clean checkpoint
 
 ✅ **Goal**: Preserve a known-good version of the semantic model before intentionally introducing an error.
 
-Version history provides a safety net for experimentation. This checkpoint captures the validated cleanup and approved measures.
+Version history provides a safety net for experimentation. This checkpoint captures the validated cleanup and measure-library improvements.
 
 ### Steps
 
-1. Confirm that the approved cleanup and measures are present.
+1. Confirm that the approved cleanup, updated measure metadata, and new measure are present.
 2. Confirm that the semantic model is saved.
 3. Open **File** and select **Save to version history**.
 4. Add the following description:
 
 	```text
-	Lab checkpoint: Validated cleanup and approved measures
+	Lab checkpoint: Validated cleanup and measure library extension
 	```
 
 5. Save the version.
@@ -370,7 +381,7 @@ Version history provides a safety net for experimentation. This checkpoint captu
 
 ### Expected result
 
-Version history should contain an entry named `Lab checkpoint: Validated cleanup and approved measures`.
+Version history should contain an entry named `Lab checkpoint: Validated cleanup and measure library extension`.
 
 ## 7. Recover with version history
 
@@ -394,18 +405,18 @@ In this scenario, you will intentionally introduce a mistake and restore the cle
 7. Locate the version with this description:
 
 	```text
-	Lab checkpoint: Validated cleanup and approved measures
+	Lab checkpoint: Validated cleanup and measure library extension
 	```
 
 8. Select that version, choose **Restore**, and confirm the operation.
 9. Reopen or refresh the semantic model if needed.
 10. Confirm that the temporary table name is gone.
 11. Confirm that the valid cleanup from the earlier exercises is still present.
-12. Confirm that the approved measures are still present.
+12. Confirm that the updated measure metadata and the approved new measure are still present.
 
 ### Expected result
 
-The model should return to the clean checkpoint created after the approved cleanup and measures were completed.
+The model should return to the clean checkpoint created after the approved cleanup and measure-library extension were completed.
 
 The temporary table name should no longer appear, while the valid work performed earlier in the lab should remain.
 
@@ -427,7 +438,7 @@ You've now:
 * Reviewed recommendations before allowing Copilot to apply changes
 * Improved model names and descriptions
 * Validated that the cleanup did not unintentionally alter model behavior
-* Created and reviewed multiple business measures
+* Analyzed, documented, improved, and extended an existing business measure library
 * Saved a known-good version of the semantic model
 * Recovered from an unwanted change using version history
 
