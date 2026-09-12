@@ -1,6 +1,6 @@
 # Lab - Personalized Power BI Agents
 
-⏱️ Duration: ? minutes
+⏱️ Duration: 90 minutes
 
 This lab shows how to extend and personalize agentic Power BI development. You will use skills, MCP capabilities, PBIP, and code-first tooling to customize agent behavior, encode team standards, and apply your own modeling best practices across semantic models and reports.
 
