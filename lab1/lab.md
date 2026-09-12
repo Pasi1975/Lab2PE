@@ -25,19 +25,19 @@ Using **Copilot in Power BI web modeling**, you will explore the model, identify
 
 ## Lab structure
 
-| # | Section | Learning goal | Duration |
-| - | ------- | ------------- | -------- |
-| - | [Prerequisites](#️-prerequisites) | Confirm access and understand workspace isolation | 5 min |
-| 0 | [0. Prepare the environment](#0-prepare-the-environment) | Create your workspace and upload the workshop model | 10 min |
-| 1 | [1. Explore the model](#1-explore-the-model) | Understand the inherited model | 10 min |
-| 2 | [2. Analyze the model](#2-analyze-the-model) | Identify naming and metadata issues | 10 min |
-| 3 | [3. Apply model cleanup](#3-apply-model-cleanup) | Improve approved names and descriptions | 15 min |
-| 4 | [4. Validate the improvements](#4-validate-the-improvements) | Confirm the intended changes | 10 min |
-| 5 | [5. Improve and extend the measure library](#5-improve-and-extend-the-measure-library) | Review and extend existing business calculations | 15 min |
-| 6 | [6. Save a clean checkpoint](#6-save-a-clean-checkpoint) | Preserve the completed model | 5 min |
-| 7 | [7. Recover with version history](#7-recover-with-version-history) | Undo an unwanted change | 5 min |
+| Section | Learning goal |
+| ------- | ------------- |
+| [Prerequisites](#prerequisites) | Confirm access and understand workspace isolation |
+| [0. Prepare the environment](#0-prepare-the-environment) | Create your workspace and upload the workshop model |
+| [1. Explore the model](#1-explore-the-model) | Understand the inherited model |
+| [2. Analyze the model](#2-analyze-the-model) | Identify naming and metadata issues |
+| [3. Apply model cleanup](#3-apply-model-cleanup) | Improve approved names and descriptions |
+| [4. Validate the improvements](#4-validate-the-improvements) | Confirm the intended changes |
+| [5. Improve and extend the measure library](#5-improve-and-extend-the-measure-library) | Review and extend existing business calculations |
+| [6. Save a clean checkpoint](#6-save-a-clean-checkpoint) | Preserve the completed model |
+| [7. Recover with version history](#7-recover-with-version-history) | Undo an unwanted change |
 
-## 🛠️ Prerequisites
+## Prerequisites
 
 Before beginning the lab, confirm that you have:
 
@@ -59,27 +59,14 @@ All participants should use the workshop-provided model rather than selecting th
 1. Go to [Power BI](https://app.powerbi.com) and sign in.
 2. Select **Workspaces** from the navigation pane.
 3. Select **New workspace**.
-4. Enter a workspace name using this convention:
-
-	```text
-	PBI-Modeling-Lab-[YourInitials]-[Date]
-	```
-
-	For example: `PBI-Modeling-Lab-SP-0926`.
-
-5. Optionally, add this description:
-
-	```text
-	Personal workspace for FabCon 2026 Agentic Web Modeling lab
-	```
-
-6. Assign the workspace to the Copilot-supported Fabric capacity identified by your instructor.
-7. Select **Save** and wait for the workspace to be created.
+4. Enter a workspace name using this convention: `Lab-1-[YourInitials]` (for example 'Lab-1-SP')
+5. Assign the workspace to one of the available Premium capacities.
+6. Select **Apply** and wait for the workspace to be created.
 
 ### Upload the workshop model
 
 1. In your new workspace, select **Upload**.
-2. Select **Browse** and locate the **ManufacturingOps** workshop PBIX file provided by your instructor.
+2. Select **Browse** and select the [ManufacturingOps.pbix](resources/ManufacturingOps.pbix) file in this repo.
 3. Select **Upload** and wait for the semantic model and associated report to appear.
 
 ### Verify the model
@@ -87,9 +74,8 @@ All participants should use the workshop-provided model rather than selecting th
 1. Select the semantic model, not the report.
 2. Select **Edit semantic model**.
 3. Confirm that the model opens without errors and displays its tables, columns, measures, and relationships.
-4. Confirm that the semantic model is named **ManufacturingOps**.
-5. Confirm that you can find the Sales, Inventory, Procurement, and Production domains, the **Business Measures** table, and the **Ambiguous Names Demo** area.
-6. Do not make any changes yet.
+4. Confirm that you can find the Sales, Inventory, Procurement, and Production domains, the **Business Measures** table, and the **Ambiguous Names Demo** area.
+5. Do not make any changes yet.
 
 ### Expected result
 
@@ -130,7 +116,8 @@ You should now have:
 
 8. Review Copilot's response and compare it with the tables, relationships, columns, and measures shown in the model.
 
-	> **Tip:** Note anything Copilot identifies as confusing. These objects are candidates for improvement in the next exercise.
+	> [!TIP]
+	> Note anything Copilot identifies as confusing. These objects are candidates for improvement in the next exercise.
 
 9. Select an unfamiliar table, column, or measure.
 10. Ask a follow-up question to clarify its purpose:
@@ -189,7 +176,8 @@ You should have a basic understanding of:
 6. Identify any recommendation that should not be applied.
 7. Record the recommendations you approve and any exceptions you want Copilot to preserve.
 
-	> **Tip:** Keep descriptions concise and place the most important business information first.
+	> [!TIP]
+	> Keep descriptions concise and place the most important business information first.
 
 ### Expected result
 

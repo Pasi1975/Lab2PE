@@ -9,7 +9,7 @@ Walk away ready to apply agentic development to your Power BI projects with conf
 ## 🏁 Get started
 
 - Ensure you met all the [Requirements](#-requirements) before starting the labs.
-- Download this repository to your machine.
+- Download or Clone this repository to your machine.
   
   ![clone-repository](resources/img/clone-repository.png)
   
@@ -58,3 +58,4 @@ Participants should be able to:
 -   [GitHub Copilot CLI](https://github.com/features/copilot/cli)
 -	[Git for Windows](https://gitforwindows.org/)
 -	[Node.js and npm](https://nodejs.org/en/download/)
+-	[Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest&pivots=winget)
