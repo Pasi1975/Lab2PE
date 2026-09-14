@@ -242,7 +242,7 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 5. Copy the folder [`resources/.github`](resources/.github) into the root of your PBIP project folder
 
     > [!IMPORTANT]
-	> This workshop uses a collection of Microsoft-provided [skills](https://agentskills.io/) installed through the `powerbi-authoring` plugin. You can also create project-specific skills and keep them in the codebase, where they can be maintained and reviewed like source code. Sharing these skills with the project helps multiple developers follow the same workflows and produce consistent results.
+	> This workshop uses Microsoft-provided agent skills installed through the `powerbi-authoring` plugin. Skills give the agent context about processes and preferred ways of working. Teams can keep project-specific skills in source control to capture business practices and help developers produce consistent results. The [`powerbi-documentation` skill](resources/.github/skills/powerbi-documentation/SKILL.md) is an example of a repository-local skill that lives alongside the codebase. Skills can also be shared through private or public repositories and marketplaces.
 
 6. Your folder should look like this.
 
@@ -267,24 +267,24 @@ Writing documentation from scratch and keeping it current both take time. AI can
 2. Enter the following prompt:
 
 	```text
-	Document the project for me.
+	Document this Power BI Project code base.
 	```
 
 	**Expected outcome**
 
-	- The agent reads the documentation requirements from `AGENTS.md` and inspects the PBIP files rather than asking you to describe the model.
-	- A `docs/` folder is created with a single Markdown file describing both the semantic model and the report.
-	- The model section contains a Mermaid diagram of the tables and relationships, a list of key measures, and the dimensions available for slicing.
-	- The report section contains one subsection per report page, with a page screenshot, a description of the report flow, and the available filters.
-	- The screenshots are produced through the Power BI Desktop tooling, so Power BI Desktop must stay open with the project loaded.
-	- No changes are made to the semantic model or the report definition. Confirm this in the Source Control view: only files under `docs/` should appear as new.
+	- The agent reads `AGENTS.md` and loads the local `powerbi-documentation` skill. LLMs load skills on demand, and the instruction in `AGENTS.md` makes this requirement explicit.
+	- The agent follows the documentation structure and standards defined by the `powerbi-documentation` skill.
+	- The agent uses the Power BI Authoring skill and MCP server to inspect the semantic model metadata.
+	- The agent loads the Power BI report authoring skills to inspect the PBIR files and understand the report pages, visuals, filters, and bindings.
+	- The agent uses the Power BI report CLI tools to capture screenshots from the report open in Power BI Desktop.
+	- A `docs/` folder is created with a catalog and one Markdown file for each semantic model and report in the codebase.
+	- The generated documentation includes the model structure, measures, report flow, filters, and a screenshot of every report page.
 
 	> [!IMPORTANT]
-	> The short prompt works because `AGENTS.md` defines how the team expects project documentation to be created. This keeps the prompt simple and applies the same documentation standard across chat sessions and team members.
+	> The short prompt works because `AGENTS.md` requires the agent to load the local `powerbi-documentation` skill. The skill defines how the team expects project documentation to be created, while the Power BI MCP server and report tools provide the model and report information needed to create it.
 
-3. Open the generated Markdown file and preview it with **Ctrl+Shift+V**.
-4. Compare the diagram and measure list against the model in Power BI Desktop.
-5. Keep this chat session open. You return to it in exercise 7.
+3. Open the generated Markdown files and preview it with **Ctrl+Shift+V**.
+4. Keep this chat session open. You return to it in exercise 7.
 
 ## 4. Add measure descriptions using company context
 
@@ -630,3 +630,5 @@ Apply the same pattern to one of your own projects. Start by saving a report as 
 * [Tabular Editor - Get Started with Agentic Development](https://tabulareditor.com/blog/how-to-get-started-with-agentic-development-for-business-intelligence)
 * [Tabular Editor - Pick the right AI model](https://tabulareditor.com/blog/picking-the-ai-model-for-the-task)
 * [Tabular Editor - LLMs for data professionals](https://tabulareditor.com/blog/practical-introduction-to-llms-for-data-professionals)
+* [Agent Plugins spec](https://github.com/agentplugins/agent-plugins-spec)
+* [Agent Skills spec](https://agentskills.io/specification)
