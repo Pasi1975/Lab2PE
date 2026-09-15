@@ -11,6 +11,8 @@ The lab covers the two scenarios you meet in real projects:
 - **Brownfield development.** You inherit an existing Power BI report, convert it to a PBIP project, track it with Git, and use AI agents to help you with development tasks.
 - **Greenfield development.** You start from a Fabric Lakehouse, and let the agent plan and build a new semantic model and reports with you steering the implementation.
 
+Both parts use the shared prerequisites and environment setup. After completing that setup, you can work through either part independently.
+
 ## What you will learn
 
 - How to install and use the `powerbi-authoring` plugin across multiple harnesses: GitHub Copilot CLI, Visual Studio Code, and the GitHub Copilot app
@@ -28,18 +30,19 @@ The lab covers the two scenarios you meet in real projects:
 | Section | Learning goal |
 | ------- | ------------- |
 | [Prerequisites](#prerequisites) | Confirm tools, licenses, and access |
-| [0. Prepare the environment](#0-prepare-the-environment) | Install the plugin and sign in to the required CLIs |
-| [1. Save the report as a PBIP project and track it with Git](#1-save-the-report-as-a-pbip-project-and-track-it-with-git) | Create a reviewable baseline |
-| [2. Set up Visual Studio Code and GitHub Copilot Chat](#2-set-up-visual-studio-code-and-github-copilot-chat) | Configure the model and add `AGENTS.md` |
-| [3. Generate documentation for the model and report](#3-generate-documentation-for-the-model-and-report) | Automate a task nobody enjoys |
-| [4. Add measure descriptions using company context](#4-add-measure-descriptions-using-company-context) | Ground the agent in business language |
-| [5. Add currency conversion with a calculation group](#5-add-currency-conversion-with-a-calculation-group) | Extend the semantic model |
-| [6. Restyle the report pages](#6-restyle-the-report-pages) | Apply report-wide layout changes |
-| [7. Update the documentation](#7-update-the-documentation) | Reuse an earlier chat session |
-| [8. Prepare the Fabric Lakehouse](#8-prepare-the-fabric-lakehouse) | Create the greenfield data source |
-| [9. Connect the GitHub Copilot app to the remote MCP server](#9-connect-the-github-copilot-app-to-the-remote-mcp-server) | Work without local setup |
-| [10. Plan and build a Direct Lake semantic model](#10-plan-and-build-a-direct-lake-semantic-model) | Plan first, then implement |
-| [11. Create two reports with parallel subagents](#11-create-two-reports-with-parallel-subagents) | Compare design variations in parallel |
+| [Prepare the environment](#prepare-the-environment) | Install the plugin and sign in to the required CLIs |
+| **[Part 1: Brownfield development](#part-1-brownfield-development)** | **Develop an existing Power BI project** |
+| [1.1 Save the report as a PBIP project and track it with Git](#11-save-the-report-as-a-pbip-project-and-track-it-with-git) | Create a reviewable baseline |
+| [1.2 Prepare the codebase with agentic context](#12-prepare-the-codebase-with-agentic-context) | Add `AGENTS.md` and a local skill to the project |
+| [1.3 Generate documentation for the model and report](#13-generate-documentation-for-the-model-and-report) | Automate a task nobody enjoys |
+| [1.4 Add measure descriptions using company context](#14-add-measure-descriptions-using-company-context) | Ground the agent in business language |
+| [1.5 Add currency conversion with a calculation group](#15-add-currency-conversion-with-a-calculation-group) | Extend the semantic model |
+| [1.6 Restyle the report pages](#16-restyle-the-report-pages) | Apply report-wide layout changes |
+| **[Part 2: Greenfield development](#part-2-greenfield-development)** | **Build new Power BI artifacts in Fabric** |
+| [2.1 Prepare the Fabric Lakehouse](#21-prepare-the-fabric-lakehouse) | Create the greenfield data source |
+| [2.2 Connect the GitHub Copilot app to the remote MCP server](#22-connect-the-github-copilot-app-to-the-remote-mcp-server) | Work without local setup |
+| [2.3 Plan and build a Direct Lake semantic model](#23-plan-and-build-a-direct-lake-semantic-model) | Plan first, then implement |
+| [2.4 Create two reports with parallel subagents](#24-create-two-reports-with-parallel-subagents) | Compare design variations in parallel |
 
 ## Prerequisites
 
@@ -83,7 +86,7 @@ You also need:
 > [!IMPORTANT]
 > Your instructor provides the workshop Fabric account and the GitHub Copilot license.
 
-## 0. Prepare the environment
+## Prepare the environment
 
 ✅ **Goal**: Install the Power BI authoring plugin once and make it available to every GitHub Copilot surface, then sign in to the accounts the agent needs.
 
@@ -122,9 +125,9 @@ You also need:
     
 3. Follow the browser prompts and return to the terminal when the sign-in completes.
    
-   Your console should look like this:
+    Your console should look like this:
 
-   ![gh-copilot-signedin](/resources/img/gh-copilot-signedin.png)
+    ![gh-copilot-signedin](resources/img/gh-copilot-signedin.png)
 
 ### Confirm that the skills and MCP server are ready
 
@@ -154,32 +157,35 @@ You also need:
 	```powershell
 	az account show
 	```
-    ![az-account-show](/resources/img/az-account-show.png)
+	![az-account-show](resources/img/az-account-show.png)
 
     > [!IMPORTANT]
 	> The Power BI report authoring tools use the Azure CLI token to reach Fabric. If the wrong account is active, later exercises fail with authorization errors.
 
-### Ensure Copilot Chat is enabled in Visual Studio Code
+### Ensure GitHub Copilot is enabled in Visual Studio Code
 
 1. Open **Visual Studio Code**.
 2. Select [Open the AI features setting](vscode://settings/chat.disableAIFeatures) and ensure that **Disable AI Features** is cleared.
    	
-    > [!NOTE]
+    > [!TIP]
 	> If the link does not open from your Markdown viewer, open **Settings** in Visual Studio Code and search for `chat.disableAIFeatures`.
 
 4. Open **GitHub Copilot Chat** (`CTRL+ALT+I`) and confirm that the chat view is accessible.
-
-
 5. You may need to sign-in with your GitHub Copilot account.
+6. Open the chat settings and confirm the `powerbi-authoring` plugin is intalled
+   
+	![vscode-chat-plugin-installed](resources/img/vscode-chat-plugin-installed.png)
 
 ### Expected result
 
 You should now have:
 
-* The `powerbi-authoring` plugin installed and shared across GitHub Copilot surfaces
 * A signed-in GitHub Copilot CLI session
+* A signed-in Visual Studio Code Copilot chat
+* The `powerbi-authoring` plugin installed and shared across GitHub Copilot surfaces
 * Confirmation that the Power BI skills and MCP server are available
 * Azure CLI signed in with the workshop Fabric account
+
 
 ---
 
@@ -187,11 +193,11 @@ You should now have:
 
 In this part you work with an existing Power BI report. You convert it to PBIP, place it under Git, and use an AI Agent inside Visual Studio Code to document and make changes to it. Power BI Desktop stays open so you can reload and inspect the agent's changes.
 
-## 1. Save the report as a PBIP project and track it with Git
+### 1.1 Save the report as a PBIP project and track it with Git
 
 ✅ **Goal**: Convert a provided PBIX file into a PBIP project and create a Git baseline so that every agent change is reviewable and reversible.
 
-### Steps
+#### Steps
 
 1. Open the workshop [`resources/sales.pbix`](resources/sales.pbix) file in **Power BI Desktop**.
 2. Select **File** > **Save as** > **Browse this device**.
@@ -200,71 +206,74 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 5. Keep Power BI Desktop open. You reload changes from it later in the lab.
 6. Open the project folder in **Visual Studio Code** by clicking the title bar and choosing **Open in Visual Studio Code**
    
-   ![pbid-open-vscode](/resources/img/pbid-open-vscode.png)
+	![pbid-open-vscode](resources/img/pbid-open-vscode.png)
 
    Confirm that the folder contains the `sales.SemanticModel` and `sales.Report` folders.
 
-   ![vscode-pbip](/resources/img/vscode-pbip.png)
+	![vscode-pbip](resources/img/vscode-pbip.png)
 
 8. Click the **Source Control** (`CTRL+SHIFT+G`) tab and select **Initialize Repository**
 9. Type a initial commit message, for example "Initial PBIP baseline"
 
-    ![vscode-init-git-pbip](/resources/img/vscode-init-git-pbip.png)
+	![vscode-init-git-pbip](resources/img/vscode-init-git-pbip.png)
 
     > [!IMPORTANT]
 	> PBIP stores the semantic model as TMDL files and the report as PBIR files. Both are plain text, so Git can show you exactly what the agent changed. This is your safety net: review the diff after every prompt, keep what you want, and discard the rest with **Discard changes** in the Source Control view.    	
 
-### Expected result
+#### Expected result
 
 * A PBIP project saved to a local folder
 * `sales.SemanticModel` and `sales.Report` folders visible in Visual Studio Code
 * An initialized Git repository with a clean working tree and one baseline commit
 
-## 2. Set up GitHub Copilot in Visual Studio Code
+### 1.2 Prepare the codebase with agentic context
 
-✅ **Goal**: Configure the AI model, add the `AGENTS.md` file and skills that keeps the agent grounded on important development rules.
+✅ **Goal**: Add versioned instructions and a local skill so agents understand how to work with this codebase before you enter the first prompt.
 
-### Steps
+#### Steps
 
-1. In **Visual Studio Code**, open **GitHub Copilot Chat** (`CTRL+ALT+I`).
-2. Set the chat mode to **Agent**.
-3. In the model picker, select a reasoning model such as `GPT-5.6 Sol`.
-   
-   ![vscode-copilot-chat](/resources/img/vscode-copilot-chat.png)
-
-4. Copy [resources/AGENTS.md](resources/AGENTS.md) from the workshop repository into the root of your PBIP project folder. 
+1. Copy [resources/AGENTS.md](resources/AGENTS.md) from the workshop repository into the root of your PBIP project folder.
 
     > [!IMPORTANT]
 	> [`AGENTS.md`](https://agents.md/) is an important part of agentic development. It lets you define codebase-level rules, context, and constraints that agents need to understand and respect when working on the project. Because the file is stored with the codebase and read automatically, the same guidance applies consistently across chat sessions and team members.
 	>
 	> The `AGENTS.md` file in this workshop is a simple example. It ensures that the agent always loads the appropriate Power BI authoring skills and directs it to use the Power BI Authoring MCP server when editing the semantic model. The agent can work with TMDL files directly, but using the MCP tools provides a more reliable authoring path less likely to break things.
 
-5. Copy the folder [`resources/.github`](resources/.github) into the root of your PBIP project folder
+2. Copy the folder [`resources/.github`](resources/.github) into the root of your PBIP project folder.
 
     > [!IMPORTANT]
 	> This workshop uses Microsoft-provided agent skills installed through the `powerbi-authoring` plugin. Skills give the agent context about processes and preferred ways of working. Teams can keep project-specific skills in source control to capture business practices and help developers produce consistent results. The [`powerbi-documentation` skill](resources/.github/skills/powerbi-documentation/SKILL.md) is an example of a repository-local skill that lives alongside the codebase. Skills can also be shared through private or public repositories and marketplaces.
 
-6. Your folder should look like this.
+3. Confirm that your folder looks like this:
 
-    ![vscode-pbip-folder](/resources/img/vscode-pbip-folder.png)
+	![vscode-pbip-folder](resources/img/vscode-pbip-folder.png)
 
-6. Open **Source Control** (`CTRL+SHIFT+G`) and commit.
+4. Open **Source Control** (`CTRL+SHIFT+G`) and commit the new files.
 
-### Expected result
+    > [!TIP]
+	> You can use Copilot to generate analyze the changes and generate the commit message for you by clicking on **Generate commit message** in the top right corner of the textbox.
 
-* GitHub Copilot Chat running in agent mode
-* `AGENTS.md` present in the project root and committed to Git
+#### Expected result
 
-## 3. Generate documentation for the model and report
+* `AGENTS.md` present in the project root with the development rules agents should follow
+* The local `powerbi-documentation` skill available under `.github/skills/`
+* Both sources of agentic context committed to Git and shared with the codebase
+
+### 1.3 Generate documentation for the model and report
 
 ✅ **Goal**: Let the agent produce the documentation that usually never gets written, using the PBIP files as the source of truth.
 
 Writing documentation from scratch and keeping it current both take time. AI can help you create a useful starting point, while the Power BI agentic tools, the MCP server, and the `powerbi-desktop` CLI can help keep it aligned with the model and report with minimal ongoing effort.
 
-### Steps
+#### Steps
 
-1. Start a **new chat session** in GitHub Copilot Chat.
-2. Enter the following prompt:
+1. In **Visual Studio Code**, open **GitHub Copilot Chat** (`CTRL+ALT+I`).
+2. Set the chat mode to **Agent**.
+3. In the model picker, select a reasoning model such as `GPT-5.6 Sol`.
+
+	![vscode-copilot-chat](resources/img/vscode-copilot-chat.png)
+
+4. Enter the following prompt:
 
 	```text
 	Document this Power BI Project code base.
@@ -282,19 +291,38 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 	> [!IMPORTANT]
 	> The short prompt works because `AGENTS.md` requires the agent to load the local `powerbi-documentation` skill. The skill defines how the team expects project documentation to be created, while the Power BI MCP server and report tools provide the model and report information needed to create it.
+    >
+	> By default, each tool call asks for your approval. You can approve calls individually, allow tools for the current session or all sessions, or switch the agent to **Autopilot**. Autopilot runs tools without asking for approval, so use it carefully and preferably in a sandbox environment. For details, see [Manage approvals and permissions](https://code.visualstudio.com/docs/agents/run/approvals).
 
-3. Open the generated Markdown files and preview it with **Ctrl+Shift+V**.
-4. Keep this chat session open. You return to it in exercise 7.
+5. Open the generated documentation Markdown files in `docs/` and preview them with **Ctrl+Shift+V**.
+6. Open the **Source Control** (`CTRL+SHIFT+G`) and commit all changes.
 
-## 4. Add measure descriptions using company context
+#### Reflection
+
+* How much time would you need to produce the same level of documentation for one of your own semantic models?
+* Which documentation standards would your team add to or remove from the `powerbi-documentation` skill?
+* Which parts of the generated documentation still need a human to verify?
+
+### 1.4 Add measure descriptions using company context
 
 ✅ **Goal**: Add business-friendly descriptions to every measure, written in the language of Northwind Retail Group rather than generic BI text.
 
-### Steps
+#### Steps
 
 1. Copy [resources/company-context.md](resources/company-context.md) from the workshop repository into the root of your PBIP project folder.
-2. Start a **new chat session**.
-3. Enter the following prompt:
+2. Start a **new chat session** in GitHub Copilot Chat.
+
+	> [!TIP]
+	> Start a new session when moving to a different task. A clean session prevents decisions, assumptions, and tool results from the previous task from influencing the next one. 
+    >
+    > You can also reuse an existing sessions to keep the session context. For example, you could reuse the documentation session to update the docs after making changes to the semantic models or reports.
+
+3. Choose a lower-cost model such as `GPT-5.6 Terra`.
+   
+	> [!TIP]
+	> Choose the model that fits the task. Generating measure descriptions still benefits from a reasoning model because it must interpret DAX and business context, but it does not require the most capable or expensive option. Reserve higher-cost models for work that needs deeper planning or more complex decisions.
+
+4. Enter the following prompt:
 
 	```text
 	Add a description to every measure in the semantic model `Sales.SemanticModel\definition`.
@@ -305,37 +333,49 @@ Writing documentation from scratch and keeping it current both take time. AI can
 	**Expected outcome**
 
 	- The agent loads the `semantic-model-authoring` skill.
-	- The agent connects to the semantic model through the Power BI Authoring MCP server instead of editing TMDL files by hand.
+	- The agent connects to the semantic model TMDL files through the Power BI Authoring MCP server instead of editing TMDL files by hand.
 	- Every measure receives a concise description of one to two sentences.
 	- The descriptions reflect the context file, for example revenue described as net sales, fiscal years labeled FY24 or FY25, and seasonal patterns called out where they are relevant.
 	- The updated model is saved back to the PBIP folder.
 	- No measure expressions, data types, or relationships are changed.
 
-4. Open the **Source Control** view in Visual Studio Code and review the Git diff.
-5. Confirm that the changed lines are description properties only, and that no DAX expression was modified.
+	> [!TIP]
+	> There is little difference between `company-context.md` and the context contained in a skill. The company context could be packaged as a skill. This exercise keeps it as a regular file to show that you can also give an agent context by referring to a file directly in your prompt.
 
-	This is the main advantage of PBIP with Git. You see the exact change before you accept it. Context files such as `company-context.md` live in the repository, so the whole team gets the same tone and business rules from the agent.
+5. Open the **Source Control tab** in Visual Studio Code (`CTRL+SHIFT+G`) and review the Git diff to the semantic model TMDL code files. Confirm that the changed lines are description properties only, and that no DAX expression was modified.
+    
+    ![vscode-copilot-change-tmdl-diff](resources/img/vscode-copilot-change-tmdl-diff.png)
+
+    > [!TIP]
+	> This is the main advantage of PBIP with Git. You see the exact change before you accept it.
 
 6. Switch to **Power BI Desktop**.
 7. Select **Apply external changes** to reload the updated model.
+   
+   ![pbi-desktop-reload-external-changes](resources/img/pbi-desktop-reload-external-changes.png)
+
+    > [!TIP]
+	> **Apply external changes** shipped with the August 2026 Power BI Desktop release. It detects and reloads PBIP files changed outside Power BI Desktop, whether those changes were made manually in Visual Studio Code or generated by AI agents and tools. Learn more in [Edit Power BI Desktop project files in Visual Studio Code](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-external-editing).
+
 8. Select a measure in the model view and confirm that its description appears in the properties pane.
+9. Open **Source Control** (`CTRL+SHIFT+G`) and commit the changes.
 
-### Reflection
+#### Reflection
 
-* Which descriptions would you keep as written, and which would you rewrite?
+* Which descriptions would you keep as written, and which would you rewrite? Could you include context in `AGENTS.md` or `company-context.md` to make it better?
 * What other team knowledge would be worth storing as a context file in the repository?
 
-## 5. Add currency conversion with a calculation group
+### 1.5 Add currency conversion with a calculation group
 
 ✅ **Goal**: Extend the semantic model with a new source table and a calculation group so sales can be analyzed in multiple currencies.
 
-### Steps
+#### Steps
 
-1. Start a **new chat session**.
+1. Start a **new chat session** and pick `GPT-5.6 Terra` model.
 2. Enter the following prompt:
 
 	```text
-	Add RAW-CurrencyExchange.csv (https://raw.githubusercontent.com/pbi-tools/sales-sample/refs/heads/data/RAW-CurrencyExchange.csv) to the Sales semantic model, then create a calculation group to convert and analyze sales in EUR, USD, and GBP.
+	Add RAW-CurrencyExchange.csv (https://raw.githubusercontent.com/pbi-tools/sales-sample/refs/heads/data/RAW-CurrencyExchange.csv) to the `sales.SemanticModel\definition` semantic model, then create a calculation group to convert and analyze sales in EUR, USD, and GBP.
 	```
 
 	**Expected outcome**
@@ -347,76 +387,67 @@ Writing documentation from scratch and keeping it current both take time. AI can
 	- The updated model is saved back to the PBIP folder.
 	- The Git diff shows new TMDL files for the table and the calculation group, and no unrelated model changes.
 
-3. Review the Git diff in the **Source Control** view.
+3. Open **Source Control** (`CTRL+SHIFT+G`) and review the Git diff.
 4. Switch to **Power BI Desktop** and select **Apply external changes**.
-5. Create a temporary visual with a sales measure, then apply the calculation group items to confirm that the converted values change as expected.
-6. Remove the temporary visual before continuing.
-7. Open **Source Control** (`CTRL+SHIFT+G`) in Visual Studio Code.
-8. Stage the measure description and currency conversion changes, enter `Add measure descriptions and currency conversion` as the commit message, and select **Commit**.
+5. **Refresh** the model in **Power BI Desktop**
+6. Create a temporary visual with a sales measure, then apply the calculation group items to confirm that the converted values change as expected.
+   
+   ![pbi-desktop-calc-group-test](resources/img/pbi-desktop-calc-group-test.png)
 
-## 6. Restyle the report pages
+7. Open **Source Control** (`CTRL+SHIFT+G`) and commit the changes.
+
+#### Reflection
+
+* Notice how the agent fetched a new data source, inspected its schema, and translated it into semantic model definitions.
+
+### 1.6 Restyle the report pages
 
 ✅ **Goal**: Apply a consistent layout across every page of the report through the report authoring tools.
 
-### Steps
+#### Steps
 
-1. Start a **new chat session**.
-2. Enter the following prompt:
+1. Open the "Sales" report page in **Power BI Desktop** and observe the visual positioning and size is not consistent.
 
-	```text
-	Remove visual titles on all visuals of all pages in report `Sales.Report`
-	Also ensure the visuals have a consistent grid alignment and size.
-	```
+    ![pbi-desktop-current-report](resources/img/pbi-desktop-current-report.png)
 
-	**Expected outcome**
-
-	- The agent loads the `powerbi-report-authoring` skill.
-	- The agent uses both the `powerbi-report-author` and `powerbi-desktop` CLI tools to inspect and update the report.
-	- The agent analyzes the PBIR files before making changes.
-	- The `visual.json` files are updated to turn off the visual titles.
-	- The `position` properties are updated so that the visuals follow a consistent grid alignment and size on every page.
-	- The Git diff is limited to files under `Sales.Report`. The semantic model is unchanged.
+2. Start a **new chat session** and pick model `GPT-5.6 Terra`.
 
 3. Optionally turn on **Autopilot** in the chat session so the agent runs the sequence of tool calls without asking for approval at every step.
 
 	> **Note:** Autopilot is useful for long, repetitive tool sequences, but use it with care. The agent acts without asking. Keep your Git working tree clean before you enable it so you can always revert.
 
-4. Review the Git diff and confirm that only report files changed.
-5. Switch to **Power BI Desktop** and select **Apply external changes**.
-6. Review each page and confirm that titles are removed and the visuals are aligned.
-7. If a page does not look right, either refine the prompt or discard the change in the **Source Control** view and try again.
-
-## 7. Update the documentation
-
-✅ **Goal**: Bring the documentation back in sync with the model and report changes by reusing the chat session that created it.
-
-### Steps
-
-1. Reopen the chat session you used in exercise 3.
-2. Enter the following prompt:
+4. Enter the following prompt to use AI to help you make changes to the report.
 
 	```text
-	I made changes to my PBIP, update the docs with those changes.
+	Remove visual titles on all visuals of all pages in report `Sales.Report`.
+    Ensure the grid layout of the report is consistent in terms of visual alignment and size:
+    - Visual alignment between the grid rows
+    - Spacing between visuals should be consistent
+    - Visuals below the cards and slicers should have the same size on each grid row.
+    Note: If CLI reports `hasUnsavedChanges=true` overwrite and continue with the reload for the screenshot validation.
 	```
 
 	**Expected outcome**
 
-	- The agent identifies what changed, either by inspecting the PBIP files or by reading the Git diff.
-	- The Markdown file in `docs/` is updated with the new currency exchange table, the calculation group, and the measure descriptions.
-	- The report section and page screenshots are refreshed to match the new layout.
-	- Only files under `docs/` change.
+	- The agent loads the `powerbi-report-authoring` skill.
+	- The agent reads and modify the PBIR *.json files
+	- The agent uses both the `powerbi-report-author` to validate schema changes and `powerbi-desktop` CLI tools to reload and screenshot in **Power BI Desktop** for validation.
 
-3. Preview the updated documentation and confirm that the new model objects and the restyled pages are reflected.
-4. Open **Source Control** (`CTRL+SHIFT+G`) in Visual Studio Code.
-5. Stage the report and documentation changes, enter `Restyle report and refresh docs` as the commit message, and select **Commit**.
+	> [!IMPORTANT]
+	> The agent might refuse to reload the report if the Power BI Desktop CLI reports `unsavedChanges`. This usually means that Power BI Desktop contains changes that have not been saved to the PBIP files. Stopping prevents the agent from overwriting your work. In this exercise we know that agent is the only one modifying the report and because of that we state explicitly in the prompt that it can proceed despite the warning.
 
-	Returning to an earlier session matters. That session already holds the context of how the documentation was structured and why, so the follow-up prompt can be short. A new session would have to rediscover all of it.
+5. Open **Source Control** and review the Git diff - only report files should have changed.
+6. Switch to **Power BI Desktop** and confirm that titles are removed and the visuals are aligned.
+   
+    ![pbi-desktop-after-report](resources/img/pbi-desktop-after-report.png)
 
-### Reflection
+7. Open **Source Control** (`CTRL+SHIFT+G`) and commit the changes.
 
-* How much of this work would you have done by hand, and how long would it have taken?
-* Which changes would you still review line by line before merging into a shared branch?
-* Where did `AGENTS.md` visibly change what the agent did?
+#### Reflection
+
+* This example makes a simple change to two report pages, but the same approach can scale to larger reports or multiple reports.
+* You could capture your team's layout and design standards as agentic context, then use agents to review reports against those standards autonomously.
+* Power BI CLI tools let the agent validate the PBIR JSON changes and use screenshots from Power BI Desktop to confirm that the rendered report matches the intended result.
 
 ---
 
@@ -426,11 +457,11 @@ In this part you start from nothing. You create a Fabric workspace, load a Lakeh
 
 There are no local files in this part. The GitHub Copilot app is a good fit for that: it is more approachable than Visual Studio Code or the CLI, and it needs no local setup. Underneath it is the same GitHub Copilot orchestrator, the same skills, and the same MCP capabilities, so the experience stays consistent. Which surface you use is a matter of preference.
 
-## 8. Prepare the Fabric Lakehouse
+### 2.1 Prepare the Fabric Lakehouse
 
 ✅ **Goal**: Create an isolated Fabric workspace and load it with a Lakehouse containing the sample sales tables.
 
-### Steps
+#### Steps
 
 1. Go to [Power BI](https://app.powerbi.com) and sign in with the workshop account.
 2. Select **Workspaces** > **New workspace**.
@@ -455,16 +486,16 @@ There are no local files in this part. The GitHub Copilot app is a good fit for 
 	* `dimension_stock_item`
 	* `fact_sale`
 
-### Expected result
+#### Expected result
 
 * A dedicated Fabric workspace named `FabCon-Agentic-Lab2-[YourInitials]`
 * A `Lakehouse_01` Lakehouse loaded with the six Delta tables above
 
-## 9. Connect the GitHub Copilot app to the remote MCP server
+### 2.2 Connect the GitHub Copilot app to the remote MCP server
 
 ✅ **Goal**: Register the remote Power BI Authoring MCP server so the agent can work against Fabric with no local installation.
 
-### Steps
+#### Steps
 
 1. Open the **GitHub Copilot app** and sign in with your GitHub account.
 2. Open the MCP server settings and add a new MCP server manually with this URL:
@@ -476,21 +507,21 @@ There are no local files in this part. The GitHub Copilot app is a good fit for 
 3. Complete the authentication prompt with the workshop Fabric account.
 4. Confirm that the `powerbi-authoring` plugin and the remote MCP server both appear as available in the app.
 
-	The local MCP server installed with the plugin in exercise 0 can do the same work. The remote server has one advantage: it needs no local setup at all, which makes it the easier option for anyone who is not working from a code project.
+	The local MCP server installed during the environment setup can do the same work. The remote server has one advantage: it needs no local setup at all, which makes it the easier option for anyone who is not working from a code project.
 
 	> **Instructor note:** The exact menu path for registering an MCP server depends on the GitHub Copilot app version installed on your machine. Your instructor will show the current path.
 
-### Expected result
+#### Expected result
 
 * The remote Power BI Authoring MCP server registered and authenticated in the GitHub Copilot app
 
-## 10. Plan and build a Direct Lake semantic model
+### 2.3 Plan and build a Direct Lake semantic model
 
 ✅ **Goal**: Produce a reviewed implementation plan for a new Direct Lake semantic model, then implement the approved plan with a cheaper model.
 
 Planning first gives you something to correct before anything is created. It also lets you split the work: an expensive reasoning model for the thinking, a cheaper model for the execution.
 
-### Create the plan
+#### Create the plan
 
 1. In the **GitHub Copilot app**, start a new session.
 2. Set the session mode to **Plan**.
@@ -514,7 +545,7 @@ Planning first gives you something to correct before anything is created. It als
 6. Read the plan and check it against `team-rules.md`.
 7. Adjust the plan where needed, for example table naming, which measures to create, or the contents of the `About` table.
 
-### Implement the plan
+#### Implement the plan
 
 1. Switch the model picker to a cheaper model such as `GPT-5.6 Terra`.
 
@@ -538,18 +569,18 @@ Planning first gives you something to correct before anything is created. It als
 4. Confirm the table names, the hidden base columns, the explicit measures, and the `About` table.
 5. Note which parts of the model came from your rules and which came from the skill defaults.
 
-### Reflection
+#### Reflection
 
 * What did the plan get wrong, and would you have caught it after implementation instead?
 * Which of your own team standards would you write down as a rules file?
 
-## 11. Create two reports with parallel subagents
+### 2.4 Create two reports with parallel subagents
 
 ✅ **Goal**: Use subagents to build two report variations at the same time and pick the better one.
 
 Trying design variations used to be expensive, so most teams built one and lived with it. With subagents you can run both and compare.
 
-### Steps
+#### Steps
 
 1. In the **GitHub Copilot app**, start a new session.
 2. Turn on **Autopilot** so the subagents can run without stopping for approval on each step.
@@ -580,7 +611,7 @@ Trying design variations used to be expensive, so most teams built one and lived
 6. Compare the layouts, the chosen measures, and the chosen fields.
 7. Decide which one you would keep, and note what you would change in the other.
 
-### Reflection
+#### Reflection
 
 * Did the two subagents pick the same measures? If not, why?
 * When is running variations in parallel worth the cost, and when is one attempt enough?
