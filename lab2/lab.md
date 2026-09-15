@@ -201,7 +201,7 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 
 1. Open the workshop [`resources/sales.pbix`](resources/sales.pbix) file in **Power BI Desktop**.
 2. Select **File** > **Save as** > **Browse this device**.
-3. Choose a local folder for the lab, for example `C:\FabCon\Lab2`.
+3. Choose a local folder for the lab, for example `C:\FabCon\Lab2_Par1`.
 4. In the file type list, select **Power BI project files (*.pbip)** and save the project.
 5. Keep Power BI Desktop open. You reload changes from it later in the lab.
 6. Open the project folder in **Visual Studio Code** by clicking the title bar and choosing **Open in Visual Studio Code**
@@ -455,7 +455,7 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 In this part you start from nothing. You create a Fabric workspace, load a Lakehouse with a notebook, and then build a Direct Lake semantic model and two reports from the **GitHub Copilot app** using the remote Power BI Authoring MCP server.
 
-There are no local files in this part. The GitHub Copilot app is a good fit for that: it is more approachable than Visual Studio Code or the CLI, and it needs no local setup. Underneath it is the same GitHub Copilot orchestrator, the same skills, and the same MCP capabilities, so the experience stays consistent. Which surface you use is a matter of preference.
+There are no local files in this part. The **GitHub Copilot app** is a good fit for that: it is more approachable than Visual Studio Code or the CLI. Underneath it is the same GitHub Copilot orchestrator, the same skills, and the same MCP capabilities, so the experience stays consistent. Which surface you use is a matter of preference.
 
 ### 2.1 Prepare the Fabric Lakehouse
 
@@ -471,11 +471,14 @@ There are no local files in this part. The GitHub Copilot app is a good fit for 
 	FabCon-Agentic-Lab2-[YourInitials]
 	```
 
-4. Assign the workspace to the Fabric capacity identified by your instructor, then select **Apply**.
+4. Assign the workspace to the avaiable Fabric/Premium capacity and select **Apply**.
 5. In the new workspace, select **New item** > **Notebook**.
 6. Open [resources/notebook.py](resources/notebook.py) from the workshop repository and copy its contents.
 7. Paste the code into the first cell of the notebook.
-8. Run the notebook and wait for it to finish.
+8. Run the notebook (`CTRL+ENTER`) and wait for it to finish.
+   
+	![fabric-notebook-lakehouse-create](resources/img/fabric-notebook-lakehouse-create.png)
+
 9. Refresh the workspace and confirm that a Lakehouse named `Lakehouse_01` was created.
 10. Open the Lakehouse and confirm that it contains the following tables:
 
@@ -486,30 +489,38 @@ There are no local files in this part. The GitHub Copilot app is a good fit for 
 	* `dimension_stock_item`
 	* `fact_sale`
 
+	![fabric-sample-lakehouse-tables](resources/img/fabric-sample-lakehouse-tables.png)
+
 #### Expected result
 
 * A dedicated Fabric workspace named `FabCon-Agentic-Lab2-[YourInitials]`
-* A `Lakehouse_01` Lakehouse loaded with the six Delta tables above
+* A `Lakehouse_01` Lakehouse loaded with the tables.
 
 ### 2.2 Connect the GitHub Copilot app to the remote MCP server
 
-✅ **Goal**: Register the remote Power BI Authoring MCP server so the agent can work against Fabric with no local installation.
+✅ **Goal**: Register the remote Power BI Authoring MCP server so the agent can work against Fabric semantic models with no local installation.
 
 #### Steps
 
 1. Open the **GitHub Copilot app** and sign in with your GitHub account.
-2. Open the MCP server settings and add a new MCP server manually with this URL:
+2. Click on **Customize** > **MCP** > **Add server** > **Custom server** and configure the Power BI Authoring MCP server using the HTTP configuration.
 
 	```text
-	https://api.fabric.microsoft.com/v1/mcp/powerbi/authoring
+	server name: powerbi-authoring-remote
+	url: https://api.fabric.microsoft.com/v1/mcp/powerbi/authoring
 	```
 
+	![gh-app-pbi-remote-mcp](resources/img/gh-app-pbi-remote-mcp.png)
+
 3. Complete the authentication prompt with the workshop Fabric account.
-4. Confirm that the `powerbi-authoring` plugin and the remote MCP server both appear as available in the app.
+4. Disable the local MCP from the `powerbi-authoring` plugin. 
 
-	The local MCP server installed during the environment setup can do the same work. The remote server has one advantage: it needs no local setup at all, which makes it the easier option for anyone who is not working from a code project.
+	![gh-app-pbi-local-mcp-disabled](resources/img/gh-app-pbi-local-mcp-disabled.png)
 
-	> **Instructor note:** The exact menu path for registering an MCP server depends on the GitHub Copilot app version installed on your machine. Your instructor will show the current path.
+	> [!IMPORTANT]
+	> The local Power BI Authoring MCP server installed by default with `powerbi-authoring` plugin provides the same capabilities and is generally available. The remote MCP server is currently in preview and is intended to become the default option for working with Fabric data sources because its hosted in Fabric and requires no local instalation.
+	>
+	> You should avoid enabling both local and remote servers at the same time. The agent then sees two overlapping tool sets, which makes routing ambiguous and consumes extra tokens on every request. Pick one: the hosted server when you work against semantic models in Fabric workspaces, and the local server when you work against Power BI Desktop or Power BI Project files on your machine.
 
 #### Expected result
 
@@ -523,56 +534,81 @@ Planning first gives you something to correct before anything is created. It als
 
 #### Create the plan
 
-1. In the **GitHub Copilot app**, start a new session.
-2. Set the session mode to **Plan**.
-3. Select a powerful model such as `GPT-5.6 Sol`.
-4. Attach or paste the contents of [resources/team-rules.md](resources/team-rules.md) so the agent can read your development standards.
-5. Enter the following prompt, replacing the workspace name with your own:
+1. Create a new empty folder in your laptop, e.g. `C:\FabCon\Lab2_Part2`
+2. In the **GitHub Copilot App**, select **+** > **Open folder** 
+   
+	![gh-app-add-folder](resources/img/gh-app-add-folder.png)
+
+	> [!TIP]
+	> You can start a chat without a working folder, but opening a dedicated folder allows you to personalize settings to sessions under this folder such as configure context files such as `AGENTS.md` or MCP servers.
+
+3. Click on **New session** under the working folder, set the session mode to **Plan** and pick a powerful model such as `GPT-5.6 Sol`.
+	
+	![gh-app-new-session](resources/img/gh-app-new-session.png)	
+
+	> [!TIP]
+	> **Plan** mode lets Copilot inspect the available context, ask clarifying questions, and propose a reviewable implementation approach before making changes. You can correct assumptions, add validation steps, and agree on the scope before handing the plan to an agent for implementation. This is especially useful for complex or unfamiliar projects, where fixing the plan is cheaper than undoing the implementation. Learn more in [Use the GitHub Copilot plan agent](https://learn.microsoft.com/en-us/visualstudio/ide/copilot-plan-agent?view=visualstudio).
+
+3. Add [resources/team-rules.md](resources/team-rules.md) file as context.
+
+	![gh-app-add-context-file](resources/img/gh-app-add-context-file.png)	
+
+3. Enter the following prompt, replacing the `[YOUR_WORKSPACE_NAME]` with the name of your workspace:
 
 	```text
-	I want to create a new Direct Lake semantic model with name 'SM - Sales' on top of the lakehouse 'Lakehouse_01' in workspace 'FabCon-Agentic-Lab2-[YourInitials]'
-	Consider the development rules in team-rules.md
+	Create a new Direct Lake semantic model with name 'Sales Model' on top of the lakehouse 'Lakehouse_01' in workspace '[YOUR_WORKSPACE_NAME]'.
+	
+	Use the lakehouse tables: dimension_city, `dimension_customer`, `dimension_date`,`dimension_employee`, `dimension_stock_item`, `fact_sale`
+
+	Consider the team development rules in attached 'team-rules.md'
 	```
 
 	**Expected outcome**
 
-	- The agent starts by inspecting the schema of `Lakehouse_01` through the remote MCP server.
+	- Because its configured with **Plan mode** agent wont create anything and instead will draft a plan that you can review and adjust before implementation.
+	- Because you are asking to create a semantic model it will load the `semantic-model-authoring` skill for guidance on Power BI semantic modeling
+	- It will load the `team-rules.md` for development rules context.
 	- The agent may ask follow-up questions, for example about the model name or which tables to include. Answer them.
 	- The agent returns an implementation plan rather than creating anything.
-	- The plan reflects the rules in `team-rules.md`: a star schema, explicit measures for aggregatable numeric columns with the base columns hidden, business-friendly table names without `Fact` or `Dim` prefixes, plural fact table names and singular dimension names, measure names in uppercase, and an `About` table.
+	- The plan should reflect the rules in `team-rules.md`: for example business-friendly table names without `Fact` or `Dim` prefixes and an `About` table to include a metadata table in the model.
 	- No semantic model exists in the workspace yet.
 
-6. Read the plan and check it against `team-rules.md`.
+6. Read the plan and check if the rules in `team-rules.md` are being followed.
+   
+   ![gh-app-plan-review](resources/img/gh-app-plan-review.png)
+
 7. Adjust the plan where needed, for example table naming, which measures to create, or the contents of the `About` table.
 
 #### Implement the plan
 
 1. Switch the model picker to a cheaper model such as `GPT-5.6 Terra`.
 
-	The implementation phase mostly follows instructions that are already written down, so it does not need the strongest reasoning model.
+	> [!TIP]
+	> The implementation phase mostly follows instructions that are already written down, so it does not need the strongest reasoning model.
 
-2. Ask the agent to implement the approved plan:
+2. Prompt the agent to implement the approved plan:
 
 	```text
-	Implement the approved plan.
+	Implement the plan.
 	```
 
 	**Expected outcome**
 
 	- The agent executes the plan step by step without re-planning from scratch.
-	- The agent uses the `database_operations` `Create` operation, which creates a Direct Lake model over the Lakehouse tables and infers their schema in a single call.
-	- A semantic model named `SM - Sales` appears in your workspace.
-	- The model follows your team rules rather than only the skill defaults. The `semantic-model-authoring` skill carries its own naming conventions, and the context you supplied overrides them.
-	- The `About` table is present with the `Key`, `Value`, and `Order` columns.
+	- The agent should start by discovering the Fabric workspace and lakehouse ID's and metadata.
+	- The agent uses the `database_operations` `Create` operation, which creates a Direct Lake model over the Lakehouse tables and infers their schema in a single tool call.
+	- A new semantic model `Sales Model` appears in your workspace.
+	- The model follows your team rules.
 
-3. Open the workspace in the Fabric portal and open `SM - Sales`.
-4. Confirm the table names, the hidden base columns, the explicit measures, and the `About` table.
-5. Note which parts of the model came from your rules and which came from the skill defaults.
+3. Open the created semantic model in Fabric workspace and confirm the tables with friendly names, the relationships, the hidden base columns, the explicit measures, and the `About` table. It does all this because of [guidance from the `semantic-model-authoring` skill](https://github.com/microsoft/skills-for-fabric/blob/main/skills/semantic-model-authoring/SKILL.md#workflow-create-new-semantic-model).
+
+	![fabric-created-semantic-model](resources/img/fabric-created-semantic-model.png)
 
 #### Reflection
 
-* What did the plan get wrong, and would you have caught it after implementation instead?
-* Which of your own team standards would you write down as a rules file?
+* When would you choose the GitHub Copilot app over Visual Studio Code or GitHub Copilot CLI for work in a Fabric workspace? All three use the same Copilot orchestrator, skills, and tools.
+* How did the instructions in your prompt and `team-rules.md` adapt the approach defined by the existing skill? Which explicit requirements took priority over the skill defaults?
+* In this exercise, the agents worked directly against a live Fabric workspace. For real projects, point agents to a development workspace and use [Fabric Git integration](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration) and [Fabric CICD](https://learn.microsoft.com/en-us/fabric/cicd/cicd-overview) to move changes between environments. Do not point agents directly at a production workspaces.
 
 ### 2.4 Create two reports with parallel subagents
 
@@ -582,84 +618,79 @@ Trying design variations used to be expensive, so most teams built one and lived
 
 #### Steps
 
-1. In the **GitHub Copilot app**, start a new session.
-2. Turn on **Autopilot** so the subagents can run without stopping for approval on each step.
-3. Select a powerful model such as `GPT-5.6 Sol`.
-4. Enter the following prompt, replacing the workspace name with your own:
+1. In the **GitHub Copilot app**, start a new session under the `Lab2_Project` working folder.
+2. Turn on **Autopilot** and select `GPT-5.6 Sol` model.
+4. Enter the following prompt, replacing the `[YOUR_WORKSPACE_NAME]` with the name of your workspace:
 
 	```text
-	Create a report on top of the semantic model 'SM - Sales' in workspace 'FabCon-Agentic-Lab2-[YourInitials]'.
+	Create a report on top of the semantic model 'Sales Model' in workspace '[YOUR_WORKSPACE_NAME]'.
+	
 	The report must have only one page and it should be focused for executive view of the company.
+
 	I want to try two different styles:
 		Style 1 - cards on top with key metrics trend and category breakdowns in the bottom
 		Style 2 - cards on the left with key metrics and trend and category breakdown on the right
-	Spin two subagents one for each style each one should create a separate report in the workspace for my review and I'll pick the best one.
+
+	Spin two subagents one for each style. Each subagent should create a separate report in the workspace for my review and I'll pick the best one.
+
 	Do not change the semantic model. Use whatever is available in the model and use your best judgement to pick the best measures and fields.
+
+	IMPORTANT:
+		When calling `powerbi-report-author preview` with `--host service` and the preview renders an empty/blank report. Stop and apply the following patch:
+		
+		> The bundled powerbi-client drops `reportDefinition`, idempotently patch the installed CLI `dist\cli.js` and `dist\preview\index.js` before `service.createReport(...)` by wrapping `Create.prototype.create` and copying `this.config.reportDefinition` to `this.createConfig.reportDefinition`.
+		
 	```
+
+	> [!IMPORTANT]
+	> This exercise uses the semantic model created in Exercise 2.3. If you did not complete that exercise, upload [sales.pbix](resources/sales.pbix) to your Fabric workspace and rename its semantic model to `Sales Model` before continuing.
 
 	**Expected outcome**
 
 	- The agent loads both the `semantic-model-authoring` and the `powerbi-report-authoring` skills.
-	- The agent first queries `SM - Sales` to understand its tables, measures, and data before designing anything.
-	- The agent produces a plan and then starts two subagents, one per style.
-	- You can see the two subagents running in parallel in the session view.
+	- The agent first queries `Sales Model` to understand its tables, measures, and data before designing anything.
+	- The agent produces a plan for your review and then starts two subagents, one per style of report.
+	- You can see the two subagents running in parallel in the session view and also as a child session of the current chat.
+		![gh-app-sub-agents-running](resources/img/gh-app-sub-agents-running.png)
 	- Two separate reports appear in your Fabric workspace, each with a single page.
 	- Style 1 places the metric cards across the top, with the trend and category breakdowns below. Style 2 places the cards and trend on the left and the category breakdown on the right.
-	- The semantic model `SM - Sales` is unchanged. No new measures, tables, or columns are added to it.
+	- The semantic model `Sales Model` is unchanged. No new measures, tables, or columns are added to it.
 
-5. Open both reports in the Fabric portal.
-6. Compare the layouts, the chosen measures, and the chosen fields.
-7. Decide which one you would keep, and note what you would change in the other.
+	> [!TIP]
+	> Subagents run in separate, isolated contexts. Each subagent can focus on its assigned task without mixing its working history with the parent agent or other subagents. This makes them useful for exploring independent approaches in parallel. Learn more in [Agents and Subagents](https://awesome-copilot.github.com/learning-hub/agents-and-subagents/).
+
+5. Review the session transcript of each subagent, each one should have its own reasoning and snapshot preview of the their report style.
+   
+	![gh-app-sub-agent-session](resources/img/gh-app-sub-agent-session.png)
+
+6. Open both reports in the Fabric portal.
+7. Compare the layouts, the chosen measures, and the chosen fields.
 
 #### Reflection
 
-* Did the two subagents pick the same measures? If not, why?
+* Subagents is a great way to parallelize work using a parent session for orchestration and work. Like silently asking two colleagues to try the same task without them knowing.
 * When is running variations in parallel worth the cost, and when is one attempt enough?
+
 
 ## ✅ Wrap-up
 
 You've now:
 
-* Installed the `powerbi-authoring` plugin once and used it from GitHub Copilot CLI, Visual Studio Code, and the GitHub Copilot app
+* Installed the `powerbi-authoring` plugin once and used it across different AI applications: GitHub Copilot CLI, Visual Studio Code, and the GitHub Copilot app
 * Converted a PBIX file to PBIP and placed it under Git to make AI changes reviewable
-* Used `AGENTS.md` to constrain how the agent works on your project
-* Generated documentation for a semantic model and a report, then kept it up to date
-* Added business-grounded measure descriptions from a shared company context file
-* Extended a semantic model with a new table and a currency conversion calculation group
-* Restyled every page of a report through the report authoring tools
-* Built a Lakehouse in Fabric and connected the GitHub Copilot app to the remote MCP server
-* Planned a Direct Lake semantic model with one model and implemented it with another
-* Created two report variations in parallel with subagents
-
-## Key takeaways
-
-* PBIP plus Git turns AI changes into diffs you can review, accept, or revert. Without it you are trusting the agent blindly.
-* Context files such as `AGENTS.md`, `company-context.md`, and `team-rules.md` live in the repository, so the whole team gets consistent agent behavior.
-* Instructions matter most with cheaper models. They are the difference between a supported authoring path and a hallucinated one.
-* Separate chat sessions keep context focused, and returning to an earlier session keeps follow-up prompts short.
-* Plan with a strong model, implement with a cheaper one. The two phases have different requirements.
-* Skills carry sensible defaults, and your own context overrides them when you provide it.
-* Autopilot removes approval friction but also removes a checkpoint. Keep a clean Git state before turning it on.
-* The same skills and MCP capabilities work across the CLI, Visual Studio Code, and the GitHub Copilot app. Pick the surface that fits the task.
-
-## What's next?
-
-Apply the same pattern to one of your own projects. Start by saving a report as PBIP, committing it to Git, and writing an `AGENTS.md` plus a rules file that reflects how your team actually works.
+* Learned how to use Agentic context to personalize and guide AI agents. 
+* Learned about picking different AI models for different tasks
+* Learned how to use **Github Copilot** Sub-Agents for isolation and parallelization.
 
 ## Useful links
 
 * [Power BI Desktop projects (PBIP)](https://learn.microsoft.com/power-bi/developer/projects/projects-overview)
-* [Power BI Desktop project semantic model folder (TMDL)](https://learn.microsoft.com/power-bi/developer/projects/projects-dataset)
-* [Power BI Desktop project report folder (PBIR)](https://learn.microsoft.com/power-bi/developer/projects/projects-report)
-* [Skills for Fabric](https://github.com/microsoft/skills-for-fabric)
-* [GitHub Copilot CLI](https://github.com/features/copilot/cli)
-* [GitHub Copilot app](https://github.com/features/ai/github-app)
+* [Power BI MCP servers](https://learn.microsoft.com/en-us/power-bi/developer/mcp/mcp-servers-overview)
+* [Skills for Fabric GitHub repo](https://github.com/microsoft/skills-for-fabric)
 * [Direct Lake overview](https://learn.microsoft.com/fabric/fundamentals/direct-lake-overview)
-* [Lakehouse overview](https://learn.microsoft.com/fabric/data-engineering/lakehouse-overview)
-* [Calculation groups](https://learn.microsoft.com/power-bi/transform-model/calculation-groups)
 * [Model Context Protocol](https://modelcontextprotocol.io/)
+* [Agent Plugins spec](https://github.com/agentplugins/agent-plugins-spec)
+* [Agent Skills spec](https://agentskills.io/specification)
 * [Tabular Editor - Get Started with Agentic Development](https://tabulareditor.com/blog/how-to-get-started-with-agentic-development-for-business-intelligence)
 * [Tabular Editor - Pick the right AI model](https://tabulareditor.com/blog/picking-the-ai-model-for-the-task)
 * [Tabular Editor - LLMs for data professionals](https://tabulareditor.com/blog/practical-introduction-to-llms-for-data-professionals)
-* [Agent Plugins spec](https://github.com/agentplugins/agent-plugins-spec)
-* [Agent Skills spec](https://agentskills.io/specification)

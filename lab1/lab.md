@@ -59,7 +59,12 @@ All participants should use the workshop-provided model rather than selecting th
 1. Go to [Power BI](https://app.powerbi.com) and sign in.
 2. Select **Workspaces** from the navigation pane.
 3. Select **New workspace**.
-4. Enter a workspace name using this convention: `Lab-1-[YourInitials]` (for example 'Lab-1-SP')
+4. Enter a workspace name using this convention: 
+   
+	```text
+	FabCon-Agentic-Lab1-[YourInitials]
+	```
+
 5. Assign the workspace to one of the available Premium capacities.
 6. Select **Apply** and wait for the workspace to be created.
 
