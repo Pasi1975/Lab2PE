@@ -1,6 +1,6 @@
 # Lab - Agentic Web Modeling with Copilot
 
-⏱️ **Total duration:** 75-90 minutes, including environment setup
+⏱️ **Total duration:** 75 minutes
 
 ## Overview
 
