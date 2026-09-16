@@ -21,8 +21,9 @@ $packages = @(
     'Git.Git'
 )
 
-$results = foreach ($package in $packages) {
-    Write-Host "`nInstalling $package..." -ForegroundColor Cyan
+$failedCount = 0
+
+foreach ($package in $packages) {
 
     $arguments = @(
         'install'
@@ -35,34 +36,29 @@ $results = foreach ($package in $packages) {
         '--accept-package-agreements'
     )
 
-    & winget.exe @arguments
+    $output = & winget.exe @arguments 2>&1 | ForEach-Object { $_.ToString() }
     $exitCode = $LASTEXITCODE
 
-    if ($exitCode -eq 0) {
-        $status = 'Success'
-    }
-    elseif ($exitCode -eq -1978335189) {
-        $status = 'Already current'
+    if (($exitCode -eq 0) -or ($exitCode -eq -1978335189)) {
+        Write-Host "${package}: OK" -ForegroundColor Green
     }
     else {
-        $status = 'Failed'
-    }
+        $failedCount++
+        $errorMessage = $output |
+            Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+            Select-Object -Last 1
 
-    [PSCustomObject]@{
-        Package  = $package
-        Status   = $status
-        ExitCode = $exitCode
+        if ([string]::IsNullOrWhiteSpace($errorMessage)) {
+            $errorMessage = "WinGet exited with code $exitCode"
+        }
+
+        $errorMessage = ($errorMessage -replace '\s+', ' ').Trim()
+        Write-Host "${package}: ERROR - $errorMessage" -ForegroundColor Red
     }
 }
 
-$results | Format-Table -Property Package, Status, ExitCode -AutoSize
-
-$failedCount = @($results | Where-Object { $_.Status -eq 'Failed' }).Count
-
 if ($failedCount -gt 0) {
-    Write-Host "`n$failedCount package installation(s) failed. Review the console output above for details." -ForegroundColor Red
     exit 1
 }
 
-Write-Host 'All package installations completed successfully.' -ForegroundColor Green
 exit 0

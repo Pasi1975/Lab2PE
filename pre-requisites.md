@@ -21,7 +21,7 @@ Participants should be able to:
 Install the following software on the laptop that you will use during the workshop:
 
 - [GitHub Copilot CLI](https://github.com/features/copilot/cli/)
-- [GitHub Copilot app](https://github.com/features/ai/github-app)
+- [GitHub Copilot App](https://github.com/features/ai/github-app)
 - [Power BI Desktop](https://pbi.onl/download)
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - [Git for Windows](https://gitforwindows.org/)
@@ -46,7 +46,7 @@ You can install each application manually by using the links above. Alternativel
 3. Review the installation details and final status summary in the console. The script attempts every installation, even if one package fails.
 
   > [!NOTE]
-  > You might see Git installation errors if Git is already installed. You can ignore these errors if you have confirmed that Git is available on your computer.
+  > You might see some installation errors for sofware that is already installed. You can ignore these errors if you have confirmed that the requirement is available on your computer and up to date.
 
 
 ## Fabric account and tenant
