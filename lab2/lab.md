@@ -46,45 +46,19 @@ Both parts use the shared prerequisites and environment setup. After completing 
 
 ## Prerequisites
 
-Before you begin, confirm that the following software is installed and available on your machine. For each item, either use the link to download and install it manually or run the provided `winget` command to install it for you.
+Before you begin, complete the [workshop prerequisites](../pre-requisites.md). That guide includes installation instructions and account setup.
 
-* [**GitHub Copilot CLI**](https://github.com/features/copilot/cli/)
-    ```console
-    winget install -e --id GitHub.Copilot --accept-source-agreements --accept-package-agreements
-    ```
-* [**GitHub Copilot app**](https://github.com/features/ai/github-app)
-    ```console
-    winget install -e --id GitHub.CopilotApp --accept-source-agreements --accept-package-agreements
-    ```
-* [**Power BI Desktop**](https://pbi.onl/download)
-    ```console
-    winget install -e --id Microsoft.PowerBI --accept-source-agreements --accept-package-agreements
-    ```
-* [**Visual Studio Code**](https://code.visualstudio.com/download)
-    ```console
-    winget install -e --id Microsoft.VisualStudioCode --accept-source-agreements --accept-package-agreements
-    ```
-* [**Git for Windows**](https://gitforwindows.org/)
-    ```console
-    winget install -e --id Git.Git --accept-source-agreements --accept-package-agreements
-    ```
-* [**Node.js and npm**](https://nodejs.org/en/download/)
-    ```console
-    winget install -e --id OpenJS.NodeJS.LTS --accept-source-agreements --accept-package-agreements
-    ```
-* [**Azure CLI**](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest&pivots=winget)
-    ```console
-    winget install -e --id Microsoft.AzureCLI --accept-source-agreements --accept-package-agreements
-    ```
+This lab requires the following:
 
-You also need:
-
-* A GitHub personal account with an active GitHub Copilot license
-* Access to a Fabric tenant with permission to create a workspace
-* This workshop repository downloaded and unzipped to a local folder
-
-> [!IMPORTANT]
-> Your instructor provides the workshop Fabric account and the GitHub Copilot license.
+* GitHub Copilot CLI
+* GitHub Copilot app
+* Power BI Desktop
+* Visual Studio Code
+* Git for Windows
+* Node.js and npm
+* Azure CLI
+* A GitHub Copilot license
+* A Fabric account with access to Fabric capacity and permission to create a workspace
 
 ## Prepare the environment
 
