@@ -674,13 +674,17 @@ Trying design variations used to be expensive, so most teams built one and lived
 
 ## ✅ Wrap-up
 
-You've now:
+You've now learned how to:
 
-* Installed the `powerbi-authoring` plugin once and used it across different AI applications: GitHub Copilot CLI, Visual Studio Code, and the GitHub Copilot app
-* Converted a PBIX file to PBIP and placed it under Git to make AI changes reviewable
-* Learned how to use Agentic context to personalize and guide AI agents. 
-* Learned about picking different AI models for different tasks
-* Learned how to use **Github Copilot** Sub-Agents for isolation and parallelization.
+* Use Git to review, version, and revert changes made by AI agents
+* Guide agents with shared instructions, skills, and project context stored alongside your code
+* Combine skills that describe how to work with MCP tools that perform and validate the work
+* Separate planning from implementation so you can review an approach before the agent makes changes
+* Choose an AI model based on the reasoning, cost, and execution needs of each task
+* Use separate sessions to keep unrelated tasks from influencing each other
+* Use subagents with isolated contexts to explore independent approaches in parallel
+* Work in development environments and promote reviewed changes instead of pointing agents at production
+* Apply the same agentic workflow across GitHub Copilot CLI, Visual Studio Code, and the GitHub Copilot app
 
 ## Useful links
 
