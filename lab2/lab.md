@@ -141,8 +141,8 @@ This lab requires the following:
 1. Open **Visual Studio Code**.
 2. Select [Open the AI features setting](vscode://settings/chat.disableAIFeatures) and ensure that **Disable AI Features** is cleared.
    	
-	> [!TIP]
-	> If the link does not open from your Markdown viewer, open **Settings** in Visual Studio Code and search for `chat.disableAIFeatures`.
+ > [!TIP]
+ > If the link does not open from your Markdown viewer, open **Settings** in Visual Studio Code and search for `chat.disableAIFeatures`.
 
 4. Open **GitHub Copilot Chat** (`CTRL+ALT+I`) and confirm that the chat view is accessible.
 5. You may need to sign-in with your GitHub Copilot account.
