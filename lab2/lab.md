@@ -76,10 +76,10 @@ This lab requires the following:
 	copilot plugin install powerbi-authoring@fabric-collection
 	```
 
-	> [!TIP]
-	> There are several ways to install skills and plugins. You can install them in Visual Studio Code, using [NPX Skills](https://github.com/vercel-labs/skills), [Agent Package Manager](https://microsoft.github.io/apm/) or simply copy them into your workspace or Copilot folder. Installing the plugin through GitHub Copilot CLI is a simple way to make its skills and MCP server available across GitHub Copilot CLI, Visual Studio Code, and the GitHub Copilot app without installing duplicate copies.
-	>
-	> Learn more in [`powerbi-authoring-plugin`](https://learn.microsoft.com/en-us/power-bi/developer/agentic/power-bi-agentic-overview#get-started) documentation page.
+> [!TIP]
+> There are several ways to install skills and plugins. You can install them in Visual Studio Code, using [NPX Skills](https://github.com/vercel-labs/skills), [Agent Package Manager](https://microsoft.github.io/apm/) or simply copy them into your workspace or Copilot folder. Installing the plugin through GitHub Copilot CLI is a simple way to make its skills and MCP server available across GitHub Copilot CLI, Visual Studio Code, and the GitHub Copilot app without installing duplicate copies.
+>
+> Learn more in [`powerbi-authoring-plugin`](https://learn.microsoft.com/en-us/power-bi/developer/agentic/power-bi-agentic-overview#get-started) documentation page.
 
 ### Sign in to GitHub Copilot
 
@@ -133,16 +133,16 @@ This lab requires the following:
 	```
 	![az-account-show](resources/img/az-account-show.png)
 
-    > [!IMPORTANT]
-	> The Power BI report authoring tools use the Azure CLI token to reach Fabric. If the wrong account is active, later exercises fail with authorization errors.
+> [!IMPORTANT]
+> The Power BI report authoring tools use the Azure CLI token to reach Fabric. If the wrong account is active, later exercises fail with authorization errors.
 
 ### Ensure GitHub Copilot is enabled in Visual Studio Code
 
 1. Open **Visual Studio Code**.
 2. Select [Open the AI features setting](vscode://settings/chat.disableAIFeatures) and ensure that **Disable AI Features** is cleared.
    	
-  > [!TIP]
-  > If the link does not open from your Markdown viewer, open **Settings** in Visual Studio Code and search for `chat.disableAIFeatures`.
+> [!TIP]
+> If the link does not open from your Markdown viewer, open **Settings** in Visual Studio Code and search for `chat.disableAIFeatures`.
 
 4. Open **GitHub Copilot Chat** (`CTRL+ALT+I`) and confirm that the chat view is accessible.
 5. You may need to sign-in with your GitHub Copilot account.
@@ -191,8 +191,8 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 
 	![vscode-init-git-pbip](resources/img/vscode-init-git-pbip.png)
 
-    > [!IMPORTANT]
-	> PBIP stores the semantic model as TMDL files and the report as PBIR files. Both are plain text, so Git can show you exactly what the agent changed. This is your safety net: review the diff after every prompt, keep what you want, and discard the rest with **Discard changes** in the Source Control view.    	
+> [!IMPORTANT]
+> PBIP stores the semantic model as TMDL files and the report as PBIR files. Both are plain text, so Git can show you exactly what the agent changed. This is your safety net: review the diff after every prompt, keep what you want, and discard the rest with **Discard changes** in the Source Control view.    	
 
 #### Expected result
 
@@ -208,15 +208,15 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 
 1. Copy [resources/AGENTS.md](resources/AGENTS.md) from the workshop repository into the root of your PBIP project folder.
 
-    > [!IMPORTANT]
-	> [`AGENTS.md`](https://agents.md/) is an important part of agentic development. It lets you define codebase-level rules, context, and constraints that agents need to understand and respect when working on the project. Because the file is stored with the codebase and read automatically, the same guidance applies consistently across chat sessions and team members.
-	>
-	> The `AGENTS.md` file in this workshop is a simple example. It ensures that the agent always loads the appropriate Power BI authoring skills and directs it to use the Power BI Authoring MCP server when editing the semantic model. The agent can work with TMDL files directly, but using the MCP tools provides a more reliable authoring path less likely to break things.
+> [!IMPORTANT]
+> [`AGENTS.md`](https://agents.md/) is an important part of agentic development. It lets you define codebase-level rules, context, and constraints that agents need to understand and respect when working on the project. Because the file is stored with the codebase and read automatically, the same guidance applies consistently across chat sessions and team members.
+>
+> The `AGENTS.md` file in this workshop is a simple example. It ensures that the agent always loads the appropriate Power BI authoring skills and directs it to use the Power BI Authoring MCP server when editing the semantic model. The agent can work with TMDL files directly, but using the MCP tools provides a more reliable authoring path less likely to break things.
 
 2. Copy the folder [`resources/.github`](resources/.github) into the root of your PBIP project folder.
 
-    > [!IMPORTANT]
-	> This workshop uses Microsoft-provided agent skills installed through the `powerbi-authoring` plugin. Skills give the agent context about processes and preferred ways of working. Teams can keep project-specific skills in source control to capture business practices and help developers produce consistent results. The [`powerbi-documentation` skill](resources/.github/skills/powerbi-documentation/SKILL.md) is an example of a repository-local skill that lives alongside the codebase. Skills can also be shared through private or public repositories and marketplaces.
+> [!IMPORTANT]
+> This workshop uses Microsoft-provided agent skills installed through the `powerbi-authoring` plugin. Skills give the agent context about processes and preferred ways of working. Teams can keep project-specific skills in source control to capture business practices and help developers produce consistent results. The [`powerbi-documentation` skill](resources/.github/skills/powerbi-documentation/SKILL.md) is an example of a repository-local skill that lives alongside the codebase. Skills can also be shared through private or public repositories and marketplaces.
 
 3. Confirm that your folder looks like this:
 
@@ -224,8 +224,8 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 
 4. Open **Source Control** (`CTRL+SHIFT+G`) and commit the new files.
 
-    > [!TIP]
-	> You can use Copilot to generate analyze the changes and generate the commit message for you by clicking on **Generate commit message** in the top right corner of the textbox.
+> [!TIP]
+> You can use Copilot to generate analyze the changes and generate the commit message for you by clicking on **Generate commit message** in the top right corner of the textbox.
 
 #### Expected result
 
@@ -263,10 +263,10 @@ Writing documentation from scratch and keeping it current both take time. AI can
 	- A `docs/` folder is created with a catalog and one Markdown file for each semantic model and report in the codebase.
 	- The generated documentation includes the model structure, measures, report flow, filters, and a screenshot of every report page.
 
-	> [!IMPORTANT]
-	> The short prompt works because `AGENTS.md` requires the agent to load the local `powerbi-documentation` skill. The skill defines how the team expects project documentation to be created, while the Power BI MCP server and report tools provide the model and report information needed to create it.
-    >
-	> By default, each tool call asks for your approval. You can approve calls individually, allow tools for the current session or all sessions, or switch the agent to **Autopilot**. Autopilot runs tools without asking for approval, so use it carefully and preferably in a sandbox environment. For details, see [Manage approvals and permissions](https://code.visualstudio.com/docs/agents/run/approvals).
+> [!IMPORTANT]
+> The short prompt works because `AGENTS.md` requires the agent to load the local `powerbi-documentation` skill. The skill defines how the team expects project documentation to be created, while the Power BI MCP server and report tools provide the model and report information needed to create it.
+>
+> By default, each tool call asks for your approval. You can approve calls individually, allow tools for the current session or all sessions, or switch the agent to **Autopilot**. Autopilot runs tools without asking for approval, so use it carefully and preferably in a sandbox environment. For details, see [Manage approvals and permissions](https://code.visualstudio.com/docs/agents/run/approvals).
 
 5. Open the generated documentation Markdown files in `docs/` and preview them with **Ctrl+Shift+V**.
 6. Open the **Source Control** (`CTRL+SHIFT+G`) and commit all changes.
@@ -286,15 +286,15 @@ Writing documentation from scratch and keeping it current both take time. AI can
 1. Copy [resources/company-context.md](resources/company-context.md) from the workshop repository into the root of your PBIP project folder.
 2. Start a **new chat session** in GitHub Copilot Chat.
 
-	> [!TIP]
-	> Start a new session when moving to a different task. A clean session prevents decisions, assumptions, and tool results from the previous task from influencing the next one. 
-    >
-    > You can also reuse an existing sessions to keep the session context. For example, you could reuse the documentation session to update the docs after making changes to the semantic models or reports.
+> [!TIP]
+> Start a new session when moving to a different task. A clean session prevents decisions, assumptions, and tool results from the previous task from influencing the next one. 
+>
+> You can also reuse an existing sessions to keep the session context. For example, you could reuse the documentation session to update the docs after making changes to the semantic models or reports.
 
 3. Choose a lower-cost model such as `GPT-5.6 Terra`.
    
-	> [!TIP]
-	> Choose the model that fits the task. Generating measure descriptions still benefits from a reasoning model because it must interpret DAX and business context, but it does not require the most capable or expensive option. Reserve higher-cost models for work that needs deeper planning or more complex decisions.
+> [!TIP]
+> Choose the model that fits the task. Generating measure descriptions still benefits from a reasoning model because it must interpret DAX and business context, but it does not require the most capable or expensive option. Reserve higher-cost models for work that needs deeper planning or more complex decisions.
 
 4. Enter the following prompt:
 
@@ -313,23 +313,23 @@ Writing documentation from scratch and keeping it current both take time. AI can
 	- The updated model is saved back to the PBIP folder.
 	- No measure expressions, data types, or relationships are changed.
 
-	> [!TIP]
-	> There is little difference between `company-context.md` and the context contained in a skill. The company context could be packaged as a skill. This exercise keeps it as a regular file to show that you can also give an agent context by referring to a file directly in your prompt.
+> [!TIP]
+> There is little difference between `company-context.md` and the context contained in a skill. The company context could be packaged as a skill. This exercise keeps it as a regular file to show that you can also give an agent context by referring to a file directly in your prompt.
 
 5. Open the **Source Control tab** in Visual Studio Code (`CTRL+SHIFT+G`) and review the Git diff to the semantic model TMDL code files. Confirm that the changed lines are description properties only, and that no DAX expression was modified.
     
     ![vscode-copilot-change-tmdl-diff](resources/img/vscode-copilot-change-tmdl-diff.png)
 
-    > [!TIP]
-	> This is the main advantage of PBIP with Git. You see the exact change before you accept it.
+> [!TIP]
+> This is the main advantage of PBIP with Git. You see the exact change before you accept it.
 
 6. Switch to **Power BI Desktop**.
 7. Select **Apply external changes** to reload the updated model.
    
    ![pbi-desktop-reload-external-changes](resources/img/pbi-desktop-reload-external-changes.png)
 
-    > [!TIP]
-	> **Apply external changes** shipped with the August 2026 Power BI Desktop release. It detects and reloads PBIP files changed outside Power BI Desktop, whether those changes were made manually in Visual Studio Code or generated by AI agents and tools. Learn more in [Edit Power BI Desktop project files in Visual Studio Code](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-external-editing).
+> [!TIP]
+> **Apply external changes** shipped with the August 2026 Power BI Desktop release. It detects and reloads PBIP files changed outside Power BI Desktop, whether those changes were made manually in Visual Studio Code or generated by AI agents and tools. Learn more in [Edit Power BI Desktop project files in Visual Studio Code](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-external-editing).
 
 8. Select a measure in the model view and confirm that its description appears in the properties pane.
 9. Open **Source Control** (`CTRL+SHIFT+G`) and commit the changes.
@@ -407,8 +407,8 @@ Writing documentation from scratch and keeping it current both take time. AI can
 	- The agent reads and modify the PBIR *.json files
 	- The agent uses both the `powerbi-report-author` to validate schema changes and `powerbi-desktop` CLI tools to reload and screenshot in **Power BI Desktop** for validation.
 
-	> [!IMPORTANT]
-	> The agent might refuse to reload the report if the Power BI Desktop CLI reports `unsavedChanges`. This usually means that Power BI Desktop contains changes that have not been saved to the PBIP files. Stopping prevents the agent from overwriting your work. In this exercise we know that agent is the only one modifying the report and because of that we state explicitly in the prompt that it can proceed despite the warning.
+> [!IMPORTANT]
+> The agent might refuse to reload the report if the Power BI Desktop CLI reports `unsavedChanges`. This usually means that Power BI Desktop contains changes that have not been saved to the PBIP files. Stopping prevents the agent from overwriting your work. In this exercise we know that agent is the only one modifying the report and because of that we state explicitly in the prompt that it can proceed despite the warning.
 
 5. Open **Source Control** and review the Git diff - only report files should have changed.
 6. Switch to **Power BI Desktop** and confirm that titles are removed and the visuals are aligned.
@@ -491,10 +491,10 @@ There are no local files in this part. The **GitHub Copilot app** is a good fit 
 
 	![gh-app-pbi-local-mcp-disabled](resources/img/gh-app-pbi-local-mcp-disabled.png)
 
-	> [!IMPORTANT]
-	> The local Power BI Authoring MCP server installed by default with `powerbi-authoring` plugin provides the same capabilities and is generally available. The remote MCP server is currently in preview and is intended to become the default option for working with Fabric data sources because its hosted in Fabric and requires no local instalation.
-	>
-	> You should avoid enabling both local and remote servers at the same time. The agent then sees two overlapping tool sets, which makes routing ambiguous and consumes extra tokens on every request. Pick one: the hosted server when you work against semantic models in Fabric workspaces, and the local server when you work against Power BI Desktop or Power BI Project files on your machine.
+> [!IMPORTANT]
+> The local Power BI Authoring MCP server installed by default with `powerbi-authoring` plugin provides the same capabilities and is generally available. The remote MCP server is currently in preview and is intended to become the default option for working with Fabric data sources because its hosted in Fabric and requires no local instalation.
+>
+> You should avoid enabling both local and remote servers at the same time. The agent then sees two overlapping tool sets, which makes routing ambiguous and consumes extra tokens on every request. Pick one: the hosted server when you work against semantic models in Fabric workspaces, and the local server when you work against Power BI Desktop or Power BI Project files on your machine.
 
 #### Expected result
 
@@ -513,15 +513,15 @@ Planning first gives you something to correct before anything is created. It als
    
 	![gh-app-add-folder](resources/img/gh-app-add-folder.png)
 
-	> [!TIP]
-	> You can start a chat without a working folder, but opening a dedicated folder allows you to personalize settings to sessions under this folder such as configure context files such as `AGENTS.md` or MCP servers.
+> [!TIP]
+> You can start a chat without a working folder, but opening a dedicated folder allows you to personalize settings to sessions under this folder such as configure context files such as `AGENTS.md` or MCP servers.
 
 3. Click on **New session** under the working folder, set the session mode to **Plan** and pick a powerful model such as `GPT-5.6 Sol`.
 	
 	![gh-app-new-session](resources/img/gh-app-new-session.png)	
 
-	> [!TIP]
-	> **Plan** mode lets Copilot inspect the available context, ask clarifying questions, and propose a reviewable implementation approach before making changes. You can correct assumptions, add validation steps, and agree on the scope before handing the plan to an agent for implementation. This is especially useful for complex or unfamiliar projects, where fixing the plan is cheaper than undoing the implementation. Learn more in [Use the GitHub Copilot plan agent](https://learn.microsoft.com/en-us/visualstudio/ide/copilot-plan-agent?view=visualstudio).
+> [!TIP]
+> **Plan** mode lets Copilot inspect the available context, ask clarifying questions, and propose a reviewable implementation approach before making changes. You can correct assumptions, add validation steps, and agree on the scope before handing the plan to an agent for implementation. This is especially useful for complex or unfamiliar projects, where fixing the plan is cheaper than undoing the implementation. Learn more in [Use the GitHub Copilot plan agent](https://learn.microsoft.com/en-us/visualstudio/ide/copilot-plan-agent?view=visualstudio).
 
 3. Add [resources/team-rules.md](resources/team-rules.md) file as context.
 
@@ -557,8 +557,8 @@ Planning first gives you something to correct before anything is created. It als
 
 1. Switch the model picker to a cheaper model such as `GPT-5.6 Terra`.
 
-	> [!TIP]
-	> The implementation phase mostly follows instructions that are already written down, so it does not need the strongest reasoning model.
+> [!TIP]
+> The implementation phase mostly follows instructions that are already written down, so it does not need the strongest reasoning model.
 
 2. Prompt the agent to implement the approved plan:
 
@@ -616,8 +616,8 @@ Trying design variations used to be expensive, so most teams built one and lived
 		
 	```
 
-	> [!IMPORTANT]
-	> This exercise uses the semantic model created in Exercise 2.3. If you did not complete that exercise, upload [sales.pbix](resources/sales.pbix) to your Fabric workspace and rename its semantic model to `Sales Model` before continuing.
+> [!IMPORTANT]
+> This exercise uses the semantic model created in Exercise 2.3. If you did not complete that exercise, upload [sales.pbix](resources/sales.pbix) to your Fabric workspace and rename its semantic model to `Sales Model` before continuing.
 
 	**Expected outcome**
 
@@ -630,8 +630,8 @@ Trying design variations used to be expensive, so most teams built one and lived
 	- Style 1 places the metric cards across the top, with the trend and category breakdowns below. Style 2 places the cards and trend on the left and the category breakdown on the right.
 	- The semantic model `Sales Model` is unchanged. No new measures, tables, or columns are added to it.
 
-	> [!TIP]
-	> Subagents run in separate, isolated contexts. Each subagent can focus on its assigned task without mixing its working history with the parent agent or other subagents. This makes them useful for exploring independent approaches in parallel. Learn more in [Agents and Subagents](https://awesome-copilot.github.com/learning-hub/agents-and-subagents/).
+> [!TIP]
+> Subagents run in separate, isolated contexts. Each subagent can focus on its assigned task without mixing its working history with the parent agent or other subagents. This makes them useful for exploring independent approaches in parallel. Learn more in [Agents and Subagents](https://awesome-copilot.github.com/learning-hub/agents-and-subagents/).
 
 5. Review the session transcript of each subagent, each one should have its own reasoning and snapshot preview of the their report style.
    
