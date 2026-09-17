@@ -581,7 +581,7 @@ Planning first gives you something to correct before anything is created. It als
 	- The agent should start by discovering the Fabric workspace and lakehouse ID's and metadata.
 	- The agent uses the `database_operations` `Create` operation, which creates a Direct Lake model over the Lakehouse tables and infers their schema in a single tool call.
 	- A new semantic model `Sales Model` appears in your workspace.
-	- The model follows your team rules.
+	- The model follows the attached team rules.
 
 3. Open the created semantic model in Fabric workspace and confirm the tables with friendly names, the relationships, the hidden base columns, the explicit measures, and the `About` table. It does all this because of [guidance from the `semantic-model-authoring` skill](https://github.com/microsoft/skills-for-fabric/blob/main/skills/semantic-model-authoring/SKILL.md#workflow-create-new-semantic-model).
 
@@ -599,6 +599,9 @@ Planning first gives you something to correct before anything is created. It als
 
 Trying design variations used to be expensive, so most teams built one and lived with it. With subagents you can run both and compare.
 
+> [!IMPORTANT]
+> This exercise uses the semantic model created in previous step. If you did not complete that step, upload [sales.pbix](resources/sales.pbix) to your Fabric workspace and rename its semantic model to `Sales Model` before continuing.
+
 #### Steps
 
 1. In the **GitHub Copilot app**, start a new session under the `Lab2_Project` working folder.
@@ -607,7 +610,7 @@ Trying design variations used to be expensive, so most teams built one and lived
 
 	```text
 	Create a report on top of the semantic model 'Sales Model' in workspace '[YOUR_WORKSPACE_NAME]'.
-	
+
 	The report must have only one page and it should be focused for executive view of the company.
 
 	I want to try two different styles:
@@ -621,12 +624,9 @@ Trying design variations used to be expensive, so most teams built one and lived
 	IMPORTANT:
 		When calling `powerbi-report-author preview` with `--host service` and the preview renders an empty/blank report. Stop and apply the following patch:
 		
-		> The bundled powerbi-client drops `reportDefinition`, idempotently patch the installed CLI `dist\cli.js` and `dist\preview\index.js` before `service.createReport(...)` by wrapping `Create.prototype.create` and copying `this.config.reportDefinition` to `this.createConfig.reportDefinition`.
+		The bundled powerbi-client drops `reportDefinition`, idempotently patch the installed CLI `dist\cli.js` and `dist\preview\index.js` before `service.createReport(...)` by wrapping `Create.prototype.create` and copying `this.config.reportDefinition` to `this.createConfig.reportDefinition`.
 		
 	```
-
-> [!IMPORTANT]
-> This exercise uses the semantic model created in Exercise 2.3. If you did not complete that exercise, upload [sales.pbix](resources/sales.pbix) to your Fabric workspace and rename its semantic model to `Sales Model` before continuing.
 
 	**Expected outcome**
 
