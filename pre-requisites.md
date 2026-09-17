@@ -68,7 +68,7 @@ We will provide a GitHub Copilot license for the workshop. You can use your own 
 
 To request a GitHub Copilot license for the workshop:
 
-1. Use a personal GitHub account. Enterprise Managed User accounts won't work. If you don't have a personal account, [sign up for GitHub](https://github.com/signup).
+1. Use a **personal GitHub account**. Enterprise Managed User accounts won't work. If you don't have a personal account, [sign up for GitHub](https://github.com/signup).
 2. Submit the [GitHub Copilot license request form](https://forms.cloud.microsoft/r/AaJCQCKwAZ) for your personal GitHub account.
 3. Look for an invitation by email a few days before or on the day of the workshop. Then follow the steps in [Enable the GitHub Copilot license](#enable-the-github-copilot-license).
 
