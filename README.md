@@ -25,7 +25,7 @@ This lab introduces Power BI's built-in agentic authoring experiences. Using **W
 
 ### [Lab 2 - Personalized Power BI Agents](lab2/lab.md)
 
-This lab shows how to extend and personalize agentic Power BI development. You will use skills, MCP capabilities, PBIP, and code-first tooling to customize agent behavior, encode team standards, and apply your own modeling best practices across semantic models and reports.
+This lab shows how to extend and personalize **agentic Power BI development**. You will use skills, MCP capabilities, PBIP, and code-first tooling to customize agent behavior, encode team standards, and apply your own modeling best practices across semantic models and reports.
 
 ### [Lab 3 - Build Data Apps with Fabric](lab3/lab.md)
 
