@@ -23,12 +23,10 @@ Once you are familiar with the model, Copilot will help you identify and make ta
 | [Prerequisites](#prerequisites) | Confirm access and understand workspace isolation |
 | [0. Prepare the environment](#0-prepare-the-environment) | Create your workspace and upload the workshop model |
 | [1. Explore the model](#1-explore-the-model) | Understand the inherited model |
-| [2. Analyze the model](#2-analyze-the-model) | Identify naming and metadata issues |
-| [3. Apply model cleanup](#3-apply-model-cleanup) | Improve approved names and descriptions |
-| [4. Validate the improvements](#4-validate-the-improvements) | Confirm the intended changes |
-| [5. Improve and extend the measure library](#5-improve-and-extend-the-measure-library) | Review and extend existing business calculations |
-| [6. Save a clean checkpoint](#6-save-a-clean-checkpoint) | Preserve the completed model |
-| [7. Recover with version history](#7-recover-with-version-history) | Undo an unwanted change |
+| [2. Improve the semantic model names](#2-improve-the-semantic-model-names) | Improve measure names, descriptions, formatting, and organization |
+| [3. Improve and extend the measure library](#3-improve-and-extend-the-measure-library) | Review and extend existing business calculations |
+| [4. Save a clean checkpoint](#4-save-a-clean-checkpoint) | Preserve the completed model |
+| [5. Recover with version history](#5-recover-with-version-history) | Undo an unwanted change |
 
 ## Prerequisites
 
@@ -133,139 +131,80 @@ You should now have:
 
 ## 2. Improve the semantic model names
 
-✅ **Goal**: Identify naming and metadata issues that make the model harder for report authors and AI experiences to understand.
+✅ **Goal**: Use Copilot to identify and fix inconsistent measure names, descriptions, formatting, and organization.
+
+As you explore the inherited model, you notice that its measures do not follow a consistent naming pattern and are not organized clearly. Some descriptions are also missing or difficult to understand. These issues make ad hoc exploration harder for report authors and make it more difficult for AI consumption experiences like [Fabric IQ](https://learn.microsoft.com/en-us/fabric/iq/overview) to interpret the model correctly.
+
+![fabric-copilot-model-before](resources/img/fabric-copilot-model-before.png)
+
+In this exercise, you will ask Copilot to review the measures and recommend improvements. You will review its recommendations before allowing it to update the model.
 
 ### Steps
 
-1. Navigate to the **Ambiguous Names Demo** area in the model and review the objects it contains.
+1. Open a new Copilot session either by toggling the Copilot button or clicking on the **Erase Broom icon**. 
+
+	![fabric-copilot-clear-session](resources/img/fabric-copilot-clear-session.png)
+
+	> [!TIP]
+	> Start a new Copilot session when you no longer need the previous conversation. Removing irrelevant context reduces token usage and helps Copilot focus on the current task, which can produce more relevant responses.
+
 2. Enter the following prompt:
 
 	```text
-	Review the tables, columns, and measures in the Ambiguous Names Demo area of
-	this semantic model. Identify unclear business terminology, abbreviations,
-	naming inconsistencies, and missing descriptions using these standards:
+	Review all measures in this semantic model for inconsistencies in their names,
+	descriptions, format strings, and display folders.
+
+	Propose a consistent naming and organization pattern that makes the measures
+	easier for report authors and AI experiences to understand. Follow these rules:
 
 	- Use clear English names.
 	- Use spaces instead of underscores.
 	- Use business-friendly wording instead of technical abbreviations.
-	- Use consistent Title Case.
-	- Provide concise descriptions for important tables, columns, and measures.
-	- Preserve the existing business meaning of each object.
+	- Use consistent capitalization and formatting.
+	- Organize related measures into clear display folders.
+	- Preserve the business meaning and DAX expression of every measure.
 
-	For each object that does not follow these standards, propose an improved name
-	or description.
+	For missing or unclear descriptions, propose a user-friendly description that
+	explains the calculation in business terms. Keep each description under 200
+	characters.
 
-	Group the recommendations by table, column, and measure. Explain the reason for
-	each recommendation.
+	Group the recommendations by business domain. For each recommendation, show the
+	current value, proposed value, and reason for the change.
 
-	Limit this review to the Ambiguous Names Demo area. Do not apply any changes yet.
+	Do not apply any changes.
 	```
 
-3. Review the proposed recommendations.
-4. Compare each recommendation with the visible objects in **Ambiguous Names Demo**.
-5. Confirm that the proposed names preserve the intended business meaning.
-6. Identify any recommendation that should not be applied.
-7. Record the recommendations you approve and any exceptions you want Copilot to preserve.
+	**Expected outcome**
 
-	> [!TIP]
-	> Keep descriptions concise and place the most important business information first.
+	- Copilot identifies inconsistent measure names, descriptions, format strings, and display folders.
+	- The response proposes a consistent naming and organization pattern based on the rules in the prompt.
+	- Recommendations are grouped by business domain and show the current value, proposed value, and reason for each change.	
+	- Copilot does not apply any changes to the semantic model.
 
-### Expected result
-
-Copilot should identify issues such as:
-
-* Names containing underscores
-* Technical abbreviations
-* Inconsistent capitalization
-* Ambiguous table or column names
-* Tables, columns, or measures without descriptions
-
-## 3. Apply model cleanup
-
-✅ **Goal**: Improve naming consistency and add useful descriptions through a controlled set of model edits.
-
-Copilot will summarize its intended edits before applying them, giving you an opportunity to review the changes.
-
-### Steps
-
-1. Review the recommendations from the previous exercise.
-2. Identify which recommendations you want to apply.
-3. Enter the following prompt:
+3. Review Copilot's recommendations before making any changes. 
+4. When you are satisfied with the recommendations, enter the following prompt:
 
 	```text
-	Apply the approved naming recommendations from the previous review to the
-	Ambiguous Names Demo area.
-
-	Also add concise, business-friendly descriptions where descriptions are missing
-	for the relevant tables, columns, and measures.
-
-	Follow these requirements:
-
-	- Preserve the business meaning of every object.
-	- Do not change DAX expressions.
-	- Do not change data types.
-	- Do not create or delete relationships.
-	- Do not change relationship behavior.
-	- Do not delete any model objects.
-	- Respect the exceptions I identified in the previous review.
-	- Do not modify objects outside the Ambiguous Names Demo area.
-
-	Before applying the changes, summarize the edits you intend to make.
+	Apply all recommendations
 	```
+	**Expected outcome**
 
-4. Review the proposed edits before applying them.
-5. Confirm that the proposed changes match the approved list.
-6. Apply the changes.
-7. Save the semantic model using **Ctrl+S** or **File** > **Save**.
-8. Inspect three to five renamed objects and generated descriptions in the properties pane.
+	- Copilot applies all approved recommendations, resulting in consistent, business-friendly measure names.
+	- Measures are organized into display folders by business domain.
+	- Measures have concise descriptions that support user exploration and help AI experiences interpret the model.
+	- Existing DAX expressions remain unchanged.
+  
+	![fabric-copilot-model-after](resources/img/fabric-copilot-model-after.png)
 
-### Expected result
-
-The model should have:
-
-* Clearer object names
-* More consistent naming
-* Business-friendly descriptions
-* No unintended changes to DAX, data types, relationships, or model behavior
-
-## 4. Validate the improvements
-
-✅ **Goal**: Confirm that the cleanup was applied as intended without changing model behavior.
-
-### Steps
-
-1. Enter the following prompt:
-
-	```text
-	Review the model changes made during this session.
-
-	1. List the objects that were renamed.
-	2. List the descriptions that were added or updated.
-	3. Identify any remaining objects that do not follow the naming standards.
-	4. Confirm whether any DAX expressions, data types, or relationships were changed.
-	5. Call out anything that still needs a manual review.
-
-	Do not make any additional changes.
-	```
-
-2. Compare Copilot's response with the changes you approved.
-3. Confirm that renamed objects use clear, consistent, business-friendly wording.
-4. Inspect the descriptions added to three to five objects.
-5. Open at least one existing measure and confirm that its DAX expression is unchanged.
-6. Review the model relationships and confirm that no unintended relationship changes were applied.
-7. Save the semantic model.
+10. Review the changes made by Copilot. Measure names should be consistent, business friendly with business domain display folders.
 
 ### Reflection
 
-Consider the following questions:
+* How valuable was Copilot for detecting patterns and inconsistencies across the measures and suggesting improvements?
+* How much time would you need to complete the same review and update the model yourself?
+* Power BI web modeling changes the semantic model directly in the workspace. What safeguards would you use to avoid making these changes in production? Consider working in a development workspace and tracking changes with Fabric Git integration.
 
-* Is the model easier for a new report author to understand?
-* Do the updated names communicate business meaning more clearly?
-* Are the descriptions useful without being overly long?
-* Did Copilot suggest anything that still required human judgment?
-* Which changes would you review more carefully in a production model?
-
-## 5. Improve and extend the measure library
+## 3. Improve and extend the measure library
 
 ✅ **Goal**: Use Copilot to analyze, document, improve, and extend the existing measure library without recreating calculations that are already present.
 
@@ -336,7 +275,7 @@ The model should contain an improved and extended measure library in which:
 * Both measures follow the approved description, formatting, and organization standards
 * The new measure is stored in the **Business Measures** table
 
-## 6. Save a clean checkpoint
+## 4. Save a clean checkpoint
 
 ✅ **Goal**: Preserve a known-good version of the semantic model before intentionally introducing an error.
 
@@ -362,7 +301,7 @@ Version history provides a safety net for experimentation. This checkpoint captu
 
 Version history should contain an entry named `Lab checkpoint: Validated cleanup and measure library extension`.
 
-## 7. Recover with version history
+## 5. Recover with version history
 
 ✅ **Goal**: Use semantic model version history as a safety net after making an unwanted change.
 
