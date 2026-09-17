@@ -27,22 +27,22 @@ Both parts use the shared prerequisites and environment setup. After completing 
 
 ## Lab structure
 
-| Section | Learning goal |
-| ------- | ------------- |
-| [Prerequisites](#prerequisites) | Confirm tools, licenses, and access |
-| [Prepare the environment](#prepare-the-environment) | Install the plugin and sign in to the required CLIs |
-| **[Part 1: Brownfield development](#part-1-brownfield-development)** | **Develop an existing Power BI project** |
-| [1.1 Save the report as a PBIP project and track it with Git](#11-save-the-report-as-a-pbip-project-and-track-it-with-git) | Create a reviewable baseline |
-| [1.2 Prepare the codebase with agentic context](#12-prepare-the-codebase-with-agentic-context) | Add `AGENTS.md` and a local skill to the project |
-| [1.3 Generate documentation for the model and report](#13-generate-documentation-for-the-model-and-report) | Automate a task nobody enjoys |
-| [1.4 Add measure descriptions using company context](#14-add-measure-descriptions-using-company-context) | Ground the agent in business language |
-| [1.5 Add currency conversion with a calculation group](#15-add-currency-conversion-with-a-calculation-group) | Extend the semantic model |
-| [1.6 Restyle the report pages](#16-restyle-the-report-pages) | Apply report-wide layout changes |
-| **[Part 2: Greenfield development](#part-2-greenfield-development)** | **Build new Power BI artifacts in Fabric** |
-| [2.1 Prepare the Fabric Lakehouse](#21-prepare-the-fabric-lakehouse) | Create the greenfield data source |
-| [2.2 Connect the GitHub Copilot app to the remote MCP server](#22-connect-the-github-copilot-app-to-the-remote-mcp-server) | Work without local setup |
-| [2.3 Plan and build a Direct Lake semantic model](#23-plan-and-build-a-direct-lake-semantic-model) | Plan first, then implement |
-| [2.4 Create two reports with parallel subagents](#24-create-two-reports-with-parallel-subagents) | Compare design variations in parallel |
+| Section                                                                                                                    | Learning goal                                       |
+| -------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| [Prerequisites](#prerequisites)                                                                                            | Confirm tools, licenses, and access                 |
+| [Prepare the environment](#prepare-the-environment)                                                                        | Install the plugin and sign in to the required CLIs |
+| **[Part 1: Brownfield development](#part-1-brownfield-development)**                                                       | **Develop an existing Power BI project**            |
+| [1.1 Save the report as a PBIP project and track it with Git](#11-save-the-report-as-a-pbip-project-and-track-it-with-git) | Create a reviewable baseline                        |
+| [1.2 Prepare the codebase with agentic context](#12-prepare-the-codebase-with-agentic-context)                             | Add `AGENTS.md` and a local skill to the project    |
+| [1.3 Generate documentation for the model and report](#13-generate-documentation-for-the-model-and-report)                 | Automate a task nobody enjoys                       |
+| [1.4 Add measure descriptions using company context](#14-add-measure-descriptions-using-company-context)                   | Ground the agent in business language               |
+| [1.5 Add currency conversion with a calculation group](#15-add-currency-conversion-with-a-calculation-group)               | Extend the semantic model                           |
+| [1.6 Restyle the report pages](#16-restyle-the-report-pages)                                                               | Apply report-wide layout changes                    |
+| **[Part 2: Greenfield development](#part-2-greenfield-development)**                                                       | **Build new Power BI artifacts in Fabric**          |
+| [2.1 Prepare the Fabric Lakehouse](#21-prepare-the-fabric-lakehouse)                                                       | Create the greenfield data source                   |
+| [2.2 Connect the GitHub Copilot app to the remote MCP server](#22-connect-the-github-copilot-app-to-the-remote-mcp-server) | Work without local setup                            |
+| [2.3 Plan and build a Direct Lake semantic model](#23-plan-and-build-a-direct-lake-semantic-model)                         | Plan first, then implement                          |
+| [2.4 Create two reports with parallel subagents](#24-create-two-reports-with-parallel-subagents)                           | Compare design variations in parallel               |
 
 ## Prerequisites
 
@@ -78,8 +78,8 @@ This lab requires the following:
 
 	> [!TIP]
 	> There are several ways to install skills and plugins. You can install them in Visual Studio Code, using [NPX Skills](https://github.com/vercel-labs/skills), [Agent Package Manager](https://microsoft.github.io/apm/) or simply copy them into your workspace or Copilot folder. Installing the plugin through GitHub Copilot CLI is a simple way to make its skills and MCP server available across GitHub Copilot CLI, Visual Studio Code, and the GitHub Copilot app without installing duplicate copies.
-    >
-    > Learn more in [`powerbi-authoring-plugin`](https://learn.microsoft.com/en-us/power-bi/developer/agentic/power-bi-agentic-overview#get-started) documentation page.
+	>
+	> Learn more in [`powerbi-authoring-plugin`](https://learn.microsoft.com/en-us/power-bi/developer/agentic/power-bi-agentic-overview#get-started) documentation page.
 
 ### Sign in to GitHub Copilot
 
