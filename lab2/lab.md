@@ -553,18 +553,21 @@ Planning first gives you something to correct before anything is created. It als
 	- The plan should reflect the rules in `team-rules.md`: for example business-friendly table names without `Fact` or `Dim` prefixes and an `About` table to include a metadata table in the model.
 	- No semantic model exists in the workspace yet.
 
-6. Read the plan and check if the rules in `team-rules.md` are being followed.
+6. Review the plan and check if the rules in `team-rules.md` are being followed (e.g. measures should be uppercase).
    
    ![gh-app-plan-review](resources/img/gh-app-plan-review.png)
 
 7. Adjust the plan where needed, for example table naming, which measures to create, or the contents of the `About` table.
+8. Don't execute the plan yet. If prompted say you don't want to implement the plan yet.
 
 #### Implement the plan
 
 1. Switch the model picker to a cheaper model such as `GPT-5.6 Terra` and turn on **Autopilot**.
 
+	![gh-app-switch-to-interactive](resources/img/gh-app-switch-to-interactive.png)
+
 > [!TIP]
-> The implementation phase mostly follows instructions that are already written down, so it does not need the strongest reasoning model.
+> The implementation phase mostly follows instructions that are already written down, so it does not need the strongest reasoning model. 
 
 2. Prompt the agent to implement the approved plan:
 
