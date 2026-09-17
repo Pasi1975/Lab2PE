@@ -140,13 +140,10 @@ This lab requires the following:
 
 1. Open **Visual Studio Code**.
 2. Select [Open the AI features setting](vscode://settings/chat.disableAIFeatures) and ensure that **Disable AI Features** is cleared.
-   	
-> [!TIP]
-> If the link does not open from your Markdown viewer, open **Settings** in Visual Studio Code and search for `chat.disableAIFeatures`.
-
-4. Open **GitHub Copilot Chat** (`CTRL+ALT+I`) and confirm that the chat view is accessible.
-5. You may need to sign-in with your GitHub Copilot account.
-6. Open the chat settings and confirm the `powerbi-authoring` plugin is intalled
+	- **Note:** If the link does not open from your Markdown viewer, open **Settings** in Visual Studio Code and search for `chat.disableAIFeatures`.
+3. Open **GitHub Copilot Chat** (`CTRL+ALT+I`) and confirm that the chat view is accessible.
+4. You may need to sign-in with your GitHub Copilot account.
+5. Open the chat settings and confirm the `powerbi-authoring` plugin is intalled
    
 	![vscode-chat-plugin-installed](resources/img/vscode-chat-plugin-installed.png)
 
