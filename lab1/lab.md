@@ -4,22 +4,15 @@
 
 ## Overview
 
-In this lab, you inherit the **ManufacturingOps** semantic model from another analyst. The model already organizes content into Sales, Inventory, Procurement, and Production business domains and includes an established measure library. It also contains an **Ambiguous Names Demo** area with realistic modeling issues such as unclear terminology, abbreviations, naming inconsistencies, and missing descriptions.
+In this lab, you inherit the **ManufacturingOps** semantic model from another analyst. You are not familiar with the model, its structure, or the business logic behind it. Before making any changes, you will use [**Copilot in Power BI web modeling**](https://learn.microsoft.com/power-bi/transform-model/copilot-web-modeling) to explore the model and understand how its tables, relationships, and measures support the Sales, Inventory, Procurement, and Production business domains.
 
-Using **Copilot in Power BI web modeling**, you will explore the model, identify areas for improvement, clean up its metadata, document and extend its existing measure library, validate your changes, and recover from an intentional mistake using semantic model version history. The entire lab is completed in the browser with no local installation required.
-
-> **Workshop model:** All participants will use the **ManufacturingOps** semantic model with sample data. Its **Ambiguous Names Demo** area provides a consistent cleanup scenario so that the exercises produce visible, meaningful improvements.
-
-> **Workspace isolation:** Each participant works in a separate Fabric workspace to prevent concurrent editing conflicts. You will create the workspace and upload the workshop model at the start of this lab.
+Once you are familiar with the model, Copilot will help you identify and make targeted improvements. You will complete the entire lab in the browser, with no local installation required or extra licensing other than Fabric/Premium capacity.
 
 ## What you will learn
 
-- How to create and organize a Fabric workspace for model development
-- How to explore and understand an inherited semantic model
+- How to explore and understand a semantic model using Copilot.
 - How to analyze model structure, naming, and metadata
-- How to improve model names and descriptions
-- How better metadata can make a semantic model easier for people and AI experiences to understand
-- How to analyze, document, improve, and extend an existing measure library with Copilot
+- How to apply modeling changes using Copilot.
 - How to review and validate AI-assisted model changes
 - How to save a clean version and recover from an unwanted change using version history
 
