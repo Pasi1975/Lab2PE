@@ -45,45 +45,38 @@ All participants should use the workshop-provided model rather than selecting th
 
 ## 0. Prepare the environment
 
-✅ **Goal**: Create an isolated Fabric workspace and upload the workshop model so that you have a private copy to edit.
+✅ **Goal**: Create an isolated Fabric workspace and upload the workshop model
 
 ### Create a workspace
 
-1. Go to [Power BI](https://app.powerbi.com) and sign in.
-2. Select **Workspaces** from the navigation pane.
-3. Select **New workspace**.
-4. Enter a workspace name using this convention: 
-   
+1. Go to [Power BI](https://app.powerbi.com) and sign in with the workshop account.
+2. Select **Workspaces** > **New workspace**.
+3. Name the workspace using this convention:
+
 	```text
 	FabCon-Agentic-Lab1-[YourInitials]
 	```
 
-5. Assign the workspace to one of the available Premium capacities.
-6. Select **Apply** and wait for the workspace to be created.
+4. Assign the workspace to the avaiable Fabric/Premium capacity and select **Apply**.
+5. Select **Apply** and wait for the workspace to be created.
 
 ### Upload the workshop model
 
 1. In your new workspace, select **Upload**.
-2. Select **Browse** and select the [ManufacturingOps.pbix](resources/ManufacturingOps.pbix) file in this repo.
+2. Select **Browse** and select the [resources/ManufacturingOps.pbix](resources/ManufacturingOps.pbix) file from this lab resources.
 3. Select **Upload** and wait for the semantic model and associated report to appear.
 
 ### Verify the model
 
-1. Select the semantic model, not the report.
-2. Select **Edit semantic model**.
-3. Confirm that the model opens without errors and displays its tables, columns, measures, and relationships.
-4. Confirm that you can find the Sales, Inventory, Procurement, and Production domains, the **Business Measures** table, and the **Ambiguous Names Demo** area.
-5. Do not make any changes yet.
+1. Open the semantic model, not the report.
+2. Confirm that the model opens without errors and displays its tables, columns, measures, and relationships.
 
 ### Expected result
 
 You should now have:
 
-* An isolated Fabric workspace assigned to the correct capacity
-* The workshop model uploaded and accessible
-* Confirmation that the model opens without errors
-* Confirmation that the expected business domains, measure library, and cleanup demo are present
-* A private model ready for the remaining exercises
+* An isolated workspace for the lab
+* A sample semantic model uploaded and ready for the lab
 
 ## 1. Explore the model
 
@@ -91,54 +84,54 @@ You should now have:
 
 ### Steps
 
-1. Open the workshop workspace in Power BI.
-2. Locate the **ManufacturingOps** semantic model.
-3. Open the model in the web modeling experience.
-4. Switch to **Editing** mode.
-5. Select **Copilot** from the ribbon.
-6. Review and accept the permission prompt for the Copilot session.
-7. Enter the following prompt:
+1. Open **ManufacturingOps** semantic model (not the report) from the workspace.
+2. Switch to **Editing** mode.
+	
+	![fabric-web-modeling-edit-mode](resources/img/fabric-web-modeling-edit-mode.png)
+
+3. Select **Copilot** from the ribbon.
+
+	![fabric-copilot-pane](resources/img/fabric-copilot-pane.png)
+      	
+4. Enter the following prompt:
 
 	```text
 	Analyze this semantic model and help me understand its current structure.
 
-	1. List the tables in the model.
-	2. Identify which tables appear to be fact tables and dimension tables.
-	3. Summarize the business purpose of the model.
-	4. Summarize the measures in the Business Measures table and the business questions they answer.
-	5. Explain how the Sales, Inventory, Procurement, and Production domains are represented.
-	6. Call out any parts of the model that may be difficult for a new report author to understand.
+	1. List the key tables in the model and categorize them as fact, dimension, utility.
+	2. Summarize the business purpose of the model.
+	3. Summarize the measures in the Business Measures table and the business questions they answer.
+	4. Explain how the Sales, Inventory, Procurement, and Production domains are represented.
+	5. Call out any parts of the model that may be difficult for a new report author to understand.
 
 	Do not make any changes yet.
 	```
+5. Select **Allow** to allow copilot to make changes to the semantic model.
+
+	![fabric-copilot-allow-changes](resources/img/fabric-copilot-allow-changes.png)
+
+> [!IMPORTANT]
+> Selecting **Allow** gives Copilot permission to change the open semantic model for the entire chat session. Power BI creates a restore checkpoint when you grant permission, which you can use to return the model to its state at the start of the session. For more details, see [Controlled model updates](https://learn.microsoft.com/power-bi/transform-model/copilot-web-modeling#controlled-model-updates).
 
 8. Review Copilot's response and compare it with the tables, relationships, columns, and measures shown in the model.
-
-	> [!TIP]
-	> Note anything Copilot identifies as confusing. These objects are candidates for improvement in the next exercise.
-
-9. Select an unfamiliar table, column, or measure.
-10. Ask a follow-up question to clarify its purpose:
+9. Ask a question about a specific model object to learn more about its value in the model. For example:
 
 	```text
-	Explain the business purpose of [OBJECT NAME] and how it relates to the other
+	Explain the business purpose of `Business Measures` and how it relates to the other
 	objects in this model.
 
 	Do not make any changes.
 	```
 
-	Replace `[OBJECT NAME]` with the name of the object you selected.
+	Replace `Business Measures` with the name of the object you selected.
 
-### Expected result
+### Reflection
 
-You should have a basic understanding of:
+* How did Copilot help you become familiar with a semantic model you had not seen before?
+* Which parts of Copilot's summary were most useful, and which parts did you need to verify against the model?
+* How could access to Copilot from the browser help you explore other semantic models available through Power BI web modeling?
 
-* The model's business scenario
-* Its fact and dimension tables
-* Its existing measures
-* The parts of the model that are currently difficult to understand
-
-## 2. Analyze the model
+## 2. Improve the semantic model names
 
 ✅ **Goal**: Identify naming and metadata issues that make the model harder for report authors and AI experiences to understand.
 
