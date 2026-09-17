@@ -587,6 +587,10 @@ Planning first gives you something to correct before anything is created. It als
 
 	![fabric-created-semantic-model](resources/img/fabric-created-semantic-model.png)
 
+4. Select the session name at the top of the window to review the total spend and token usage for the session.
+
+	![gh-app-session-context](resources/img/gh-app-session-context.png)	
+
 #### Reflection
 
 * When would you choose the GitHub Copilot app over Visual Studio Code or GitHub Copilot CLI for work in a Fabric workspace? All three use the same Copilot orchestrator, skills, and tools.
@@ -642,18 +646,16 @@ Trying design variations used to be expensive, so most teams built one and lived
 > [!TIP]
 > Subagents run in separate, isolated contexts. Each subagent can focus on its assigned task without mixing its working history with the parent agent or other subagents. This makes them useful for exploring independent approaches in parallel. Learn more in [Agents and Subagents](https://awesome-copilot.github.com/learning-hub/agents-and-subagents/).
 
-5. Review the session transcript of each subagent, each one should have its own reasoning and snapshot preview of the their report style.
+5. Review the session transcript of each subagent, each one should have its own reasoning and snapshot preview of their report style.
    
 	![gh-app-sub-agent-session](resources/img/gh-app-sub-agent-session.png)
 
-6. Open both reports in the Fabric portal.
-7. Compare the layouts, the chosen measures, and the chosen fields.
+6. Open both reports in the Fabric portal and compare the layouts.
 
 #### Reflection
 
 * Subagents is a great way to parallelize work using a parent session for orchestration and work. Like silently asking two colleagues to try the same task without them knowing.
 * When is running variations in parallel worth the cost, and when is one attempt enough?
-
 
 ## ✅ Wrap-up
 
