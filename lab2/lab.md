@@ -72,6 +72,7 @@ This lab requires the following:
 	```powershell
 	copilot plugin marketplace add microsoft/skills-for-fabric	
 	```
+
 	```powershell	
 	copilot plugin install powerbi-authoring@fabric-collection
 	```
@@ -429,7 +430,7 @@ In this part you start from nothing. You create a Fabric workspace, load a Lakeh
 There are no local files in this part. The **GitHub Copilot app** is a good fit for that: it is more approachable than Visual Studio Code or the CLI. Underneath it is the same GitHub Copilot orchestrator, the same skills, and the same MCP capabilities, so the experience stays consistent. Which surface you use is a matter of preference.
 
 > [!IMPORTANT]
-> Run the following in the terminal before starting this part:
+> Run the following in the terminal before starting this part and restart the **Github Copilot App**
 ```
 npx skills add https://github.com/azure-data-intelligence-platform/pbi-report-authoring-skill --skill powerbi-report-authoring powerbi-report-design powerbi-report-management powerbi-report-planning -y -a github-copilot
 ```
@@ -509,32 +510,34 @@ npx skills add https://github.com/azure-data-intelligence-platform/pbi-report-au
 
 Planning first gives you something to correct before anything is created. It also lets you split the work: an expensive reasoning model for the thinking, a cheaper model for the execution.
 
-#### Create the plan
+#### Start a GitHub App project
 
 1. Create a new empty folder in your laptop, e.g. `C:\FabCon\Lab2_Part2`
-2. In the **GitHub Copilot App**, select **+** > **Open folder** 
+2. In the **GitHub Copilot App**, select **+** > **Open folder** and select the created folder.
    
 	![gh-app-add-folder](resources/img/gh-app-add-folder.png)
 
 > [!TIP]
-> You can start a chat without a working folder, but opening a dedicated folder allows you to personalize settings to sessions under this folder such as configure context files such as `AGENTS.md` or MCP servers.
+> You can start a chat without a working folder. But opening a working folder gives the agent a defined project boundary. It can inspect existing files, discover instructions such as AGENTS.md, use folder-specific MCP settings, and save generated files in a predictable location. Sessions for the same project also stay grouped together. Use an empty chat for questions or remote tasks that do not require local project context. Opening a folder does not automatically load every file into the context; the agent reads relevant files as needed.
 
-3. Click on **New session** under the working folder, set the session mode to **Plan** and pick a powerful model such as `GPT-5.6 Sol`.
+3. Start a **New session** under the working folder, set the session mode to **Plan** and pick `GPT-5.6 Sol` model.
 	
-	![gh-app-new-session](resources/img/gh-app-new-session.png)	
+	![gh-app-new-session](resources/img/gh-app-new-session.png)		
 
 > [!TIP]
 > **Plan** mode lets Copilot inspect the available context, ask clarifying questions, and propose a reviewable implementation approach before making changes. You can correct assumptions, add validation steps, and agree on the scope before handing the plan to an agent for implementation. This is especially useful for complex or unfamiliar projects, where fixing the plan is cheaper than undoing the implementation. Learn more in [Use the GitHub Copilot plan agent](https://learn.microsoft.com/en-us/visualstudio/ide/copilot-plan-agent?view=visualstudio).
 
 3. Add [resources/team-rules.md](resources/team-rules.md) file as context.
-
+	
 	![gh-app-add-context-file](resources/img/gh-app-add-context-file.png)	
+
+	**Note:** Alternatively you could also add the file to the working folder.
 
 3. Enter the following prompt, replacing the `[YOUR_WORKSPACE_NAME]` with the name of your workspace:
 
 	```text
 	Create a new Direct Lake semantic model with name 'Sales Model' on top of the lakehouse 'Lakehouse_01' in workspace '[YOUR_WORKSPACE_NAME]'.
-	
+
 	Use the lakehouse tables: dimension_city, `dimension_customer`, `dimension_date`,`dimension_employee`, `dimension_stock_item`, `fact_sale`
 
 	Consider the team development rules in attached 'team-rules.md'
@@ -558,7 +561,7 @@ Planning first gives you something to correct before anything is created. It als
 
 #### Implement the plan
 
-1. Switch the model picker to a cheaper model such as `GPT-5.6 Terra`.
+1. Switch the model picker to a cheaper model such as `GPT-5.6 Terra` and turn on **Autopilot**.
 
 > [!TIP]
 > The implementation phase mostly follows instructions that are already written down, so it does not need the strongest reasoning model.
