@@ -347,7 +347,7 @@ Writing documentation from scratch and keeping it current both take time. AI can
 2. Enter the following prompt:
 
 	```text
-	Add RAW-CurrencyExchange.csv (https://raw.githubusercontent.com/pbi-tools/sales-sample/refs/heads/data/RAW-CurrencyExchange.csv) to the `sales.SemanticModel\definition` semantic model, then create a calculation group to convert and analyze sales in EUR, USD, and GBP.
+	Add https://raw.githubusercontent.com/pbi-tools/sales-sample/refs/heads/data/RAW-CurrencyExchange.csv to the `sales.SemanticModel\definition` semantic model, then create a calculation group to convert and analyze sales in EUR, USD, and GBP.
 	```
 
 	**Expected outcome**

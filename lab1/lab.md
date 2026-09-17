@@ -24,9 +24,8 @@ Once you are familiar with the model, Copilot will help you identify and make ta
 | [0. Prepare the environment](#0-prepare-the-environment) | Create your workspace and upload the workshop model |
 | [1. Explore the model](#1-explore-the-model) | Understand the inherited model |
 | [2. Improve the semantic model names](#2-improve-the-semantic-model-names) | Improve measure names, descriptions, formatting, and organization |
-| [3. Improve and extend the measure library](#3-improve-and-extend-the-measure-library) | Review and extend existing business calculations |
-| [4. Save a clean checkpoint](#4-save-a-clean-checkpoint) | Preserve the completed model |
-| [5. Recover with version history](#5-recover-with-version-history) | Undo an unwanted change |
+| [3. Create time intelligence measures](#3-create-time-intelligence-measures) | Create new measures that follow the model's development style |
+| [4. Revert unwanted changes with version history](#4-revert-unwanted-changes-with-version-history) | Restore the model after an unwanted Copilot change |
 
 ## Prerequisites
 
@@ -196,7 +195,7 @@ In this exercise, you will ask Copilot to review the measures and recommend impr
   
 	![fabric-copilot-model-after](resources/img/fabric-copilot-model-after.png)
 
-10. Review the changes made by Copilot. Measure names should be consistent, business friendly with business domain display folders.
+5. Review the changes made by Copilot. Measure names should be consistent, business friendly with business domain display folders.
 
 ### Reflection
 
@@ -204,174 +203,94 @@ In this exercise, you will ask Copilot to review the measures and recommend impr
 * How much time would you need to complete the same review and update the model yourself?
 * Power BI web modeling changes the semantic model directly in the workspace. What safeguards would you use to avoid making these changes in production? Consider working in a development workspace and tracking changes with Fabric Git integration.
 
-## 3. Improve and extend the measure library
+## 3. Create time intelligence measures
 
-✅ **Goal**: Use Copilot to analyze, document, improve, and extend the existing measure library without recreating calculations that are already present.
+✅ **Goal**: Use Copilot to create new time intelligence measures that follow the model's existing development style.
 
-### Steps
-
-1. Open the **Business Measures** table and review its existing measures and display folders.
-2. Select one existing measure from a business domain identified by your instructor.
-3. Enter the following prompt:
-
-	```text
-	Analyze the existing measures in the Business Measures table of the
-	ManufacturingOps semantic model.
-
-	1. Group the measures by the Sales, Inventory, Procurement, and Production
-	   business domains.
-	2. For [SELECTED MEASURE], explain the DAX and business purpose in plain language.
-	3. Review its name, description, format string, and display folder.
-	4. Recommend metadata improvements without changing its business logic.
-	5. Identify one useful calculation that is missing from the same business domain
-	   and can reuse existing measures.
-	6. Provide the proposed DAX, business description, format string, and display
-	   folder for that new calculation.
-
-	Do not make any changes yet, and do not recreate an existing measure.
-	```
-
-4. Replace `[SELECTED MEASURE]` with the measure you selected, then review Copilot's response.
-5. Confirm that the explanation of the existing measure matches its DAX and business purpose.
-6. Confirm that the metadata recommendations preserve the measure's name where it is already clear and do not alter its DAX.
-7. Check that the proposed new calculation does not duplicate an existing measure in **Business Measures**.
-8. Confirm that the proposed DAX reuses appropriate existing measures and uses the intended tables, columns, and date context.
-9. If the proposal duplicates an existing measure or uses an incorrect field, refine the request:
-
-	```text
-	Revise the proposed calculation so that it does not duplicate [EXISTING MEASURE].
-	Use [APPROVED BASE MEASURE] and, when needed, [APPROVED DATE FIELD] from
-	[APPROVED DATE TABLE].
-
-	Show the revised DAX and metadata before applying it.
-	```
-
-	Replace the placeholders with the approved objects from **ManufacturingOps**.
-
-10. Once the proposed metadata and calculation are correct, enter:
-
-	```text
-	Apply the approved metadata improvements to [SELECTED MEASURE] without changing
-	its DAX expression.
-
-	Create the approved new measure using the DAX, description, format string, and
-	display folder we reviewed. Store it in the Business Measures table.
-
-	Do not modify any other existing measures.
-	```
-
-11. Replace `[SELECTED MEASURE]`, review the proposed changes, and apply them.
-12. Save the semantic model.
-13. Inspect the updated metadata of the existing measure and confirm that its DAX is unchanged.
-14. Inspect the new measure's name, description, format string, display folder, destination table, and DAX expression.
-
-### Expected result
-
-The model should contain an improved and extended measure library in which:
-
-* One existing measure has clearer, reviewed metadata and unchanged DAX
-* One non-duplicate measure extends an existing business domain
-* The new measure reuses the intended model objects and existing measures
-* Both measures follow the approved description, formatting, and organization standards
-* The new measure is stored in the **Business Measures** table
-
-## 4. Save a clean checkpoint
-
-✅ **Goal**: Preserve a known-good version of the semantic model before intentionally introducing an error.
-
-Version history provides a safety net for experimentation. This checkpoint captures the validated cleanup and measure-library improvements.
+Copilot can inspect the semantic model and apply its existing patterns when it creates new objects. 
 
 ### Steps
 
-1. Confirm that the approved cleanup, updated measure metadata, and new measure are present.
-2. Confirm that the semantic model is saved.
-3. Open **File** and select **Save to version history**.
-4. Add the following description:
+1. Open a new Copilot session either by toggling the Copilot button or clicking on the **Erase Broom icon**. 
+2. Enter the following prompt:
 
 	```text
-	Lab checkpoint: Validated cleanup and measure library extension
+	Create time intelligence measures based on [Total Sales]: sales for the
+	previous year, a 12-month moving average, and year-to-date sales.
+
+	Follow the existing model measure development style. Use the model existing
+	date table.
 	```
 
-5. Save the version.
-6. Open **File** > **View version history** and confirm that the checkpoint appears with the expected description and timestamp.
+	**Expected outcome**
 
-> Do not continue until you can identify the clean checkpoint. You will restore this exact version in the next exercise.
+	- Copilot reviews the model's existing measure development style, including its naming, formatting, descriptions, and organization.
+	- Copilot creates the new previous-year, 12-month moving average, and year-to-date measures based on **[Total Sales]**.
 
-### Expected result
-
-Version history should contain an entry named `Lab checkpoint: Validated cleanup and measure library extension`.
-
-## 5. Recover with version history
-
-✅ **Goal**: Use semantic model version history as a safety net after making an unwanted change.
-
-In this scenario, you will intentionally introduce a mistake and restore the clean checkpoint.
-
-### Steps
-
-1. Select the table identified by your instructor.
-2. Note its current approved name.
-3. Rename the table to:
-
-	```text
-	TEMPORARY INCORRECT TABLE NAME
-	```
-
-4. Save the semantic model.
-5. Confirm that the temporary name appears in the model.
-6. Open the semantic model's version history.
-7. Locate the version with this description:
-
-	```text
-	Lab checkpoint: Validated cleanup and measure library extension
-	```
-
-8. Select that version, choose **Restore**, and confirm the operation.
-9. Reopen or refresh the semantic model if needed.
-10. Confirm that the temporary table name is gone.
-11. Confirm that the valid cleanup from the earlier exercises is still present.
-12. Confirm that the updated measure metadata and the approved new measure are still present.
-
-### Expected result
-
-The model should return to the clean checkpoint created after the approved cleanup and measure-library extension were completed.
-
-The temporary table name should no longer appear, while the valid work performed earlier in the lab should remain.
+3. Locate the three new measures in the model and confirm that they follow the naming, formatting, description, and display-folder patterns used by the existing measures.
+4. Review the DAX for each measure. Confirm that it references **[Total Sales]**, uses the correct date column, and implements the intended time calculation.
 
 ### Reflection
 
-Consider the following questions:
+* How well did Copilot understand and follow the model existing development patterns when creating new objects?
+* What did you check in the generated DAX before accepting the measures as correct?
 
-* When would you create a manual checkpoint in a production model?
-* What other unwanted changes could version history help you recover from?
-* How does version history support safe experimentation and collaboration?
+## 4. Revert unwanted changes with version history
+
+✅ **Goal**: Use semantic model version history to restore the model after an unwanted Copilot change.
+
+Copilot can make changes directly to the semantic model in the workspace. Version history provides a recovery point when an AI-assisted change produces an unwanted result. In this exercise, you will save a clean checkpoint, ask Copilot to make an intentionally bad change, and then restore the model.
+
+### Steps
+
+1. Open **File** and select **Save to version history**.
+   
+   ![fabric-model-new-version-history](resources/img/fabric-model-new-version-history.png)
+
+2. Add the following description, then select **Save**.
+
+	```text
+	Before Copilot
+	```
+
+	![fabric-model-version-name](resources/img/fabric-model-version-name.png)
+
+3. Open **File** > **Version history** and confirm that the checkpoint appears with the expected description and timestamp.
+   
+   ![fabric-model-version-history](resources/img/fabric-model-version-history.png)
+
+4. Open a new Copilot session by toggling the **Copilot** button or selecting the **Erase Broom** icon.
+5. Enter the following prompt to make an intentionally unwanted change:
+   
+	```text
+	Rename table 'Business Measures' to '_Measures'
+	```
+
+6. Confirm that the `Business Measures` table was renamed to `_Measures`.
+7. Open **File** > **View version history**.
+8. Confirm that a new version appears after the version labeled `Before Copilot`.
+   
+	![fabric-model-version-history-after](resources/img/fabric-model-version-history-after.png)
+
+9. Select the version labeled `Before Copilot`, choose **Restore**, and confirm the operation.
+    
+	![fabric-model-version-history-restore](resources/img/fabric-model-version-history-restore.png)
+
+10. Confirm that the semantic model has been restored to its state before the intentional rename. You might need to refresh the browser.
+
+### Reflection
+
+* Version history makes it easy to revert an unwanted change, but restoring a complete model version might not provide enough granularity for every development workflow. You should consider other solutions for a more effective version control such as [Fabric Git integration](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/git-get-started).
 
 ## ✅ Wrap-up
 
-You've now:
+You've now learned how to:
 
-* Created and organized an isolated Fabric workspace
-* Explored and summarized an inherited semantic model
-* Identified realistic naming and metadata issues
-* Reviewed recommendations before allowing Copilot to apply changes
-* Improved model names and descriptions
-* Validated that the cleanup did not unintentionally alter model behavior
-* Analyzed, documented, improved, and extended an existing business measure library
-* Saved a known-good version of the semantic model
-* Recovered from an unwanted change using version history
-
-## Key takeaways
-
-* Copilot can accelerate model exploration and common authoring tasks, but its recommendations still require review.
-* Clear names and descriptions make a semantic model easier for both people and AI-powered experiences to understand.
-* Specific prompts and clear constraints help produce more controlled results.
-* A standardized workshop model makes the hands-on experience more predictable.
-* Version history provides a recovery path when an AI-assisted or manual change produces an unwanted result.
-* The quality of the experience depends on the combination of the selected model, its starting state, and the prompts used against it.
-
-## What's next?
-
-Apply the same review, cleanup, and validation principles to other semantic models in your organization. You can also explore additional Copilot capabilities in Power BI web modeling and share the cleaned model with colleagues for feedback.
+* Use Copilot in Power BI web modeling to explore and understand an unfamiliar semantic model
+* Review AI recommendations before applying changes directly to a semantic model
+* Ask Copilot to change your semantic model for refactoring and new developments
+* Use separate Copilot sessions to keep unrelated tasks from influencing each other
+* Restore a semantic model after an unwanted Copilot change by using version history
 
 ## Useful links
 
