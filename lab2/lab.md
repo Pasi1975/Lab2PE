@@ -75,6 +75,11 @@ This lab requires the following:
 	```powershell	
 	copilot plugin install powerbi-authoring@fabric-collection
 	```
+3. **IMPORTANT: (Microsoft only)**
+   Open a terminal and run the following:
+   ```
+   npx skills add https://github.com/azure-data-intelligence-platform/pbi-report-authoring-skill --skill powerbi-report-cli -y -a github-copilot
+   ```
 
 > [!TIP]
 > There are several ways to install skills and plugins. You can install them in Visual Studio Code, using [NPX Skills](https://github.com/vercel-labs/skills), [Agent Package Manager](https://microsoft.github.io/apm/) or simply copy them into your workspace or Copilot folder. Installing the plugin through GitHub Copilot CLI is a simple way to make its skills and MCP server available across GitHub Copilot CLI, Visual Studio Code, and the GitHub Copilot app without installing duplicate copies.
@@ -392,15 +397,9 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 ## Part 2: Greenfield development
 
-In this part you start from nothing. You create a Fabric workspace, load a Lakehouse with a notebook, and then build a Direct Lake semantic model and two reports from the **GitHub Copilot app** using the remote Power BI Authoring MCP server.
+In this part you start from nothing. You create a Fabric workspace, load a Lakehouse with a notebook, and then build a Direct Lake semantic model and two reports using the **GitHub Copilot app**.
 
 There are no local files in this part. The **GitHub Copilot app** is a good fit for that: it is more approachable than Visual Studio Code or the CLI. Underneath it is the same GitHub Copilot orchestrator, the same skills, and the same MCP capabilities, so the experience stays consistent. Which surface you use is a matter of preference.
-
-**IMPORTANT: (For Microsoft testers only)**
-- Open a terminal and run the following before starting the lab. Restart the **Github Copilot App** after installing.
-	```
-	npx skills add https://github.com/azure-data-intelligence-platform/pbi-report-authoring-skill --skill powerbi-report-cli -y -a github-copilot
-	```
 
 ### 2.1 Prepare the Fabric Workspace
 
