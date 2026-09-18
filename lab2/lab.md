@@ -429,11 +429,11 @@ In this part you start from nothing. You create a Fabric workspace, load a Lakeh
 
 There are no local files in this part. The **GitHub Copilot app** is a good fit for that: it is more approachable than Visual Studio Code or the CLI. Underneath it is the same GitHub Copilot orchestrator, the same skills, and the same MCP capabilities, so the experience stays consistent. Which surface you use is a matter of preference.
 
-> [!IMPORTANT]
-> Run the following in the terminal before starting this part and restart the **Github Copilot App**
-```
-npx skills add https://github.com/azure-data-intelligence-platform/pbi-report-authoring-skill --skill powerbi-report-authoring powerbi-report-design powerbi-report-management powerbi-report-planning -y -a github-copilot
-```
+**IMPORTANT: (For Microsoft testers only)**
+- Open a terminal and run the following before starting the lab. Restart the **Github Copilot App** after installing.
+	```
+	npx skills add https://github.com/azure-data-intelligence-platform/pbi-report-authoring-skill --skill powerbi-report-cli -y -a github-copilot
+	```
 
 ### 2.1 Prepare the Fabric Lakehouse
 

@@ -59,9 +59,9 @@ All participants should use the workshop-provided model rather than selecting th
 
 ### Upload the workshop model
 
-1. In your new workspace, select **Upload**.
-2. Select **Browse** and select the [resources/ManufacturingOps.pbix](resources/ManufacturingOps.pbix) file from this lab resources.
-3. Select **Upload** and wait for the semantic model and associated report to appear.
+1. In your new workspace, select **Import** > **Report, Paginated Report, or Workbook** > **From this Computer**
+2. Select the [resources/ManufacturingOps.pbix](resources/ManufacturingOps.pbix) file from this lab resources.
+3. Select **Open** and wait for the semantic model and associated report to appear.
 
 ### Verify the model
 
@@ -99,9 +99,7 @@ You should now have:
 	2. Summarize the business purpose of the model.
 	3. Summarize the measures in the Business Measures table and the business questions they answer.
 	4. Explain how the Sales, Inventory, Procurement, and Production domains are represented.
-	5. Call out any parts of the model that may be difficult for a new report author to understand.
-
-	Do not make any changes yet.
+	5. Call out any parts of the model that may be difficult for a new report author to understand.	
 	```
 5. Select **Allow** to allow copilot to make changes to the semantic model.
 
@@ -115,9 +113,7 @@ You should now have:
 
 	```text
 	Explain the business purpose of `Business Measures` and how it relates to the other
-	objects in this model.
-
-	Do not make any changes.
+	objects in this model.	
 	```
 
 	Replace `Business Measures` with the name of the object you selected.
