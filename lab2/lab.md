@@ -419,7 +419,7 @@ There are no local files in this part. The **GitHub Copilot app** is a good fit 
 5. In the new workspace, select **New item** > **Notebook**.
 6. Open [resources/notebook.py](resources/notebook.py) from the workshop repository and copy its contents.
 7. Paste the code into the first cell of the notebook.
-8. Run the notebook (`CTRL+ENTER`) and wait for it to finish.
+8. Run the notebook cell (`CTRL+ENTER`) and wait for it to finish.
    
 	![fabric-notebook-lakehouse-create](resources/img/fabric-notebook-lakehouse-create.png)
 
@@ -445,10 +445,10 @@ There are no local files in this part. The **GitHub Copilot app** is a good fit 
 1. Open the **GitHub Copilot app** and sign in with your GitHub account.
 2. Click on **Customize** > **MCP** > **Add server** > **Custom server** and configure the Power BI Authoring MCP server using the HTTP configuration.
 
-	```text
-	server name: powerbi-authoring-remote
-	url: https://api.fabric.microsoft.com/v1/mcp/powerbi/authoring
-	```
+	| Setting | Value                                                       |
+	| ------- | ----------------------------------------------------------- |
+	| Server  | `powerbi-authoring-remote`                                  |
+	| URL     | `https://api.fabric.microsoft.com/v1/mcp/powerbi/authoring` |
 
 	![gh-app-pbi-remote-mcp](resources/img/gh-app-pbi-remote-mcp.png)
 
@@ -458,9 +458,9 @@ There are no local files in this part. The **GitHub Copilot app** is a good fit 
 	![gh-app-pbi-local-mcp-disabled](resources/img/gh-app-pbi-local-mcp-disabled.png)
 
 > [!IMPORTANT]
-> The local Power BI Authoring MCP server installed by default with `powerbi-authoring` plugin provides the same capabilities and is generally available. The remote MCP server is currently in preview and is intended to become the default option for working with Fabric data sources because its hosted in Fabric and requires no local instalation. Learn more in [Power BI Authoring MCP server](https://learn.microsoft.com/power-bi/developer/mcp/power-bi-authoring-mcp)
->
-> You should avoid enabling both local and remote servers at the same time. The agent then sees two overlapping tool sets, which makes routing ambiguous and consumes extra tokens on every request. Pick one: the hosted server when you work against semantic models in Fabric workspaces, and the local server when you work against Power BI Desktop or Power BI Project files on your machine.
+> The Power BI Authoring MCP server is available in local and remote (hosted) versions. Use the local server with Power BI Desktop or PBIP files. Use the remote server with semantic models in Fabric because it requires no local installation. For details, see [Power BI Authoring MCP server](https://learn.microsoft.com/power-bi/developer/mcp/power-bi-authoring-mcp).
+> 
+> The `powerbi-authoring` plugin you installed previously ships with the local version to support both local development and remote. **You should avoid enabling both local and remote versions at the same time**. The agent then sees two overlapping tool sets, which makes routing ambiguous and consumes extra tokens on every request. Pick one: the hosted server when you work against semantic models in Fabric workspaces, and the local server when you work against Power BI Desktop or Power BI Project files on your machine.
 
 
 ### 2.3 Plan and build a Direct Lake semantic model
@@ -472,12 +472,12 @@ Planning first gives you something to correct before anything is created. It als
 #### Start a GitHub App project
 
 1. Create a new empty folder in your laptop, e.g. `C:\FabCon\Lab2_Part2`
-2. In the **GitHub Copilot App**, select **+** > **Open folder** and select the created folder.
+2. In the **GitHub Copilot App**, select **+** > **Open folder** and open the created folder.
    
 	![gh-app-add-folder](resources/img/gh-app-add-folder.png)
 
 > [!TIP]
-> You can start a chat without a working folder. But opening a working folder gives the agent a defined project boundary. It can inspect existing files, discover instructions such as AGENTS.md, use folder-specific MCP settings, and save generated files in a predictable location. Sessions for the same project also stay grouped together. Use an empty chat for questions or remote tasks that do not require local project context. Opening a folder does not automatically load every file into the context; the agent reads relevant files as needed.
+> You can start a chat without a working folder. But working within a folder gives the agent a defined project boundary. It can inspect existing files, discover instructions such as AGENTS.md, use folder-specific MCP settings, and save generated files in a predictable location. Sessions for the same project also stay grouped together. Use an empty chat for questions or remote tasks that do not require local project context. Opening a folder does not automatically load every file into the context; the agent reads relevant files as needed.
 
 3. Start a **New session** under the working folder, set the session mode to **Plan** and pick `GPT-5.6 Sol` model.
 	
@@ -497,56 +497,40 @@ Planning first gives you something to correct before anything is created. It als
 	```text
 	Create a new Direct Lake semantic model with name 'Sales Model' on top of the lakehouse 'Lakehouse_01' in workspace '[YOUR_WORKSPACE_NAME]'.
 
-	Use the lakehouse tables: dimension_city, `dimension_customer`, `dimension_date`,`dimension_employee`, `dimension_stock_item`, `fact_sale`
+	Use the lakehouse tables: dimension_city, `dimension_customer`, `dimension_date`,`dimension_employee`, `dimension_stock_item`, `fact_sale`. 
 
-	Consider the team development rules in attached 'team-rules.md'
+	Consider the team development rules in attached 'team-rules.md'.
 	```
 
 	**Expected outcome**
 
 	- Because its configured with **Plan mode** agent wont create anything and instead will draft a plan that you can review and adjust before implementation.
 	- Because you are asking to create a semantic model it will load the `semantic-model-authoring` skill for guidance on Power BI semantic modeling
-	- It will load the `team-rules.md` for development rules context.
+	- It will consider the `team-rules.md` for development rules included in that file.
 	- The agent may ask follow-up questions, for example about the model name or which tables to include. Answer them.
 	- The agent returns an implementation plan rather than creating anything.
 	- The plan should reflect the rules in `team-rules.md`: for example business-friendly table names without `Fact` or `Dim` prefixes and an `About` table to include a metadata table in the model.
-	- No semantic model exists in the workspace yet.
 
 6. Review the plan and check if the rules in `team-rules.md` are being followed (e.g. measures should be uppercase).
    
    ![gh-app-plan-review](resources/img/gh-app-plan-review.png)
 
 7. Adjust the plan where needed, for example table naming, which measures to create, or the contents of the `About` table.
-8. Don't execute the plan yet. If prompted say you don't want to implement the plan yet.
-
-#### Implement the plan
-
-1. Switch the model picker to a cheaper model such as `GPT-5.6 Terra` and turn on **Autopilot**.
-
-	![gh-app-switch-to-interactive](resources/img/gh-app-switch-to-interactive.png)
-
-> [!TIP]
-> The implementation phase mostly follows instructions that are already written down, so it does not need the strongest reasoning model. 
-
-2. Prompt the agent to implement the approved plan:
-
-	```text
-	Implement the plan.
-	```
+8. Ask the agent to implement the plan.
 
 	**Expected outcome**
 
-	- The agent executes the plan step by step without re-planning from scratch.
+	- The agent executes the plan step by step.
 	- The agent should start by discovering the Fabric workspace and lakehouse ID's and metadata.
 	- The agent uses the `database_operations` `Create` operation, which creates a Direct Lake model over the Lakehouse tables and infers their schema in a single tool call.
 	- A new semantic model `Sales Model` appears in your workspace.
 	- The model follows the attached team rules.
 
-3. Open the created semantic model in Fabric workspace and confirm the tables with friendly names, the relationships, the hidden base columns, the explicit measures, and the `About` table. It does all this because of [guidance from the `semantic-model-authoring` skill](https://github.com/microsoft/skills-for-fabric/blob/main/skills/semantic-model-authoring/SKILL.md#workflow-create-new-semantic-model).
+9. Open the created semantic model in Fabric workspace and confirm the tables with friendly names, the relationships, the hidden base columns, the explicit measures, and the `About` table. It does all this because of [guidance from the `semantic-model-authoring` skill](https://github.com/microsoft/skills-for-fabric/blob/main/skills/semantic-model-authoring/SKILL.md#workflow-create-new-semantic-model).
 
 	![fabric-created-semantic-model](resources/img/fabric-created-semantic-model.png)
 
-4. Select the session name at the top of the window to review the total spend and token usage for the session.
+10. Select the session name at the top of the window to review the total spend and token usage for the session.
 
 	![gh-app-session-context](resources/img/gh-app-session-context.png)	
 
