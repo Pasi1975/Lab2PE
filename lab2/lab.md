@@ -434,7 +434,7 @@ There are no local files in this part. The **GitHub Copilot app** is a good fit 
 	npx skills add https://github.com/azure-data-intelligence-platform/pbi-report-authoring-skill --skill powerbi-report-cli -y -a github-copilot
 	```
 
-### 2.1 Prepare the Fabric Lakehouse
+### 2.1 Prepare the Fabric Workspace
 
 ✅ **Goal**: Create an isolated Fabric workspace and load it with a Lakehouse containing the sample sales tables.
 
@@ -495,7 +495,7 @@ There are no local files in this part. The **GitHub Copilot app** is a good fit 
 	![gh-app-pbi-local-mcp-disabled](resources/img/gh-app-pbi-local-mcp-disabled.png)
 
 > [!IMPORTANT]
-> The local Power BI Authoring MCP server installed by default with `powerbi-authoring` plugin provides the same capabilities and is generally available. The remote MCP server is currently in preview and is intended to become the default option for working with Fabric data sources because its hosted in Fabric and requires no local instalation.
+> The local Power BI Authoring MCP server installed by default with `powerbi-authoring` plugin provides the same capabilities and is generally available. The remote MCP server is currently in preview and is intended to become the default option for working with Fabric data sources because its hosted in Fabric and requires no local instalation. Learn more in [Power BI Authoring MCP server](https://learn.microsoft.com/power-bi/developer/mcp/power-bi-authoring-mcp)
 >
 > You should avoid enabling both local and remote servers at the same time. The agent then sees two overlapping tool sets, which makes routing ambiguous and consumes extra tokens on every request. Pick one: the hosted server when you work against semantic models in Fabric workspaces, and the local server when you work against Power BI Desktop or Power BI Project files on your machine.
 
