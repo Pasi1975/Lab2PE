@@ -4,22 +4,15 @@
 
 ## Overview
 
-In this lab, you inherit the **ManufacturingOps** semantic model from another analyst. The model already organizes content into Sales, Inventory, Procurement, and Production business domains and includes an established measure library. It also contains an **Ambiguous Names Demo** area with realistic modeling issues such as unclear terminology, abbreviations, naming inconsistencies, and missing descriptions.
+In this lab, you inherit the **ManufacturingOps** semantic model from another analyst. You are not familiar with the model, its structure, or the business logic behind it. Before making any changes, you will use [**Copilot in Power BI web modeling**](https://learn.microsoft.com/power-bi/transform-model/copilot-web-modeling) to explore the model and understand how its tables, relationships, and measures support the Sales, Inventory, Procurement, and Production business domains.
 
-Using **Copilot in Power BI web modeling**, you will explore the model, identify areas for improvement, clean up its metadata, document and extend its existing measure library, validate your changes, and recover from an intentional mistake using semantic model version history. The entire lab is completed in the browser with no local installation required.
-
-> **Workshop model:** All participants will use the **ManufacturingOps** semantic model with sample data. Its **Ambiguous Names Demo** area provides a consistent cleanup scenario so that the exercises produce visible, meaningful improvements.
-
-> **Workspace isolation:** Each participant works in a separate Fabric workspace to prevent concurrent editing conflicts. You will create the workspace and upload the workshop model at the start of this lab.
+Once you are familiar with the model, Copilot will help you identify and make targeted improvements. You will complete the entire lab in the browser, with no local installation required or extra licensing other than Fabric/Premium capacity.
 
 ## What you will learn
 
-- How to create and organize a Fabric workspace for model development
-- How to explore and understand an inherited semantic model
+- How to explore and understand a semantic model using Copilot.
 - How to analyze model structure, naming, and metadata
-- How to improve model names and descriptions
-- How better metadata can make a semantic model easier for people and AI experiences to understand
-- How to analyze, document, improve, and extend an existing measure library with Copilot
+- How to apply modeling changes using Copilot.
 - How to review and validate AI-assisted model changes
 - How to save a clean version and recover from an unwanted change using version history
 
@@ -30,12 +23,9 @@ Using **Copilot in Power BI web modeling**, you will explore the model, identify
 | [Prerequisites](#prerequisites) | Confirm access and understand workspace isolation |
 | [0. Prepare the environment](#0-prepare-the-environment) | Create your workspace and upload the workshop model |
 | [1. Explore the model](#1-explore-the-model) | Understand the inherited model |
-| [2. Analyze the model](#2-analyze-the-model) | Identify naming and metadata issues |
-| [3. Apply model cleanup](#3-apply-model-cleanup) | Improve approved names and descriptions |
-| [4. Validate the improvements](#4-validate-the-improvements) | Confirm the intended changes |
-| [5. Improve and extend the measure library](#5-improve-and-extend-the-measure-library) | Review and extend existing business calculations |
-| [6. Save a clean checkpoint](#6-save-a-clean-checkpoint) | Preserve the completed model |
-| [7. Recover with version history](#7-recover-with-version-history) | Undo an unwanted change |
+| [2. Improve the semantic model names](#2-improve-the-semantic-model-names) | Improve measure names, descriptions, formatting, and organization |
+| [3. Create time intelligence measures](#3-create-time-intelligence-measures) | Create new measures that follow the model's development style |
+| [4. Revert unwanted changes with version history](#4-revert-unwanted-changes-with-version-history) | Restore the model after an unwanted Copilot change |
 
 ## Prerequisites
 
@@ -52,45 +42,38 @@ All participants should use the workshop-provided model rather than selecting th
 
 ## 0. Prepare the environment
 
-✅ **Goal**: Create an isolated Fabric workspace and upload the workshop model so that you have a private copy to edit.
+✅ **Goal**: Create an isolated Fabric workspace and upload the workshop model
 
 ### Create a workspace
 
-1. Go to [Power BI](https://app.powerbi.com) and sign in.
-2. Select **Workspaces** from the navigation pane.
-3. Select **New workspace**.
-4. Enter a workspace name using this convention: 
-   
+1. Go to [Power BI](https://app.powerbi.com) and sign in with the workshop account.
+2. Select **Workspaces** > **New workspace**.
+3. Name the workspace using this convention:
+
 	```text
 	FabCon-Agentic-Lab1-[YourInitials]
 	```
 
-5. Assign the workspace to one of the available Premium capacities.
-6. Select **Apply** and wait for the workspace to be created.
+4. Assign the workspace to the avaiable Fabric/Premium capacity and select **Apply**.
+5. Select **Apply** and wait for the workspace to be created.
 
 ### Upload the workshop model
 
 1. In your new workspace, select **Upload**.
-2. Select **Browse** and select the [ManufacturingOps.pbix](resources/ManufacturingOps.pbix) file in this repo.
+2. Select **Browse** and select the [resources/ManufacturingOps.pbix](resources/ManufacturingOps.pbix) file from this lab resources.
 3. Select **Upload** and wait for the semantic model and associated report to appear.
 
 ### Verify the model
 
-1. Select the semantic model, not the report.
-2. Select **Edit semantic model**.
-3. Confirm that the model opens without errors and displays its tables, columns, measures, and relationships.
-4. Confirm that you can find the Sales, Inventory, Procurement, and Production domains, the **Business Measures** table, and the **Ambiguous Names Demo** area.
-5. Do not make any changes yet.
+1. Open the semantic model, not the report.
+2. Confirm that the model opens without errors and displays its tables, columns, measures, and relationships.
 
 ### Expected result
 
 You should now have:
 
-* An isolated Fabric workspace assigned to the correct capacity
-* The workshop model uploaded and accessible
-* Confirmation that the model opens without errors
-* Confirmation that the expected business domains, measure library, and cleanup demo are present
-* A private model ready for the remaining exercises
+* An isolated workspace for the lab
+* A sample semantic model uploaded and ready for the lab
 
 ## 1. Explore the model
 
@@ -98,355 +81,216 @@ You should now have:
 
 ### Steps
 
-1. Open the workshop workspace in Power BI.
-2. Locate the **ManufacturingOps** semantic model.
-3. Open the model in the web modeling experience.
-4. Switch to **Editing** mode.
-5. Select **Copilot** from the ribbon.
-6. Review and accept the permission prompt for the Copilot session.
-7. Enter the following prompt:
+1. Open **ManufacturingOps** semantic model (not the report) from the workspace.
+2. Switch to **Editing** mode.
+	
+	![fabric-web-modeling-edit-mode](resources/img/fabric-web-modeling-edit-mode.png)
+
+3. Select **Copilot** from the ribbon.
+
+	![fabric-copilot-pane](resources/img/fabric-copilot-pane.png)
+      	
+4. Enter the following prompt:
 
 	```text
 	Analyze this semantic model and help me understand its current structure.
 
-	1. List the tables in the model.
-	2. Identify which tables appear to be fact tables and dimension tables.
-	3. Summarize the business purpose of the model.
-	4. Summarize the measures in the Business Measures table and the business questions they answer.
-	5. Explain how the Sales, Inventory, Procurement, and Production domains are represented.
-	6. Call out any parts of the model that may be difficult for a new report author to understand.
+	1. List the key tables in the model and categorize them as fact, dimension, utility.
+	2. Summarize the business purpose of the model.
+	3. Summarize the measures in the Business Measures table and the business questions they answer.
+	4. Explain how the Sales, Inventory, Procurement, and Production domains are represented.
+	5. Call out any parts of the model that may be difficult for a new report author to understand.
 
 	Do not make any changes yet.
 	```
+5. Select **Allow** to allow copilot to make changes to the semantic model.
+
+	![fabric-copilot-allow-changes](resources/img/fabric-copilot-allow-changes.png)
+
+> [!IMPORTANT]
+> Selecting **Allow** gives Copilot permission to change the open semantic model for the entire chat session. Power BI creates a restore checkpoint when you grant permission, which you can use to return the model to its state at the start of the session. For more details, see [Controlled model updates](https://learn.microsoft.com/power-bi/transform-model/copilot-web-modeling#controlled-model-updates).
 
 8. Review Copilot's response and compare it with the tables, relationships, columns, and measures shown in the model.
-
-	> [!TIP]
-	> Note anything Copilot identifies as confusing. These objects are candidates for improvement in the next exercise.
-
-9. Select an unfamiliar table, column, or measure.
-10. Ask a follow-up question to clarify its purpose:
+9. Ask a question about a specific model object to learn more about its value in the model. For example:
 
 	```text
-	Explain the business purpose of [OBJECT NAME] and how it relates to the other
+	Explain the business purpose of `Business Measures` and how it relates to the other
 	objects in this model.
 
 	Do not make any changes.
 	```
 
-	Replace `[OBJECT NAME]` with the name of the object you selected.
+	Replace `Business Measures` with the name of the object you selected.
 
-### Expected result
+### Reflection
 
-You should have a basic understanding of:
+* How did Copilot help you become familiar with a semantic model you had not seen before?
+* Which parts of Copilot's summary were most useful, and which parts did you need to verify against the model?
+* How could access to Copilot from the browser help you explore other semantic models available through Power BI web modeling?
 
-* The model's business scenario
-* Its fact and dimension tables
-* Its existing measures
-* The parts of the model that are currently difficult to understand
+## 2. Improve the semantic model names
 
-## 2. Analyze the model
+✅ **Goal**: Use Copilot to identify and fix inconsistent measure names, descriptions, formatting, and organization.
 
-✅ **Goal**: Identify naming and metadata issues that make the model harder for report authors and AI experiences to understand.
+As you explore the inherited model, you notice that its measures do not follow a consistent naming pattern and are not organized clearly. Some descriptions are also missing or difficult to understand. These issues make ad hoc exploration harder for report authors and make it more difficult for AI consumption experiences like [Fabric IQ](https://learn.microsoft.com/en-us/fabric/iq/overview) to interpret the model correctly.
+
+![fabric-copilot-model-before](resources/img/fabric-copilot-model-before.png)
+
+In this exercise, you will ask Copilot to review the measures and recommend improvements. You will review its recommendations before allowing it to update the model.
 
 ### Steps
 
-1. Navigate to the **Ambiguous Names Demo** area in the model and review the objects it contains.
+1. Open a new Copilot session either by toggling the Copilot button or clicking on the **Erase Broom icon**. 
+
+	![fabric-copilot-clear-session](resources/img/fabric-copilot-clear-session.png)
+
+	> [!TIP]
+	> Start a new Copilot session when you no longer need the previous conversation. Removing irrelevant context reduces token usage and helps Copilot focus on the current task, which can produce more relevant responses.
+
 2. Enter the following prompt:
 
 	```text
-	Review the tables, columns, and measures in the Ambiguous Names Demo area of
-	this semantic model. Identify unclear business terminology, abbreviations,
-	naming inconsistencies, and missing descriptions using these standards:
+	Review all measures in this semantic model for inconsistencies in their names,
+	descriptions, format strings, and display folders.
+
+	Propose a consistent naming and organization pattern that makes the measures
+	easier for report authors and AI experiences to understand. Follow these rules:
 
 	- Use clear English names.
 	- Use spaces instead of underscores.
 	- Use business-friendly wording instead of technical abbreviations.
-	- Use consistent Title Case.
-	- Provide concise descriptions for important tables, columns, and measures.
-	- Preserve the existing business meaning of each object.
+	- Use consistent capitalization and formatting.
+	- Organize related measures into clear display folders.
+	- Preserve the business meaning and DAX expression of every measure.
 
-	For each object that does not follow these standards, propose an improved name
-	or description.
+	For missing or unclear descriptions, propose a user-friendly description that
+	explains the calculation in business terms. Keep each description under 200
+	characters.
 
-	Group the recommendations by table, column, and measure. Explain the reason for
-	each recommendation.
+	Group the recommendations by business domain. For each recommendation, show the
+	current value, proposed value, and reason for the change.
 
-	Limit this review to the Ambiguous Names Demo area. Do not apply any changes yet.
+	Do not apply any changes.
 	```
 
-3. Review the proposed recommendations.
-4. Compare each recommendation with the visible objects in **Ambiguous Names Demo**.
-5. Confirm that the proposed names preserve the intended business meaning.
-6. Identify any recommendation that should not be applied.
-7. Record the recommendations you approve and any exceptions you want Copilot to preserve.
+	**Expected outcome**
 
-	> [!TIP]
-	> Keep descriptions concise and place the most important business information first.
+	- Copilot identifies inconsistent measure names, descriptions, format strings, and display folders.
+	- The response proposes a consistent naming and organization pattern based on the rules in the prompt.
+	- Recommendations are grouped by business domain and show the current value, proposed value, and reason for each change.	
+	- Copilot does not apply any changes to the semantic model.
 
-### Expected result
-
-Copilot should identify issues such as:
-
-* Names containing underscores
-* Technical abbreviations
-* Inconsistent capitalization
-* Ambiguous table or column names
-* Tables, columns, or measures without descriptions
-
-## 3. Apply model cleanup
-
-✅ **Goal**: Improve naming consistency and add useful descriptions through a controlled set of model edits.
-
-Copilot will summarize its intended edits before applying them, giving you an opportunity to review the changes.
-
-### Steps
-
-1. Review the recommendations from the previous exercise.
-2. Identify which recommendations you want to apply.
-3. Enter the following prompt:
+3. Review Copilot's recommendations before making any changes. 
+4. When you are satisfied with the recommendations, enter the following prompt:
 
 	```text
-	Apply the approved naming recommendations from the previous review to the
-	Ambiguous Names Demo area.
-
-	Also add concise, business-friendly descriptions where descriptions are missing
-	for the relevant tables, columns, and measures.
-
-	Follow these requirements:
-
-	- Preserve the business meaning of every object.
-	- Do not change DAX expressions.
-	- Do not change data types.
-	- Do not create or delete relationships.
-	- Do not change relationship behavior.
-	- Do not delete any model objects.
-	- Respect the exceptions I identified in the previous review.
-	- Do not modify objects outside the Ambiguous Names Demo area.
-
-	Before applying the changes, summarize the edits you intend to make.
+	Apply all recommendations
 	```
+	**Expected outcome**
 
-4. Review the proposed edits before applying them.
-5. Confirm that the proposed changes match the approved list.
-6. Apply the changes.
-7. Save the semantic model using **Ctrl+S** or **File** > **Save**.
-8. Inspect three to five renamed objects and generated descriptions in the properties pane.
+	- Copilot applies all approved recommendations, resulting in consistent, business-friendly measure names.
+	- Measures are organized into display folders by business domain.
+	- Measures have concise descriptions that support user exploration and help AI experiences interpret the model.
+	- Existing DAX expressions remain unchanged.
+  
+	![fabric-copilot-model-after](resources/img/fabric-copilot-model-after.png)
 
-### Expected result
-
-The model should have:
-
-* Clearer object names
-* More consistent naming
-* Business-friendly descriptions
-* No unintended changes to DAX, data types, relationships, or model behavior
-
-## 4. Validate the improvements
-
-✅ **Goal**: Confirm that the cleanup was applied as intended without changing model behavior.
-
-### Steps
-
-1. Enter the following prompt:
-
-	```text
-	Review the model changes made during this session.
-
-	1. List the objects that were renamed.
-	2. List the descriptions that were added or updated.
-	3. Identify any remaining objects that do not follow the naming standards.
-	4. Confirm whether any DAX expressions, data types, or relationships were changed.
-	5. Call out anything that still needs a manual review.
-
-	Do not make any additional changes.
-	```
-
-2. Compare Copilot's response with the changes you approved.
-3. Confirm that renamed objects use clear, consistent, business-friendly wording.
-4. Inspect the descriptions added to three to five objects.
-5. Open at least one existing measure and confirm that its DAX expression is unchanged.
-6. Review the model relationships and confirm that no unintended relationship changes were applied.
-7. Save the semantic model.
+5. Review the changes made by Copilot. Measure names should be consistent, business friendly with business domain display folders.
 
 ### Reflection
 
-Consider the following questions:
+* How valuable was Copilot for detecting patterns and inconsistencies across the measures and suggesting improvements?
+* How much time would you need to complete the same review and update the model yourself?
+* Power BI web modeling changes the semantic model directly in the workspace. What safeguards would you use to avoid making these changes in production? Consider working in a development workspace and tracking changes with Fabric Git integration.
 
-* Is the model easier for a new report author to understand?
-* Do the updated names communicate business meaning more clearly?
-* Are the descriptions useful without being overly long?
-* Did Copilot suggest anything that still required human judgment?
-* Which changes would you review more carefully in a production model?
+## 3. Create time intelligence measures
 
-## 5. Improve and extend the measure library
+✅ **Goal**: Use Copilot to create new time intelligence measures that follow the model's existing development style.
 
-✅ **Goal**: Use Copilot to analyze, document, improve, and extend the existing measure library without recreating calculations that are already present.
+Copilot can inspect the semantic model and apply its existing patterns when it creates new objects. 
 
 ### Steps
 
-1. Open the **Business Measures** table and review its existing measures and display folders.
-2. Select one existing measure from a business domain identified by your instructor.
-3. Enter the following prompt:
+1. Open a new Copilot session either by toggling the Copilot button or clicking on the **Erase Broom icon**. 
+2. Enter the following prompt:
 
 	```text
-	Analyze the existing measures in the Business Measures table of the
-	ManufacturingOps semantic model.
+	Create time intelligence measures based on [Total Sales]: sales for the
+	previous year, a 12-month moving average, and year-to-date sales.
 
-	1. Group the measures by the Sales, Inventory, Procurement, and Production
-	   business domains.
-	2. For [SELECTED MEASURE], explain the DAX and business purpose in plain language.
-	3. Review its name, description, format string, and display folder.
-	4. Recommend metadata improvements without changing its business logic.
-	5. Identify one useful calculation that is missing from the same business domain
-	   and can reuse existing measures.
-	6. Provide the proposed DAX, business description, format string, and display
-	   folder for that new calculation.
-
-	Do not make any changes yet, and do not recreate an existing measure.
+	Follow the existing model measure development style. Use the model existing
+	date table.
 	```
 
-4. Replace `[SELECTED MEASURE]` with the measure you selected, then review Copilot's response.
-5. Confirm that the explanation of the existing measure matches its DAX and business purpose.
-6. Confirm that the metadata recommendations preserve the measure's name where it is already clear and do not alter its DAX.
-7. Check that the proposed new calculation does not duplicate an existing measure in **Business Measures**.
-8. Confirm that the proposed DAX reuses appropriate existing measures and uses the intended tables, columns, and date context.
-9. If the proposal duplicates an existing measure or uses an incorrect field, refine the request:
+	**Expected outcome**
 
-	```text
-	Revise the proposed calculation so that it does not duplicate [EXISTING MEASURE].
-	Use [APPROVED BASE MEASURE] and, when needed, [APPROVED DATE FIELD] from
-	[APPROVED DATE TABLE].
+	- Copilot reviews the model's existing measure development style, including its naming, formatting, descriptions, and organization.
+	- Copilot creates the new previous-year, 12-month moving average, and year-to-date measures based on **[Total Sales]**.
 
-	Show the revised DAX and metadata before applying it.
-	```
-
-	Replace the placeholders with the approved objects from **ManufacturingOps**.
-
-10. Once the proposed metadata and calculation are correct, enter:
-
-	```text
-	Apply the approved metadata improvements to [SELECTED MEASURE] without changing
-	its DAX expression.
-
-	Create the approved new measure using the DAX, description, format string, and
-	display folder we reviewed. Store it in the Business Measures table.
-
-	Do not modify any other existing measures.
-	```
-
-11. Replace `[SELECTED MEASURE]`, review the proposed changes, and apply them.
-12. Save the semantic model.
-13. Inspect the updated metadata of the existing measure and confirm that its DAX is unchanged.
-14. Inspect the new measure's name, description, format string, display folder, destination table, and DAX expression.
-
-### Expected result
-
-The model should contain an improved and extended measure library in which:
-
-* One existing measure has clearer, reviewed metadata and unchanged DAX
-* One non-duplicate measure extends an existing business domain
-* The new measure reuses the intended model objects and existing measures
-* Both measures follow the approved description, formatting, and organization standards
-* The new measure is stored in the **Business Measures** table
-
-## 6. Save a clean checkpoint
-
-✅ **Goal**: Preserve a known-good version of the semantic model before intentionally introducing an error.
-
-Version history provides a safety net for experimentation. This checkpoint captures the validated cleanup and measure-library improvements.
-
-### Steps
-
-1. Confirm that the approved cleanup, updated measure metadata, and new measure are present.
-2. Confirm that the semantic model is saved.
-3. Open **File** and select **Save to version history**.
-4. Add the following description:
-
-	```text
-	Lab checkpoint: Validated cleanup and measure library extension
-	```
-
-5. Save the version.
-6. Open **File** > **View version history** and confirm that the checkpoint appears with the expected description and timestamp.
-
-> Do not continue until you can identify the clean checkpoint. You will restore this exact version in the next exercise.
-
-### Expected result
-
-Version history should contain an entry named `Lab checkpoint: Validated cleanup and measure library extension`.
-
-## 7. Recover with version history
-
-✅ **Goal**: Use semantic model version history as a safety net after making an unwanted change.
-
-In this scenario, you will intentionally introduce a mistake and restore the clean checkpoint.
-
-### Steps
-
-1. Select the table identified by your instructor.
-2. Note its current approved name.
-3. Rename the table to:
-
-	```text
-	TEMPORARY INCORRECT TABLE NAME
-	```
-
-4. Save the semantic model.
-5. Confirm that the temporary name appears in the model.
-6. Open the semantic model's version history.
-7. Locate the version with this description:
-
-	```text
-	Lab checkpoint: Validated cleanup and measure library extension
-	```
-
-8. Select that version, choose **Restore**, and confirm the operation.
-9. Reopen or refresh the semantic model if needed.
-10. Confirm that the temporary table name is gone.
-11. Confirm that the valid cleanup from the earlier exercises is still present.
-12. Confirm that the updated measure metadata and the approved new measure are still present.
-
-### Expected result
-
-The model should return to the clean checkpoint created after the approved cleanup and measure-library extension were completed.
-
-The temporary table name should no longer appear, while the valid work performed earlier in the lab should remain.
+3. Locate the three new measures in the model and confirm that they follow the naming, formatting, description, and display-folder patterns used by the existing measures.
+4. Review the DAX for each measure. Confirm that it references **[Total Sales]**, uses the correct date column, and implements the intended time calculation.
 
 ### Reflection
 
-Consider the following questions:
+* How well did Copilot understand and follow the model existing development patterns when creating new objects?
+* What did you check in the generated DAX before accepting the measures as correct?
 
-* When would you create a manual checkpoint in a production model?
-* What other unwanted changes could version history help you recover from?
-* How does version history support safe experimentation and collaboration?
+## 4. Revert unwanted changes with version history
+
+✅ **Goal**: Use semantic model version history to restore the model after an unwanted Copilot change.
+
+Copilot can make changes directly to the semantic model in the workspace. Version history provides a recovery point when an AI-assisted change produces an unwanted result. In this exercise, you will save a clean checkpoint, ask Copilot to make an intentionally bad change, and then restore the model.
+
+### Steps
+
+1. Open **File** and select **Save to version history**.
+   
+   ![fabric-model-new-version-history](resources/img/fabric-model-new-version-history.png)
+
+2. Add the following description, then select **Save**.
+
+	```text
+	Before Copilot
+	```
+
+	![fabric-model-version-name](resources/img/fabric-model-version-name.png)
+
+3. Open **File** > **Version history** and confirm that the checkpoint appears with the expected description and timestamp.
+   
+   ![fabric-model-version-history](resources/img/fabric-model-version-history.png)
+
+4. Open a new Copilot session by toggling the **Copilot** button or selecting the **Erase Broom** icon.
+5. Enter the following prompt to make an intentionally unwanted change:
+   
+	```text
+	Rename table 'Business Measures' to '_Measures'
+	```
+
+6. Confirm that the `Business Measures` table was renamed to `_Measures`.
+7. Open **File** > **View version history**.
+8. Confirm that a new version appears after the version labeled `Before Copilot`.
+   
+	![fabric-model-version-history-after](resources/img/fabric-model-version-history-after.png)
+
+9. Select the version labeled `Before Copilot`, choose **Restore**, and confirm the operation.
+    
+	![fabric-model-version-history-restore](resources/img/fabric-model-version-history-restore.png)
+
+10. Confirm that the semantic model has been restored to its state before the intentional rename. You might need to refresh the browser.
+
+### Reflection
+
+* Version history makes it easy to revert an unwanted change, but restoring a complete model version might not provide enough granularity for every development workflow. You should consider other solutions for a more effective version control such as [Fabric Git integration](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/git-get-started).
 
 ## ✅ Wrap-up
 
-You've now:
+You've now learned how to:
 
-* Created and organized an isolated Fabric workspace
-* Explored and summarized an inherited semantic model
-* Identified realistic naming and metadata issues
-* Reviewed recommendations before allowing Copilot to apply changes
-* Improved model names and descriptions
-* Validated that the cleanup did not unintentionally alter model behavior
-* Analyzed, documented, improved, and extended an existing business measure library
-* Saved a known-good version of the semantic model
-* Recovered from an unwanted change using version history
-
-## Key takeaways
-
-* Copilot can accelerate model exploration and common authoring tasks, but its recommendations still require review.
-* Clear names and descriptions make a semantic model easier for both people and AI-powered experiences to understand.
-* Specific prompts and clear constraints help produce more controlled results.
-* A standardized workshop model makes the hands-on experience more predictable.
-* Version history provides a recovery path when an AI-assisted or manual change produces an unwanted result.
-* The quality of the experience depends on the combination of the selected model, its starting state, and the prompts used against it.
-
-## What's next?
-
-Apply the same review, cleanup, and validation principles to other semantic models in your organization. You can also explore additional Copilot capabilities in Power BI web modeling and share the cleaned model with colleagues for feedback.
+* Use Copilot in Power BI web modeling to explore and understand an unfamiliar semantic model
+* Review AI recommendations before applying changes directly to a semantic model
+* Ask Copilot to change your semantic model for refactoring and new developments
+* Use separate Copilot sessions to keep unrelated tasks from influencing each other
+* Restore a semantic model after an unwanted Copilot change by using version history
 
 ## Useful links
 

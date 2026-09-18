@@ -72,6 +72,7 @@ This lab requires the following:
 	```powershell
 	copilot plugin marketplace add microsoft/skills-for-fabric	
 	```
+
 	```powershell	
 	copilot plugin install powerbi-authoring@fabric-collection
 	```
@@ -346,7 +347,7 @@ Writing documentation from scratch and keeping it current both take time. AI can
 2. Enter the following prompt:
 
 	```text
-	Add RAW-CurrencyExchange.csv (https://raw.githubusercontent.com/pbi-tools/sales-sample/refs/heads/data/RAW-CurrencyExchange.csv) to the `sales.SemanticModel\definition` semantic model, then create a calculation group to convert and analyze sales in EUR, USD, and GBP.
+	Add https://raw.githubusercontent.com/pbi-tools/sales-sample/refs/heads/data/RAW-CurrencyExchange.csv to the `sales.SemanticModel\definition` semantic model, then create a calculation group to convert and analyze sales in EUR, USD, and GBP.
 	```
 
 	**Expected outcome**
@@ -429,7 +430,7 @@ In this part you start from nothing. You create a Fabric workspace, load a Lakeh
 There are no local files in this part. The **GitHub Copilot app** is a good fit for that: it is more approachable than Visual Studio Code or the CLI. Underneath it is the same GitHub Copilot orchestrator, the same skills, and the same MCP capabilities, so the experience stays consistent. Which surface you use is a matter of preference.
 
 > [!IMPORTANT]
-> Run the following in the terminal before starting this part:
+> Run the following in the terminal before starting this part and restart the **Github Copilot App**
 ```
 npx skills add https://github.com/azure-data-intelligence-platform/pbi-report-authoring-skill --skill powerbi-report-authoring powerbi-report-design powerbi-report-management powerbi-report-planning -y -a github-copilot
 ```
@@ -509,32 +510,34 @@ npx skills add https://github.com/azure-data-intelligence-platform/pbi-report-au
 
 Planning first gives you something to correct before anything is created. It also lets you split the work: an expensive reasoning model for the thinking, a cheaper model for the execution.
 
-#### Create the plan
+#### Start a GitHub App project
 
 1. Create a new empty folder in your laptop, e.g. `C:\FabCon\Lab2_Part2`
-2. In the **GitHub Copilot App**, select **+** > **Open folder** 
+2. In the **GitHub Copilot App**, select **+** > **Open folder** and select the created folder.
    
 	![gh-app-add-folder](resources/img/gh-app-add-folder.png)
 
 > [!TIP]
-> You can start a chat without a working folder, but opening a dedicated folder allows you to personalize settings to sessions under this folder such as configure context files such as `AGENTS.md` or MCP servers.
+> You can start a chat without a working folder. But opening a working folder gives the agent a defined project boundary. It can inspect existing files, discover instructions such as AGENTS.md, use folder-specific MCP settings, and save generated files in a predictable location. Sessions for the same project also stay grouped together. Use an empty chat for questions or remote tasks that do not require local project context. Opening a folder does not automatically load every file into the context; the agent reads relevant files as needed.
 
-3. Click on **New session** under the working folder, set the session mode to **Plan** and pick a powerful model such as `GPT-5.6 Sol`.
+3. Start a **New session** under the working folder, set the session mode to **Plan** and pick `GPT-5.6 Sol` model.
 	
-	![gh-app-new-session](resources/img/gh-app-new-session.png)	
+	![gh-app-new-session](resources/img/gh-app-new-session.png)		
 
 > [!TIP]
 > **Plan** mode lets Copilot inspect the available context, ask clarifying questions, and propose a reviewable implementation approach before making changes. You can correct assumptions, add validation steps, and agree on the scope before handing the plan to an agent for implementation. This is especially useful for complex or unfamiliar projects, where fixing the plan is cheaper than undoing the implementation. Learn more in [Use the GitHub Copilot plan agent](https://learn.microsoft.com/en-us/visualstudio/ide/copilot-plan-agent?view=visualstudio).
 
 3. Add [resources/team-rules.md](resources/team-rules.md) file as context.
-
+	
 	![gh-app-add-context-file](resources/img/gh-app-add-context-file.png)	
+
+	**Note:** Alternatively you could also add the file to the working folder.
 
 3. Enter the following prompt, replacing the `[YOUR_WORKSPACE_NAME]` with the name of your workspace:
 
 	```text
 	Create a new Direct Lake semantic model with name 'Sales Model' on top of the lakehouse 'Lakehouse_01' in workspace '[YOUR_WORKSPACE_NAME]'.
-	
+
 	Use the lakehouse tables: dimension_city, `dimension_customer`, `dimension_date`,`dimension_employee`, `dimension_stock_item`, `fact_sale`
 
 	Consider the team development rules in attached 'team-rules.md'
@@ -550,18 +553,21 @@ Planning first gives you something to correct before anything is created. It als
 	- The plan should reflect the rules in `team-rules.md`: for example business-friendly table names without `Fact` or `Dim` prefixes and an `About` table to include a metadata table in the model.
 	- No semantic model exists in the workspace yet.
 
-6. Read the plan and check if the rules in `team-rules.md` are being followed.
+6. Review the plan and check if the rules in `team-rules.md` are being followed (e.g. measures should be uppercase).
    
    ![gh-app-plan-review](resources/img/gh-app-plan-review.png)
 
 7. Adjust the plan where needed, for example table naming, which measures to create, or the contents of the `About` table.
+8. Don't execute the plan yet. If prompted say you don't want to implement the plan yet.
 
 #### Implement the plan
 
-1. Switch the model picker to a cheaper model such as `GPT-5.6 Terra`.
+1. Switch the model picker to a cheaper model such as `GPT-5.6 Terra` and turn on **Autopilot**.
+
+	![gh-app-switch-to-interactive](resources/img/gh-app-switch-to-interactive.png)
 
 > [!TIP]
-> The implementation phase mostly follows instructions that are already written down, so it does not need the strongest reasoning model.
+> The implementation phase mostly follows instructions that are already written down, so it does not need the strongest reasoning model. 
 
 2. Prompt the agent to implement the approved plan:
 
@@ -575,11 +581,15 @@ Planning first gives you something to correct before anything is created. It als
 	- The agent should start by discovering the Fabric workspace and lakehouse ID's and metadata.
 	- The agent uses the `database_operations` `Create` operation, which creates a Direct Lake model over the Lakehouse tables and infers their schema in a single tool call.
 	- A new semantic model `Sales Model` appears in your workspace.
-	- The model follows your team rules.
+	- The model follows the attached team rules.
 
 3. Open the created semantic model in Fabric workspace and confirm the tables with friendly names, the relationships, the hidden base columns, the explicit measures, and the `About` table. It does all this because of [guidance from the `semantic-model-authoring` skill](https://github.com/microsoft/skills-for-fabric/blob/main/skills/semantic-model-authoring/SKILL.md#workflow-create-new-semantic-model).
 
 	![fabric-created-semantic-model](resources/img/fabric-created-semantic-model.png)
+
+4. Select the session name at the top of the window to review the total spend and token usage for the session.
+
+	![gh-app-session-context](resources/img/gh-app-session-context.png)	
 
 #### Reflection
 
@@ -593,6 +603,9 @@ Planning first gives you something to correct before anything is created. It als
 
 Trying design variations used to be expensive, so most teams built one and lived with it. With subagents you can run both and compare.
 
+> [!IMPORTANT]
+> This exercise uses the semantic model created in previous step. If you did not complete that step, upload [sales.pbix](resources/sales.pbix) to your Fabric workspace and rename its semantic model to `Sales Model` before continuing.
+
 #### Steps
 
 1. In the **GitHub Copilot app**, start a new session under the `Lab2_Project` working folder.
@@ -601,7 +614,7 @@ Trying design variations used to be expensive, so most teams built one and lived
 
 	```text
 	Create a report on top of the semantic model 'Sales Model' in workspace '[YOUR_WORKSPACE_NAME]'.
-	
+
 	The report must have only one page and it should be focused for executive view of the company.
 
 	I want to try two different styles:
@@ -615,12 +628,9 @@ Trying design variations used to be expensive, so most teams built one and lived
 	IMPORTANT:
 		When calling `powerbi-report-author preview` with `--host service` and the preview renders an empty/blank report. Stop and apply the following patch:
 		
-		> The bundled powerbi-client drops `reportDefinition`, idempotently patch the installed CLI `dist\cli.js` and `dist\preview\index.js` before `service.createReport(...)` by wrapping `Create.prototype.create` and copying `this.config.reportDefinition` to `this.createConfig.reportDefinition`.
+		The bundled powerbi-client drops `reportDefinition`, idempotently patch the installed CLI `dist\cli.js` and `dist\preview\index.js` before `service.createReport(...)` by wrapping `Create.prototype.create` and copying `this.config.reportDefinition` to `this.createConfig.reportDefinition`.
 		
 	```
-
-> [!IMPORTANT]
-> This exercise uses the semantic model created in Exercise 2.3. If you did not complete that exercise, upload [sales.pbix](resources/sales.pbix) to your Fabric workspace and rename its semantic model to `Sales Model` before continuing.
 
 	**Expected outcome**
 
@@ -636,18 +646,16 @@ Trying design variations used to be expensive, so most teams built one and lived
 > [!TIP]
 > Subagents run in separate, isolated contexts. Each subagent can focus on its assigned task without mixing its working history with the parent agent or other subagents. This makes them useful for exploring independent approaches in parallel. Learn more in [Agents and Subagents](https://awesome-copilot.github.com/learning-hub/agents-and-subagents/).
 
-5. Review the session transcript of each subagent, each one should have its own reasoning and snapshot preview of the their report style.
+5. Review the session transcript of each subagent, each one should have its own reasoning and snapshot preview of their report style.
    
 	![gh-app-sub-agent-session](resources/img/gh-app-sub-agent-session.png)
 
-6. Open both reports in the Fabric portal.
-7. Compare the layouts, the chosen measures, and the chosen fields.
+6. Open both reports in the Fabric portal and compare the layouts.
 
 #### Reflection
 
 * Subagents is a great way to parallelize work using a parent session for orchestration and work. Like silently asking two colleagues to try the same task without them knowing.
 * When is running variations in parallel worth the cost, and when is one attempt enough?
-
 
 ## ✅ Wrap-up
 
