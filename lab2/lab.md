@@ -17,9 +17,8 @@ Both parts use the shared prerequisites and environment setup. After completing 
 
 - How to install and use the `powerbi-authoring` plugin across multiple harnesses: GitHub Copilot CLI, Visual Studio Code, and the GitHub Copilot app
 - How PBIP and Git let you track, review, and revert AI-generated changes
-- How an `AGENTS.md` file constrains agent behavior and reduces hallucinations
+- How AI context help guide agent behavior
 - How to feed company context and team standards to an agent as versioned team shareable files
-- How to generate and maintain documentation for a semantic model and a report
 - How to modify an existing semantic model and report using AI and Power BI agentic skills and tools
 - How to plan before implementing, and how to choose a model for each phase
 - How to use the remote Power BI Authoring MCP server with no local setup
