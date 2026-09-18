@@ -229,8 +229,7 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 	- The agent reads `AGENTS.md` and loads the local `powerbi-documentation` skill. LLMs load skills on demand, and the instruction in `AGENTS.md` reinforces this requirement for certain tasks.
 	- The agent follows the documentation structure and standards defined by the `powerbi-documentation` skill.
-	- The agent uses the Power BI Authoring skill and MCP server to inspect the semantic model metadata.
-	- The agent loads the Power BI report authoring skills to inspect the PBIR files and understand the report pages, visuals, filters, and bindings.
+	- The agent loads semantic model and report skills from `powerbi-authoring` plugin. The skills include guidance on how to properly read and analyze semantic model and report metadata.		
 	- The agent uses the Power BI report CLI tools to capture screenshots from the report open in Power BI Desktop.
 	- A `docs/` folder is created with a catalog and one Markdown file for each semantic model and report in the codebase.
 	- The generated documentation includes the model structure, measures, report flow, filters, and a screenshot of every report page.
