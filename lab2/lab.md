@@ -38,7 +38,7 @@ Both parts use the shared prerequisites and environment setup. After completing 
 | [1.5 Add currency conversion with a calculation group](#15-add-currency-conversion-with-a-calculation-group)               | Extend the semantic model                           |
 | [1.6 Restyle the report pages](#16-restyle-the-report-pages)                                                               | Apply report-wide layout changes                    |
 | **[Part 2: Greenfield development](#part-2-greenfield-development)**                                                       | **Build new Power BI artifacts in Fabric**          |
-| [2.1 Prepare the Fabric Lakehouse](#21-prepare-the-fabric-lakehouse)                                                       | Create the greenfield data source                   |
+| [2.1 Prepare the Fabric Workspace](#21-prepare-the-fabric-workspace)                                                       | Create the greenfield data source                   |
 | [2.2 Connect the GitHub Copilot app to the remote MCP server](#22-connect-the-github-copilot-app-to-the-remote-mcp-server) | Work without local setup                            |
 | [2.3 Plan and build a Direct Lake semantic model](#23-plan-and-build-a-direct-lake-semantic-model)                         | Plan first, then implement                          |
 | [2.4 Create two reports with parallel subagents](#24-create-two-reports-with-parallel-subagents)                           | Compare design variations in parallel               |
@@ -143,20 +143,12 @@ This lab requires the following:
 	- **Note:** If the link does not open from your Markdown viewer, open **Settings** in Visual Studio Code and search for `chat.disableAIFeatures`.
 3. Open **GitHub Copilot Chat** (`CTRL+ALT+I`) and confirm that the chat view is accessible.
 4. You may need to sign-in with your GitHub Copilot account.
-5. Open the chat settings and confirm the `powerbi-authoring` plugin is intalled
+	
+	![vscode-github-copilot-signin](resources/img/vscode-github-copilot-signin.png)	
+
+5. Open the chat settings and confirm the `powerbi-authoring` plugin is installed.
    
-	![vscode-chat-plugin-installed](resources/img/vscode-chat-plugin-installed.png)
-
-### Expected result
-
-You should now have:
-
-* A signed-in GitHub Copilot CLI session
-* A signed-in Visual Studio Code Copilot chat
-* The `powerbi-authoring` plugin installed and shared across GitHub Copilot surfaces
-* Confirmation that the Power BI skills and MCP server are available
-* Azure CLI signed in with the workshop Fabric account
-
+	![vscode-chat-plugin-installed](resources/img/vscode-chat-plugin-installed.png)	
 
 ---
 
@@ -171,11 +163,12 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 #### Steps
 
 1. Open the workshop [`resources/sales.pbix`](resources/sales.pbix) file in **Power BI Desktop**.
-2. Select **File** > **Save as** > **Browse this device**.
-3. Choose a local folder for the lab, for example `C:\FabCon\Lab2_Par1`.
-4. In the file type list, select **Power BI project files (*.pbip)** and save the project.
-5. Keep Power BI Desktop open. You reload changes from it later in the lab.
-6. Open the project folder in **Visual Studio Code** by clicking the title bar and choosing **Open in Visual Studio Code**
+2. Select **File** > **Save as** > **Browse this device**. In the **Save as type** option, select **Power BI project files (*.pbip)** and save the project to a local folder of you choice, for example `C:\FabCon\Lab2_Part1`.
+	
+	![pbid-save-pbip](resources/img/pbid-save-pbip.png)
+
+3. Keep Power BI Desktop open. You reload changes from it later in the lab.
+4. Open the project folder in **Visual Studio Code** by clicking the title bar and choosing **Open in Visual Studio Code**
    
 	![pbid-open-vscode](resources/img/pbid-open-vscode.png)
 
@@ -183,19 +176,13 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 
 	![vscode-pbip](resources/img/vscode-pbip.png)
 
-8. Click the **Source Control** (`CTRL+SHIFT+G`) tab and select **Initialize Repository**
-9. Type a initial commit message, for example "Initial PBIP baseline"
+5. Click the **Source Control** (`CTRL+SHIFT+G`) tab and select **Initialize Repository**. 
+6. Type a initial commit message, for example "Initial PBIP baseline"
 
 	![vscode-init-git-pbip](resources/img/vscode-init-git-pbip.png)
 
 > [!IMPORTANT]
 > PBIP stores the semantic model as TMDL files and the report as PBIR files. Both are plain text, so Git can show you exactly what the agent changed. This is your safety net: review the diff after every prompt, keep what you want, and discard the rest with **Discard changes** in the Source Control view.    	
-
-#### Expected result
-
-* A PBIP project saved to a local folder
-* `sales.SemanticModel` and `sales.Report` folders visible in Visual Studio Code
-* An initialized Git repository with a clean working tree and one baseline commit
 
 ### 1.2 Prepare the codebase with agentic context
 
@@ -203,32 +190,21 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 
 #### Steps
 
-1. Copy [resources/AGENTS.md](resources/AGENTS.md) from the workshop repository into the root of your PBIP project folder.
+1. Copy the file [resources/AGENTS.md](resources/AGENTS.md) and folder [`resources/.github`](resources/.github) from this lab resources folder into the root of your PBIP project folder.
+
+2. Confirm that your folder looks like this:
+
+	![vscode-pbip-folder](resources/img/vscode-pbip-folder.png)
+
+3. Open **Source Control** (`CTRL+SHIFT+G`) and commit the new files.
+   - **Tip:** You can use Copilot to generate analyze the changes and generate the commit message for you by clicking on **Generate commit message** in the top right corner of the textbox.
 
 > [!IMPORTANT]
 > [`AGENTS.md`](https://agents.md/) is an important part of agentic development. It lets you define codebase-level rules, context, and constraints that agents need to understand and respect when working on the project. Because the file is stored with the codebase and read automatically, the same guidance applies consistently across chat sessions and team members.
 >
 > The `AGENTS.md` file in this workshop is a simple example. It ensures that the agent always loads the appropriate Power BI authoring skills and directs it to use the Power BI Authoring MCP server when editing the semantic model. The agent can work with TMDL files directly, but using the MCP tools provides a more reliable authoring path less likely to break things.
-
-2. Copy the folder [`resources/.github`](resources/.github) into the root of your PBIP project folder.
-
-> [!IMPORTANT]
+>
 > This workshop uses Microsoft-provided agent skills installed through the `powerbi-authoring` plugin. Skills give the agent context about processes and preferred ways of working. Teams can keep project-specific skills in source control to capture business practices and help developers produce consistent results. The [`powerbi-documentation` skill](resources/.github/skills/powerbi-documentation/SKILL.md) is an example of a repository-local skill that lives alongside the codebase. Skills can also be shared through private or public repositories and marketplaces.
-
-3. Confirm that your folder looks like this:
-
-	![vscode-pbip-folder](resources/img/vscode-pbip-folder.png)
-
-4. Open **Source Control** (`CTRL+SHIFT+G`) and commit the new files.
-
-> [!TIP]
-> You can use Copilot to generate analyze the changes and generate the commit message for you by clicking on **Generate commit message** in the top right corner of the textbox.
-
-#### Expected result
-
-* `AGENTS.md` present in the project root with the development rules agents should follow
-* The local `powerbi-documentation` skill available under `.github/skills/`
-* Both sources of agentic context committed to Git and shared with the codebase
 
 ### 1.3 Generate documentation for the model and report
 
@@ -239,12 +215,11 @@ Writing documentation from scratch and keeping it current both take time. AI can
 #### Steps
 
 1. In **Visual Studio Code**, open **GitHub Copilot Chat** (`CTRL+ALT+I`).
-2. Set the chat mode to **Agent**.
-3. In the model picker, select a reasoning model such as `GPT-5.6 Sol`.
+2. Set the chat mode to **Agent** and in the model picker, select the reasoning model `GPT-5.6 Sol`.
 
 	![vscode-copilot-chat](resources/img/vscode-copilot-chat.png)
 
-4. Enter the following prompt:
+3. Enter the following prompt:
 
 	```text
 	Document this Power BI Project code base.
@@ -252,7 +227,7 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 	**Expected outcome**
 
-	- The agent reads `AGENTS.md` and loads the local `powerbi-documentation` skill. LLMs load skills on demand, and the instruction in `AGENTS.md` makes this requirement explicit.
+	- The agent reads `AGENTS.md` and loads the local `powerbi-documentation` skill. LLMs load skills on demand, and the instruction in `AGENTS.md` reinforces this requirement for certain tasks.
 	- The agent follows the documentation structure and standards defined by the `powerbi-documentation` skill.
 	- The agent uses the Power BI Authoring skill and MCP server to inspect the semantic model metadata.
 	- The agent loads the Power BI report authoring skills to inspect the PBIR files and understand the report pages, visuals, filters, and bindings.
@@ -264,6 +239,8 @@ Writing documentation from scratch and keeping it current both take time. AI can
 > The short prompt works because `AGENTS.md` requires the agent to load the local `powerbi-documentation` skill. The skill defines how the team expects project documentation to be created, while the Power BI MCP server and report tools provide the model and report information needed to create it.
 >
 > By default, each tool call asks for your approval. You can approve calls individually, allow tools for the current session or all sessions, or switch the agent to **Autopilot**. Autopilot runs tools without asking for approval, so use it carefully and preferably in a sandbox environment. For details, see [Manage approvals and permissions](https://code.visualstudio.com/docs/agents/run/approvals).
+> 
+> ![vscode-copilot-chat-auto-pilot](resources/img/vscode-copilot-chat-auto-pilot.png)
 
 5. Open the generated documentation Markdown files in `docs/` and preview them with **Ctrl+Shift+V**.
 6. Open the **Source Control** (`CTRL+SHIFT+G`) and commit all changes.
@@ -468,10 +445,6 @@ There are no local files in this part. The **GitHub Copilot app** is a good fit 
 
 	![fabric-sample-lakehouse-tables](resources/img/fabric-sample-lakehouse-tables.png)
 
-#### Expected result
-
-* A dedicated Fabric workspace named `FabCon-Agentic-Lab2-[YourInitials]`
-* A `Lakehouse_01` Lakehouse loaded with the tables.
 
 ### 2.2 Connect the GitHub Copilot app to the remote MCP server
 
@@ -499,9 +472,6 @@ There are no local files in this part. The **GitHub Copilot app** is a good fit 
 >
 > You should avoid enabling both local and remote servers at the same time. The agent then sees two overlapping tool sets, which makes routing ambiguous and consumes extra tokens on every request. Pick one: the hosted server when you work against semantic models in Fabric workspaces, and the local server when you work against Power BI Desktop or Power BI Project files on your machine.
 
-#### Expected result
-
-* The remote Power BI Authoring MCP server registered and authenticated in the GitHub Copilot app
 
 ### 2.3 Plan and build a Direct Lake semantic model
 

@@ -68,13 +68,6 @@ All participants should use the workshop-provided model rather than selecting th
 1. Open the semantic model, not the report.
 2. Confirm that the model opens without errors and displays its tables, columns, measures, and relationships.
 
-### Expected result
-
-You should now have:
-
-* An isolated workspace for the lab
-* A sample semantic model uploaded and ready for the lab
-
 ## 1. Explore the model
 
 ✅ **Goal**: Understand the purpose and structure of the inherited semantic model before making changes.
