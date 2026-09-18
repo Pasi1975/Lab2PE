@@ -553,6 +553,7 @@ Trying design variations used to be expensive, so most teams built one and lived
 
 1. In the **GitHub Copilot app**, start a new session under the `Lab2_Project` working folder.
 2. Turn on **Autopilot** and select `GPT-5.6 Sol` model.
+3. Attach the [resources/contoso-design-standards.png](resources/contoso-design-standards.png) to the chat.
 4. Enter the following prompt, replacing the `[YOUR_WORKSPACE_NAME]` with the name of your workspace:
 
 	```text
@@ -563,6 +564,8 @@ Trying design variations used to be expensive, so most teams built one and lived
 	I want to try two different styles:
 		Style 1 - cards on top with key metrics trend and category breakdowns in the bottom
 		Style 2 - cards on the left with key metrics and trend and category breakdown on the right
+
+	Use the attached design system 'contoso-design-standards.png'.
 
 	Spin two subagents one for each style. Each subagent should create a separate report in the workspace for my review and I'll pick the best one.
 
