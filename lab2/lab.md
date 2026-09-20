@@ -63,6 +63,16 @@ This lab requires the following:
 
 ✅ **Goal**: Install the Power BI authoring plugin once and make it available to every GitHub Copilot surface, then sign in to the accounts the agent needs.
 
+### Clone or download the lab resources
+
+Clone or download as zip the entire repository to your machine, for example under `C:\FabCon\repo`. The lab exercises refer to several resource files by their location in the repository, so downloading the complete repository is easier than downloading each file separately.
+  
+![clone-repository](../resources/img/clone-repository.png)
+  
+If you downloaded the repository as a ZIP file, extract it.
+
+The resources for this lab are in `./lab2/resources`.
+
 ### Install the Power BI authoring plugin
 
 1. Open a terminal.
@@ -182,7 +192,7 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 	![vscode-pbip](resources/img/vscode-pbip.png)
 
 5. Click the **Source Control** (`CTRL+SHIFT+G`) tab and select **Initialize Repository**. 
-6. Type a initial commit message, for example "Initial PBIP baseline"
+6. Commit your changes with a message of your choice. For example: `Initial PBIP baseline`
 
 	![vscode-init-git-pbip](resources/img/vscode-init-git-pbip.png)
 
@@ -246,8 +256,8 @@ Writing documentation from scratch and keeping it current both take time. AI can
 > 
 > ![vscode-copilot-chat-auto-pilot](resources/img/vscode-copilot-chat-auto-pilot.png)
 
-5. Open the generated documentation Markdown files in `docs/` and preview them with **Ctrl+Shift+V**.
-6. Open the **Source Control** (`CTRL+SHIFT+G`) and commit all changes.
+4. Open the generated documentation Markdown files in `docs/` and preview them with **Ctrl+Shift+V**.
+5. Open the **Source Control** (`CTRL+SHIFT+G`) and commit all changes.
 
 #### Reflection
 
