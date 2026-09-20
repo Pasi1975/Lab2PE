@@ -503,7 +503,7 @@ You first review the full implementation plan. After you approve it, the agent c
 > [!TIP]
 > A working folder gives the agent a defined project boundary. It can discover project instructions, use folder-specific MCP settings, and keep related sessions together. Opening a folder does not automatically add every file to the context. The agent reads files as needed.
 
-3. Start a **New session** under the working folder. Set the session mode to **Plan** and select the `GPT-5.6 Sol` model and thinking effort `Medium`.
+3. Start a **New session** under the working folder. Set the session mode to **Plan** and select the `GPT-5.6 Sol` model and effort `Medium`.
 	
 	![gh-app-new-session](resources/img/gh-app-new-session.png)
 
