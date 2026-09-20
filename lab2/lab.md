@@ -40,8 +40,7 @@ Both parts use the shared prerequisites and environment setup. After completing 
 | **[Part 2: Greenfield development](#part-2-greenfield-development)**                                                       | **Build new Power BI artifacts in Fabric**          |
 | [2.1 Prepare the Fabric Workspace](#21-prepare-the-fabric-workspace)                                                       | Create the greenfield data source                   |
 | [2.2 Connect the GitHub Copilot app to the remote MCP server](#22-connect-the-github-copilot-app-to-the-remote-mcp-server) | Work without local setup                            |
-| [2.3 Plan and build a Direct Lake semantic model](#23-plan-and-build-a-direct-lake-semantic-model)                         | Plan first, then implement                          |
-| [2.4 Create two reports with parallel subagents](#24-create-two-reports-with-parallel-subagents)                           | Compare design variations in parallel               |
+| [2.3 Plan and build an end-to-end Power BI solution](#23-plan-and-build-an-end-to-end-power-bi-solution)                   | Build a model and two report variations             |
 
 ## Prerequisites
 
@@ -230,9 +229,22 @@ Writing documentation from scratch and keeping it current both take time. AI can
 #### Steps
 
 1. In **Visual Studio Code**, open **GitHub Copilot Chat** (`CTRL+ALT+I`).
-2. Set the chat mode to **Agent** and in the model picker, select the reasoning model `GPT-5.6 Sol`.
+2. Set the chat mode to **Agent** and in the model picker, select the reasoning model `GPT-5.6 Terra` and thinking effort `Medium`.	
 
-	![vscode-copilot-chat](resources/img/vscode-copilot-chat.png)
+	![vscode-copilot-chat](resources/img/vscode-copilot-chat-2.png)	
+
+> [!IMPORTANT]
+> **Choose the model and thinking effort based on the complexity of the task.**
+> Example using GPT-5.6 models:
+> * **Luna:** Fast and cost-efficient for simple, high-volume tasks, but less suitable for complex Power BI development and reasoning.
+> * **Terra:** A good workhorse for most Power BI tasks, including documentation, descriptions, and straightforward model or report changes.
+> * **Sol:** Best suited for more complex tasks that require deeper reasoning, planning, or validation.
+>
+> You can also adjust the **thinking effort** independently. Higher thinking effort can improve results on complex tasks, but can also increase cost.
+>
+> **Rule of thumb:** Start with the least expensive model and thinking effort that can reliably complete the task, and scale up when the task requires more reasoning or validation.
+>
+> Highly recommend the following article from the Tabular Editor team: [Tabular Editor - Pick the right AI model](https://tabulareditor.com/blog/picking-the-ai-model-for-the-task)
 
 3. Enter the following prompt:
 
@@ -271,13 +283,11 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 #### Steps
 
-1. Copy [resources/company-context.md](resources/company-context.md) from the workshop repository into the root of your PBIP project folder.
-2. Start a **new chat session** in GitHub Copilot Chat and choose a lower-cost model `GPT-5.6 Terra`.
+1. Copy [resources/company-context.md](resources/company-context.md) from the lab resources into the root of your PBIP project folder.
+2. Start a **new chat session** in GitHub Copilot Chat and choose `GPT-5.6 Terra` model and thinking effort `Low`.
 
 > [!TIP]
 > Start a new session when moving to a different task. A clean session prevents decisions, assumptions, and tool results from the previous task from influencing the next one. You can also reuse an existing sessions to keep the session context. For example, you could reuse the documentation session to update the docs after making changes to the semantic models or reports.
-> 
-> You should choose the model that fits the task. Generating measure descriptions still benefits from a reasoning model because it must interpret DAX and business context, but it does not require the most capable or expensive option. Reserve higher-cost models for work that needs deeper planning or more complex decisions.
 
 3. Enter the following prompt:
 
@@ -327,7 +337,11 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 #### Steps
 
-1. Start a **new chat session** and pick `GPT-5.6 Terra` model.
+1. Start a **new chat session** and pick `GPT-5.6 Sol` model and thinking effort `Medium`.
+
+> [!IMPORTANT]
+> Use the `GPT-5.6 Sol` model for this task because it requires more than a straightforward model edit. The agent must inspect a new data source, infer its schema, design a calculation group, and write the required DAX expressions. These steps benefit from a model with stronger reasoning than `GPT-5.6 Terra`.
+
 2. Enter the following prompt:
 
 	```text
@@ -473,145 +487,135 @@ There are no local files in this part. The **GitHub Copilot app** is a good fit 
 > The `powerbi-authoring` plugin you installed previously ships with the local version to support both local development and remote. **You should avoid enabling both local and remote versions at the same time**. The agent then sees two overlapping tool sets, which makes routing ambiguous and consumes extra tokens on every request. Pick one: the hosted server when you work against semantic models in Fabric workspaces, and the local server when you work against Power BI Desktop or Power BI Project files on your machine.
 
 
-### 2.3 Plan and build a Direct Lake semantic model
+### 2.3 Plan and build an end-to-end Power BI solution
 
-✅ **Goal**: Produce a reviewed implementation plan for a new Direct Lake semantic model, then implement the approved plan with a cheaper model.
+✅ **Goal**: Use one prompt to plan and build a Direct Lake semantic model and two executive reports. The exercise demonstrates how skills, MCP tools, and parallel subagents can deliver a complete Power BI solution.
 
-Planning first gives you something to correct before anything is created. It also lets you split the work: an expensive reasoning model for the thinking, a cheaper model for the execution.
-
-#### Start a GitHub App project
-
-1. Create a new empty folder in your laptop, e.g. `C:\FabCon\Lab2_Part2`
-2. In the **GitHub Copilot App**, select **+** > **Open folder** and open the created folder.
-   
-	![gh-app-add-folder](resources/img/gh-app-add-folder.png)
-
-> [!TIP]
-> You can start a chat without a working folder. But working within a folder gives the agent a defined project boundary. It can inspect existing files, discover instructions such as AGENTS.md, use folder-specific MCP settings, and save generated files in a predictable location. Sessions for the same project also stay grouped together. Use an empty chat for questions or remote tasks that do not require local project context. Opening a folder does not automatically load every file into the context; the agent reads relevant files as needed.
-
-3. Start a **New session** under the working folder, set the session mode to **Plan** and pick `GPT-5.6 Sol` model.
-	
-	![gh-app-new-session](resources/img/gh-app-new-session.png)		
-
-> [!TIP]
-> **Plan** mode lets Copilot inspect the available context, ask clarifying questions, and propose a reviewable implementation approach before making changes. You can correct assumptions, add validation steps, and agree on the scope before handing the plan to an agent for implementation. This is especially useful for complex or unfamiliar projects, where fixing the plan is cheaper than undoing the implementation. Learn more in [Use the GitHub Copilot plan agent](https://learn.microsoft.com/en-us/visualstudio/ide/copilot-plan-agent?view=visualstudio).
-
-3. Add [resources/team-rules.md](resources/team-rules.md) file as context.
-	
-	![gh-app-add-context-file](resources/img/gh-app-add-context-file.png)	
-
-	**Note:** Alternatively you could also add the file to the working folder.
-
-3. Enter the following prompt, replacing the `[YOUR_WORKSPACE_NAME]` with the name of your workspace:
-
-	```text
-	Create a new Direct Lake semantic model with name 'Sales Model' on top of the lakehouse 'Lakehouse_01' in workspace '[YOUR_WORKSPACE_NAME]'.
-
-	Use the lakehouse tables: dimension_city, `dimension_customer`, `dimension_date`,`dimension_employee`, `dimension_stock_item`, `fact_sale`. 
-
-	Consider the team development rules in attached 'team-rules.md'.
-	```
-
-	**Expected outcome**
-
-	- Because its configured with **Plan mode** agent wont create anything and instead will draft a plan that you can review and adjust before implementation.
-	- Because you are asking to create a semantic model it will load the `semantic-model-authoring` skill for guidance on Power BI semantic modeling
-	- It will consider the `team-rules.md` for development rules included in that file.
-	- The agent may ask follow-up questions, for example about the model name or which tables to include. Answer them.
-	- The agent returns an implementation plan rather than creating anything.
-	- The plan should reflect the rules in `team-rules.md`: for example business-friendly table names without `Fact` or `Dim` prefixes and an `About` table to include a metadata table in the model.
-
-6. Review the plan and check if the rules in `team-rules.md` are being followed (e.g. measures should be uppercase).
-   
-   ![gh-app-plan-review](resources/img/gh-app-plan-review.png)
-
-7. Adjust the plan where needed, for example table naming, which measures to create, or the contents of the `About` table.
-8. Ask the agent to implement the plan.
-
-	**Expected outcome**
-
-	- The agent executes the plan step by step.
-	- The agent should start by discovering the Fabric workspace and lakehouse ID's and metadata.
-	- The agent uses the `database_operations` `Create` operation, which creates a Direct Lake model over the Lakehouse tables and infers their schema in a single tool call.
-	- A new semantic model `Sales Model` appears in your workspace.
-	- The model follows the attached team rules.
-
-9. Open the created semantic model in Fabric workspace and confirm the tables with friendly names, the relationships, the hidden base columns, the explicit measures, and the `About` table. It does all this because of [guidance from the `semantic-model-authoring` skill](https://github.com/microsoft/skills-for-fabric/blob/main/skills/semantic-model-authoring/SKILL.md#workflow-create-new-semantic-model).
-
-	![fabric-created-semantic-model](resources/img/fabric-created-semantic-model.png)
-
-10. Select the session name at the top of the window to review the total spend and token usage for the session.
-
-	![gh-app-session-context](resources/img/gh-app-session-context.png)	
-
-#### Reflection
-
-* When would you choose the GitHub Copilot app over Visual Studio Code or GitHub Copilot CLI for work in a Fabric workspace? All three use the same Copilot orchestrator, skills, and tools.
-* How did the instructions in your prompt and `team-rules.md` adapt the approach defined by the existing skill? Which explicit requirements took priority over the skill defaults?
-* In this exercise, the agents worked directly against a live Fabric workspace. For real projects, point agents to a development workspace and use [Fabric Git integration](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration) and [Fabric CICD](https://learn.microsoft.com/en-us/fabric/cicd/cicd-overview) to move changes between environments. Do not point agents directly at a production workspaces.
-
-### 2.4 Create two reports with parallel subagents
-
-✅ **Goal**: Use subagents to build two report variations at the same time and pick the better one.
-
-Trying design variations used to be expensive, so most teams built one and lived with it. With subagents you can run both and compare.
-
-> [!IMPORTANT]
-> This exercise uses the semantic model created in previous step. If you did not complete that step, upload [sales.pbix](resources/sales.pbix) to your Fabric workspace and rename its semantic model to `Sales Model` before continuing.
+You first review the full implementation plan. After you approve it, the agent creates the semantic model and assigns each report variation to a separate subagent.
 
 #### Steps
 
-1. In the **GitHub Copilot app**, start a new session under the `Lab2_Project` working folder.
-2. Turn on **Autopilot** and select `GPT-5.6 Sol` model.
-3. Attach the [resources/contoso-design-standards.png](resources/contoso-design-standards.png) to the chat.
-4. Enter the following prompt, replacing the `[YOUR_WORKSPACE_NAME]` with the name of your workspace:
+1. Create an empty folder on your laptop, for example `C:\FabCon\Lab2_Part2`.
+2. In the **GitHub Copilot app**, select **+** > **Open folder**, then open the folder you created.
+
+	![gh-app-add-folder](resources/img/gh-app-add-folder.png)
+
+> [!TIP]
+> A working folder gives the agent a defined project boundary. It can discover project instructions, use folder-specific MCP settings, and keep related sessions together. Opening a folder does not automatically add every file to the context. The agent reads files as needed.
+
+3. Start a **New session** under the working folder. Set the session mode to **Plan** and select the `GPT-5.6 Sol` model and thinking effort `Medium`.
+	
+	![gh-app-new-session](resources/img/gh-app-new-session.png)
+
+> [!TIP]
+> **Plan** mode lets Copilot inspect the available context and propose an implementation approach before creating anything. You can correct assumptions and agree on the complete solution before implementation begins. For details, see [Use the GitHub Copilot plan agent](https://learn.microsoft.com/en-us/visualstudio/ide/copilot-plan-agent?view=visualstudio).
+
+4. Add [resources/team-rules.md](resources/team-rules.md) and [resources/contoso-design-standards.png](resources/contoso-design-standards.png) to the session context.	
+
+	![gh-app-add-context-file](resources/img/gh-app-add-context-file.png)
+
+	**Note:** You can also copy these files into the working folder (`C:\FabCon\Lab2_Part2`) and simply refer their name in the prompt.
+
+5. Enter and run the following prompt, replacing the [YOUR_WORKSPACE_NAME] with the name of your workspace:
 
 	```text
-	Create a report on top of the semantic model 'Sales Model' in workspace '[YOUR_WORKSPACE_NAME]'.
+	Create a Direct Lake semantic model named **Sales Model** using lakehouse **Lakehouse_01** in workspace **[YOUR_WORKSPACE_NAME]**.
 
-	The report must have only one page and it should be focused for executive view of the company.
+	Include these tables:
 
-	I want to try two different styles:
-		Style 1 - cards on top with key metrics trend and category breakdowns in the bottom
-		Style 2 - cards on the left with key metrics and trend and category breakdown on the right
+	- `dimension_city`
+	- `dimension_customer`
+	- `dimension_date`
+	- `dimension_employee`
+	- `dimension_stock_item`
+	- `fact_sale`
 
-	Use the attached design system 'contoso-design-standards.png'.
+	Follow the development rules in `team-rules.md`.
 
-	Spin two subagents one for each style. Each subagent should create a separate report in the workspace for my review and I'll pick the best one.
+	Then create two separate, single-page executive Power BI reports using `contoso-design-standards.png` design system:
 
-	Do not change the semantic model. Use whatever is available in the model and use your best judgement to pick the best measures and fields.
+	- **Style 1:** KPI cards across the top; trends and category breakdowns below.
+	- **Style 2:** KPI cards on the left; trends and category breakdowns on the right.
+
+	Assign one subagent to each report style as nested sessions. Save both reports separately in the workspace for my review in the workspace.
+
+	Do not modify the semantic model after creation. Use the available fields and measures, applying best judgment to select the most relevant executive insights.
 
 	IMPORTANT:
 		When calling `powerbi-report-author preview` with `--host service` and the preview renders an empty/blank report. Stop and apply the following patch:
-		
+
 		The bundled powerbi-client drops `reportDefinition`, idempotently patch the installed CLI `dist\cli.js` and `dist\preview\index.js` before `service.createReport(...)` by wrapping `Create.prototype.create` and copying `this.config.reportDefinition` to `this.createConfig.reportDefinition`.
-		
 	```
 
-	**Expected outcome**
+	**Expected planning outcome**
 
-	- The agent loads both the `semantic-model-authoring` and the `powerbi-report-authoring` skills.
-	- The agent first queries `Sales Model` to understand its tables, measures, and data before designing anything.
-	- The agent produces a plan for your review and then starts two subagents, one per style of report.
-	- You can see the two subagents running in parallel in the session view and also as a child session of the current chat.
+	- The agent loads the semantic model and report authoring skills required for the task.
+	- The agent uses [`team-rules.md`](resources/team-rules.md) for semantic model standards and [`contoso-design-standards.png`](resources/contoso-design-standards.png) for report design guidance.
+	- The agent produces a plan for the complete solution without creating any Fabric items.
+	- The plan creates the semantic model before the reports and prevents report work from changing the completed model.
+	- The plan assigns one isolated subagent to each report style so both variations can be built in parallel.	
+
+6. Review the plan. Confirm that it follows the team rules, uses the requested tables, creates both report styles, and includes validation for the model and reports.	
+
+	![gh-app-plan-review](resources/img/gh-app-plan-review.png)
+
+7. Adjust the plan if needed, then approve it to start the implementation.
+
+	**Expected implementation outcome**
+
+	- The agent discovers the Fabric workspace, lakehouse, and required metadata.
+	- The agent uses the Power BI Authoring MCP server to create the `Sales Model` Direct Lake semantic model over the selected lakehouse tables.
+	- The model follows `team-rules.md`, including friendly table names, explicit measures, hidden base columns, relationships, and the `About` table.
+	- After the model is complete, the agent starts two subagents in isolated background sessions, one for each report style.
+	- Each subagent uses the completed semantic model without modifying it and saves a separate single-page report in the workspace.
+		
 		![gh-app-sub-agents-running](resources/img/gh-app-sub-agents-running.png)
-	- Two separate reports appear in your Fabric workspace, each with a single page.
-	- Style 1 places the metric cards across the top, with the trend and category breakdowns below. Style 2 places the cards and trend on the left and the category breakdown on the right.
-	- The semantic model `Sales Model` is unchanged. No new measures, tables, or columns are added to it.
 
 > [!TIP]
-> Subagents run in separate, isolated contexts. Each subagent can focus on its assigned task without mixing its working history with the parent agent or other subagents. This makes them useful for exploring independent approaches in parallel. Learn more in [Agents and Subagents](https://awesome-copilot.github.com/learning-hub/agents-and-subagents/).
+> Subagents run in separate, isolated contexts. Each subagent can focus on one report style without mixing its work with the parent agent or the other subagent. Learn more in [Agents and Subagents](https://awesome-copilot.github.com/learning-hub/agents-and-subagents/).
 
-5. Review the session transcript of each subagent, each one should have its own reasoning and snapshot preview of their report style.
-   
-	![gh-app-sub-agent-session](resources/img/gh-app-sub-agent-session.png)
+8. Review the session transcripts.
 
-6. Open both reports in the Fabric portal and compare the layouts.
+	Notice how the parent agent first creates the model in the Fabric Lakehouse using the Power BI Authoring MCP server:
+
+	![gh-app-create-direct-lake](resources/img/gh-app-create-direct-lake.png)
+
+	After creating the model, the parent agent starts two subagents, one for each report style. It gives each subagent the model context and instructs it to author only its assigned report without changing the semantic model.
+
+	![gh-app-nested-sessions](resources/img/gh-app-nested-sessions.png)	
+
+	Select a subagent to inspect the prompt it received from the parent agent and review the work it completed.
+
+	![gh-app-sub-agent-session-prompt](resources/img/gh-app-sub-agent-session-prompt.png)
+
+	Each subagent uses the Power BI report authoring skill to create and preview its report before deploying it to the workspace.
+
+	![gh-app-nested-sessions-rp-preview](resources/img/gh-app-nested-sessions-rp-preview.png)
+
+9. Open `Sales Model` in the Fabric workspace. Confirm that the tables, relationships, hidden base columns, explicit measures, and `About` table follow the team rules.
+
+	![fabric-created-semantic-model](resources/img/fabric-created-semantic-model.png)
+
+10. Open both reports in the Fabric portal. Confirm that each report has one page, follows the assigned layout, and uses the provided design standards. Compare the two variations.
+    
+	| Style 1 | Style 2 |
+	| --- | --- |
+	| ![Report style 1](resources/img/fabric-created-report-style-1.png) | ![Report style 2](resources/img/fabric-created-report-style-2.png) |
+
+11. Select the session name at the top of the window to review the total spend and token usage for the parent session and its subagents.
+	
+	![gh-app-session-context](resources/img/gh-app-session-context.png)
+
+	You can also click on **View session insights** for a more detailed timeline.
+
+	![gh-app-session-context-insights](resources/img/gh-app-session-context-insights.png)
+
 
 #### Reflection
 
-* Subagents is a great way to parallelize work using a parent session for orchestration and work. Like silently asking two colleagues to try the same task without them knowing.
-* When is running variations in parallel worth the cost, and when is one attempt enough?
+* How did the time and cost of using the agent compare with completing the entire task yourself?
+* What additional instructions would you add to the prompt, `team-rules.md`, or another context file to help the agent meet your development quality standards?
+* For real projects, point agents to a development workspace and use [Fabric Git integration](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration) and [Fabric CI/CD](https://learn.microsoft.com/en-us/fabric/cicd/cicd-overview) to promote reviewed changes. Do not point agents directly at a production workspace.
 
 ## ✅ Wrap-up
 
