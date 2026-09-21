@@ -204,10 +204,10 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 
 #### Steps
 
-1. Copy the file [resources/AGENTS.md](resources/AGENTS.md) and folder [`resources/.github`](resources/.github) from this lab resources folder into the root of your PBIP project folder.
+1. Copy the file [resources/AGENTS.md](resources/AGENTS.md), folder [`resources/.github`](resources/.github) and file [resources/company-context-md](resources/company-context.md) from this lab resources folder into the root of your PBIP project folder.
 
 2. Confirm that your folder looks like this:
-
+	
 	![vscode-pbip-folder](resources/img/vscode-pbip-folder.png)
 
 3. Open **Source Control** (`CTRL+SHIFT+G`) and commit the new files.
@@ -216,7 +216,7 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 > [!IMPORTANT]
 > [`AGENTS.md`](https://agents.md/) is an important part of agentic development. It lets you define codebase-level rules, context, and constraints that agents need to understand and respect when working on the project. Because the file is stored with the codebase and read automatically, the same guidance applies consistently across chat sessions and team members.
 >
-> The `AGENTS.md` file in this workshop is a simple example. It ensures that the agent always loads the appropriate Power BI authoring skills and directs it to use the Power BI Authoring MCP server when editing the semantic model. The agent can work with TMDL files directly, but using the MCP tools provides a more reliable authoring path less likely to break things.
+> The `AGENTS.md` file in this workshop is a simple example. It reinforces that the agent always loads the appropriate Power BI authoring skills and directs it to use the Power BI Authoring MCP server when editing the semantic model. The agent can work with TMDL files directly, but using the MCP tools provides a more reliable authoring path less likely to break things.
 >
 > This workshop uses Microsoft-provided agent skills installed through the `powerbi-authoring` plugin. Skills give the agent context about processes and preferred ways of working. Teams can keep project-specific skills in source control to capture business practices and help developers produce consistent results. The [`powerbi-documentation` skill](resources/.github/skills/powerbi-documentation/SKILL.md) is an example of a repository-local skill that lives alongside the codebase. Skills can also be shared through private or public repositories and marketplaces.
 
@@ -263,13 +263,20 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 > [!IMPORTANT]
 > The short prompt works because `AGENTS.md` requires the agent to load the local `powerbi-documentation` skill. The skill defines how the team expects project documentation to be created, while the Power BI MCP server and report tools provide the model and report information needed to create it. `AGENTS.md` includes an important guidance to always prefer to use the MCP to edit the semantic model instead of direct TMDL file editing.
->
-> By default, each tool call asks for your approval. You can approve calls individually, allow tools for the current session or all sessions, or switch the agent to **Autopilot**. Autopilot runs tools without asking for approval, so use it carefully and preferably in a sandbox environment. For details, see [Manage approvals and permissions](https://code.visualstudio.com/docs/agents/run/approvals).
-> 
-> ![vscode-copilot-chat-auto-pilot](resources/img/vscode-copilot-chat-auto-pilot.png)
 
-4. Open the generated documentation Markdown files in `docs/` and preview them with **Ctrl+Shift+V**.
-5. Open the **Source Control** (`CTRL+SHIFT+G`) and commit all changes.
+4. Notice that the agent asks for approval before each tool call. This is the default behavior of the VS Code agent harness. Review the tool and its parameters before approving it.
+
+	![vscode-copilot-tool-permissions-1](resources/img/vscode-copilot-tool-permissions-1.png)	
+
+	You can **Allow all** tools or switch the agent mode to **Autopilot** and **Allow all** permissions so it can run the required tools and continue until the task is complete without prompting you at every step.
+
+	![vscode-copilot-chat-auto-pilot](resources/img/vscode-copilot-chat-auto-pilot.png)
+
+> [!IMPORTANT]
+> **Autopilot** is an agent mode, not a permission level. It lets the agent work autonomously until the task is complete by auto-approving tools, retrying errors, and answering questions that would otherwise block progress. **Allow all** and **Autopilot** skip confirmation for potentially destructive actions, including file edits, terminal commands, and external tool calls. Use Autopilot or Allow All only in a trusted workspace and when you understand the security implications. For details, see [How Autopilot works](https://code.visualstudio.com/docs/agents/run/approvals#_how-autopilot-works).
+
+5. Open the generated documentation Markdown files in `docs/` and preview them with **Ctrl+Shift+V**.
+6. Open the **Source Control** (`CTRL+SHIFT+G`) and commit all changes.
 
 #### Reflection
 
@@ -283,13 +290,12 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 #### Steps
 
-1. Copy [resources/company-context.md](resources/company-context.md) from the lab resources into the root of your PBIP project folder.
-2. Start a **new chat session** in GitHub Copilot Chat and choose `GPT-5.6 Terra` model and thinking effort `Low`.
+1. Start a **new chat session** in GitHub Copilot Chat and choose `GPT-5.6 Terra` model and thinking effort `Low`.
 
 > [!TIP]
 > Start a new session when moving to a different task. A clean session prevents decisions, assumptions, and tool results from the previous task from influencing the next one. You can also reuse an existing sessions to keep the session context. For example, you could reuse the documentation session to update the docs after making changes to the semantic models or reports.
 
-3. Enter the following prompt:
+2. Enter the following prompt:
 
 	```text
 	Add a description to every measure in the semantic model `Sales.SemanticModel\definition`.
@@ -309,15 +315,15 @@ Writing documentation from scratch and keeping it current both take time. AI can
 > [!TIP]
 > There is little difference between `company-context.md` and the context contained in a skill. The company context could be packaged as a skill. This exercise keeps it as a regular file to show that you can also give an agent context by referring to a file directly in your prompt.
 
-4. Switch to **Power BI Desktop** and select **Apply external changes** to load into **Power BI Desktop** the changes the agent did to the semantic model.
+3. Switch to **Power BI Desktop** and select **Apply external changes** to load into **Power BI Desktop** the changes the agent did to the semantic model.
    
    ![pbi-desktop-reload-external-changes](resources/img/pbi-desktop-reload-external-changes.png)
 
 > [!TIP]
 > **Apply external changes** shipped with the August 2026 Power BI Desktop release. It detects and reloads PBIP files changed outside Power BI Desktop, whether those changes were made manually in Visual Studio Code or generated by AI agents and tools. Learn more in [Edit Power BI Desktop project files in Visual Studio Code](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-external-editing).
 
-5. Select a measure in the model view and review the AI generated description infused with context from the `company-context.md`.
-6. Open the **Source Control tab** in Visual Studio Code (`CTRL+SHIFT+G`) and review the Git diffs. Confirm that the changed lines are description properties only, and that no DAX expression was modified. In the end **Commit** the changes to the repo.
+4. Select a measure in the model view and review the AI generated description infused with context from the [`company-context.md`](resources/company-context.md).
+5. Open the **Source Control tab** in Visual Studio Code (`CTRL+SHIFT+G`) and review the Git diffs. Confirm that the changed lines are description properties only, and that no DAX expression was modified. In the end **Commit** the changes to the repo.
     
     ![vscode-copilot-change-tmdl-diff](resources/img/vscode-copilot-change-tmdl-diff.png)
 
@@ -326,7 +332,7 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 #### Reflection
 
-* Which descriptions would you keep as written, and which would you rewrite? Could you include context in `AGENTS.md` or `company-context.md` to make it better?
+* Which descriptions would you keep as written, and which would you rewrite? Could you include context in [`AGENTS.md`](resources/AGENTS.md) or [`company-context.md`](resources/company-context.md) to make it better?
 * What other team knowledge would be worth storing as a context file in the repository?
 * Without Git, how would you determine exactly what the agent changed?
 * How would you safely and quickly revert an agent change that produced the wrong result?
@@ -640,6 +646,7 @@ You've now learned how to:
 * [Model Context Protocol](https://modelcontextprotocol.io/)
 * [Agent Plugins spec](https://github.com/agentplugins/agent-plugins-spec)
 * [Agent Skills spec](https://agentskills.io/specification)
+* [VS Code agent harnesses](https://code.visualstudio.com/docs/agents/run/agent-harnesses)
 * [Tabular Editor - Get Started with Agentic Development](https://tabulareditor.com/blog/how-to-get-started-with-agentic-development-for-business-intelligence)
 * [Tabular Editor - Pick the right AI model](https://tabulareditor.com/blog/picking-the-ai-model-for-the-task)
 * [Tabular Editor - LLMs for data professionals](https://tabulareditor.com/blog/practical-introduction-to-llms-for-data-professionals)
