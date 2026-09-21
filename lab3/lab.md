@@ -4,7 +4,7 @@
 
 ## Overview
 
-This lab takes agentic development beyond model authoring and into application creation. Starting from an existing semantic model, you will use **Fabric Data Apps** and natural-language prompts to generate, customize, and refine highly personalized analytical applications—including experiences inspired by screenshots and design concepts.
+This lab takes agentic development beyond model authoring and into application creation. Starting from an existing semantic model, you will use **Fabric Data Apps** and natural-language prompts to generate, customize, and refine highly personalized analytical applications with rich customization and flexibility.
 
 ## What you will learn
 
@@ -19,12 +19,10 @@ This lab takes agentic development beyond model authoring and into application c
 | Section | Learning goal |
 | ------- | ------------- |
 | [Prerequisites](#prerequisites) | Confirm tools, capacity, model access, and tenant settings |
-| [0. Upload the Contoso Sales model](#0-upload-the-contoso-sales-model) | Import the workshop semantic model into Fabric |
-| [1. Create a Fabric app](#1-create-a-fabric-app) | Open the Fabric App (preview) creation experience |
-| [2. Open a local project and get set up in the GitHub Copilot app](#2-open-a-local-project-and-get-set-up-in-the-github-copilot-app) | Choose the local folder and configure GitHub Copilot |
-| [3. Create the first iteration of the Fabric app](#3-create-the-first-iteration-of-the-fabric-app) | Connect, generate, and deploy the first app experience |
-| [4. Iterate on the Fabric app](#4-iterate-on-the-fabric-app) | Add interactive analysis, coaching notes, and Contoso branding |
-| [5. Explore and customize](#5-explore-and-customize) | Experiment with creative Fabric App scenarios |
+| [0. Create workspace, app and upload sample model (prep the environment)](#0-create-workspace-app-and-upload-sample-model-prep-the-environment) | Prepare an isolated workspace, sample model, Fabric App, and local project |
+| [1. Create the first iteration of the Fabric app](#1-create-the-first-iteration-of-the-fabric-app) | Connect, generate, and deploy the first app experience |
+| [2. Iterate on the Fabric app](#2-iterate-on-the-fabric-app) | Add interactive analysis, coaching notes, and Contoso branding |
+| [3. Explore and customize](#3-explore-and-customize) | Experiment with creative Fabric App scenarios |
 
 ## Prerequisites
 
@@ -33,44 +31,43 @@ Before beginning the lab, confirm that you have:
 * Access to the workshop's Fabric tenant with permission to create a workspace
 * Access to a Fabric capacity that can be assigned to your workspace
 * The **Fabric Apps (preview)** workload enabled for your account by a Fabric tenant administrator
-* A Power BI Pro license
 * Permission to download the workshop-provided **Contoso Sales** PBIX file
 * A modern web browser such as Microsoft Edge, Google Chrome, or Mozilla Firefox
 * A GitHub account with an active GitHub Copilot license
 * The [GitHub Copilot app](https://github.com/features/ai/github-app) installed on your computer
 * [Node.js and npm](https://nodejs.org/en/download/) installed on your computer
-* The Rayfin CLI package installed:
 
-	```console
-	npm install @microsoft/rayfin-cli
-	```
-
-Verify that the Rayfin CLI is available before continuing:
-
-	```console
-	npx rayfin --version
-	```
 
 All participants should use the workshop-provided **Contoso Sales** semantic model rather than selecting their own model. This ensures that the prompts, expected results, and validation steps remain consistent across the workshop.
 
-## 0. Upload the Contoso Sales model
+## 0. Create workspace, app and upload sample model (prep the environment)
 
-✅ **Goal**: Upload the workshop PBIX file to your Fabric workspace and confirm that the Contoso Sales semantic model is ready to use.
+✅ **Goal**: Create an isolated Fabric workspace, upload the workshop PBIX file, create a Fabric App, and prepare a local project for development.
+
+### Create a workspace
+
+1. Go to [Power BI](https://app.powerbi.com) and sign in with the workshop account.
+2. Select **Workspaces** > **New workspace**.
+3. Name the workspace using this convention:
+
+	```text
+	FabCon-Agentic-Lab3-[YourInitials]
+	```
+
+4. Assign the workspace to the available Fabric/Premium capacity and select **Apply**.
+5. Wait for the workspace to be created. Use this new workspace throughout the lab to ensure that you have a clean, isolated environment.
 
 ### Upload the workshop model
 
 1. Download the workshop [Contoso Sales PBIX file](resources/Contoso%20Sales.pbix) and save it to your **Downloads** folder.
-2. Go to [Microsoft Fabric](https://app.fabric.microsoft.com) and sign in.
-3. Open the Fabric workspace you will use for this lab.
-4. Confirm that the workspace is assigned to a Fabric capacity.
-5. Select **Import** from the workspace toolbar.
-6. Select **Report, Paginated Report or Workbook**.
-7. Select **From this computer**.
+2. In your new workspace, select **Import** from the workspace toolbar.
+3. Select **Report, Paginated Report or Workbook**.
+4. Select **From this computer**.
 
 	![Import a report from this computer](resources/img/fabric-import-menu.png)
 
-8. In the file picker, open your **Downloads** folder and select `Contoso Sales.pbix`.
-9. Select **Open** and wait for the import to finish.
+5. In the file picker, open your **Downloads** folder and select `Contoso Sales.pbix`.
+6. Select **Open** and wait for the import to finish.
 
 ### Verify the model
 
@@ -79,21 +76,9 @@ All participants should use the workshop-provided **Contoso Sales** semantic mod
 3. Open the semantic model and confirm that it loads without errors.
 4. Do not make any changes yet.
 
-### Expected result
+### Create a Fabric app
 
-You should now have:
-
-* The Contoso Sales report and semantic model in your Fabric workspace
-* Confirmation that the semantic model opens without errors
-* A workshop model ready for the remaining exercises
-
-## 1. Create a Fabric app
-
-✅ **Goal**: Start creating a Fabric App in the same workspace as the Contoso Sales semantic model.
-
-### Steps
-
-1. Return to the workspace containing the **Contoso Sales** semantic model.
+1. Return to the workspace you just created containing the **Contoso Sales** semantic model.
 2. Select **New item** in the upper-left corner of the workspace.
 
 	![New item button in a Fabric workspace](resources/img/fabric-new-item-button.png)
@@ -114,65 +99,78 @@ You should now have:
 
 	![Select the Data App template](resources/img/fabric-data-app-template.png)
 
-### Expected result
+	> [!NOTE]
+	> You should now see your Fabric App **Overview** page. Confirm that it displays a **Getting started** section with steps to open a terminal, set up your project, edit the app, and publish your changes. A live URL may also appear at the top of the page. Do not run or copy any of these commands yet; the next steps in this lab will walk you through the setup in the correct order.
 
-You should now have:
+	![Fabric App Overview page with Getting started steps](resources/img/fabric-app-overview.png)
 
-* A new Fabric App in the same workspace as the Contoso Sales semantic model
-* The **Data App** template selected
-* A **Getting started** guide with commands to run in a terminal
+### Create and open the local project folder
 
-## 2. Open a local project and get set up in the GitHub Copilot app
+1. In File Explorer, create a local folder you'd like to use for the project such as the following example:
 
-✅ **Goal**: Open the local folder where you will develop the Fabric app with GitHub Copilot.
+	```text
+	C:\playground\FabCon26
+	```
 
-### Steps
-
-1. Open the **GitHub Copilot app**.
-2. In **Projects**, select the **+** button.
-3. Select **Open folder**.
-4. Browse to and select the folder on your computer that you want to use for this Fabric app.
-5. Confirm the folder selection.
-6. In the chat pane, open the model selector.
-7. Set **Model** to **GPT-5.6 Sol**.
-8. Set **Effort** to **Medium**.
+2. Open the **GitHub Copilot app**.
+3. In **Projects**, select the **+** button.
+4. Select **Open folder**.
+5. Browse to and select the folder you created in step 1 ex: `C:\playground\FabCon26`.
+6. Confirm the folder selection.
+7. In the chat pane, open the model selector.
+8. Set **Model** to **GPT-5.6 Sol**.
+9. Set **Effort** to **Medium**.
 
 	![Configure the GitHub Copilot model and effort](resources/img/copilot-model-settings.png)
 
+### Scaffold and start the Fabric app
+
+1. Return to your Fabric App in the Fabric portal.
+2. In **Getting started**, locate step 2 and copy the provided scaffolding command.
+3. Return to the GitHub Copilot app and confirm that your local folder project is open.
+4. In the upper-right corner of the GitHub Copilot app, select **Toggle panel**.
+
+	![Toggle the panel in the GitHub Copilot app](resources/img/copilot-toggle-panel.png)
+
+	In the panel that opens, select **Terminal**.
+
+	![Select Terminal in the GitHub Copilot app panel](resources/img/copilot-panel-terminal.png)
+
+5. A PowerShell terminal will open within the GitHub Copilot app. Paste the scaffolding command directly into this terminal and press **Enter**.  For example:
+
+	```powershell
+	npm create @microsoft/rayfin@latest -- "Contoso Sales App" --template dataapp --workspace "FabCon EU 2026" --base-api-url https://fabric.microsoft.com
+	```
+	If prompted, approve any permissions or confirmation steps required for the command to run.
+
+	> [!IMPORTANT]
+	> Use the command generated for your Fabric App. The app name, workspace name, and base API URL should differ from the example.
+
+6. After scaffolding finishes, run the following commands directly in the same PowerShell terminal pane to open the generated project directory and start the app:
+
+	```powershell
+	cd "Contoso Sales App"
+	npm run dev
+	```
+
 ### Expected result
 
 You should now have:
 
-* The selected local folder open as a project in the GitHub Copilot app
-* **GPT-5.6 Sol** selected as the model
-* **Effort** set to **Medium**
+* A clean Fabric workspace named using the `FabCon-Agentic-Lab3-[YourInitials]` convention
+* The Contoso Sales report and semantic model in the workspace
+* A new Fabric App with the **Data App** template selected
+* A project in the GitHub Copilot app
+* **GPT-5.6 Sol** selected as the model and **Effort** set to **Medium**
+* A scaffolded Fabric Data App project running locally
 
-## 3. Create the first iteration of the Fabric app
+## 1. Create the first iteration of the Fabric app
 
-✅ **Goal**: Scaffold the Fabric App, connect it to the Contoso Sales semantic model, and create the first sales analytics experience.
+✅ **Goal**: Connect the Fabric App to the Contoso Sales semantic model and create the first sales analytics experience using prompts in GitHub Copilot chat.
 
 ### Steps
 
-1. Return to your Fabric App in the Fabric portal.
-2. In **Getting started**, locate step 2 and copy the provided scaffolding command.
-3. Return to the GitHub Copilot app and confirm that the local project folder selected in the previous section is open.
-4. Paste the scaffolding command into the chat pane and ask Copilot to run it. For example:
-
-	```powershell
-	npm create @microsoft/rayfin@latest -- "Contoso Sales App" --template dataapp --workspace "FabCon EU 2026" --base-api-url https://msitapi.fabric.microsoft.com
-	```
-
-	> [!IMPORTANT]
-	> Use the command generated for your Fabric App. The app name, workspace name, and base API URL may differ from the example.
-
-5. After scaffolding finishes, GitHub Copilot should suggest the next PowerShell commands for opening the generated project directory and starting the app. Copy and paste the suggested commands into GitHub Copilot, then ask it to run them. For example:
-
-	```powershell
-	cd "Contoso Sales App"
-	npx rayfin dev
-	```
-
-6. Open the **Contoso Sales** semantic model in the Fabric web portal and copy its full URL from the browser address bar. Paste the URL into GitHub Copilot as plain text, add the following instruction, and run the prompt:
+1. Open the **Contoso Sales** semantic model in the Fabric web portal and copy its full URL from the browser address bar. Paste the URL into the GitHub Copilot chat pane as plain text, add the following instruction, and run the prompt:
 
 	```text
 	connect my data app to this semantic model : [insert URL to semantic model]
@@ -181,25 +179,36 @@ You should now have:
 	> [!IMPORTANT]
 	> Confirm that the full URL is visible as text in the chat pane rather than appearing only as a generic **Power BI** link. The URL contains the semantic model ID and workspace ID that GitHub Copilot needs to connect the app to the correct model.
 
-7. Once that process finishes, give GitHub Copilot the following prompt and ask it to run the required commands:
+2. Once that process finishes, enter the following prompt directly in GitHub Copilot chat for your project and ask it to run the required commands:
 
 	```text
 	Build and deploy a polished sales analytics app for a Global Sales Manager using the connected semantic model. Analyze store performance with KPIs for Total Sales, Gross Profit, Gross Margin %, Units Sold, and Sales per Unit. Create a responsive store-level scatter plot of Sales per Unit vs. Gross Margin %, with labeled performance quadrants. Highlight top performers, outliers, and improvement opportunities, then deploy the app to Fabric.
 	```
 
-8. When GitHub Copilot displays the option to open the app in the Fabric portal, select it.
+	> [!NOTE]
+	> If you forget a PowerShell command, GitHub Copilot can often determine and run the appropriate command on your behalf. For example, the prompt above does not explicitly mention `npx rayfin up`, but Copilot can infer that command from the request to deploy the app to Fabric. Consider the trade-off when choosing an approach: natural-language prompts offer convenience, while running known PowerShell commands directly can reduce token consumption.
+
+3. When GitHub Copilot displays the option to open the app in the Fabric portal, select it.
+
+	> [!NOTE]
+	> The screenshot below is one example of an app that this prompt could create. Because the prompt leaves some design and implementation choices open, your app may look different from this example and from the apps generated for other participants. Vague prompts can produce useful Fabric Apps quickly, but you can fine-tune the experience through iterations such as:
+	>
+	> 1. Writing a detailed Markdown specification that describes the app's requirements and provides additional context.
+	> 2. Using plan mode to review and iterate on the requirements before implementation.
+	> 3. Continuing to refine the first draft with additional prompts, as demonstrated in the next section of this workshop.
+
+	![Example first iteration of a generated Fabric sales app](resources/img/fabric-app-first-iteration-example.png)
 
 ### Expected result
 
 You should now have:
 
-* A scaffolded Fabric Data App project running locally
 * A connection to the Contoso Sales semantic model
 * A first sales analytics experience for global sales managers
 * A deployed app that opens in the Fabric portal
 * Store-performance insights that highlight top performers, outliers, and improvement opportunities
 
-## 4. Iterate on the Fabric app
+## 2. Iterate on the Fabric app
 
 ✅ **Goal**: Refine the first app iteration by adding interactive selection, store coaching notes, and flexible Contoso themes.
 
@@ -211,8 +220,15 @@ You should now have:
 	Make the scatter plot fully interactive. Allow selecting individual stores or multiple stores using rectangle and lasso selection, and use those selections to cross-filter the entire app. Include a Clear Selection action alongside the selection actions so users can quickly return to the unfiltered view. Keep the look and feel of the scatter plot clean and not too busy.
 	```
 
-2. Wait for GitHub Copilot to finish running the prompt, then refresh the app in the Fabric portal.
+2. Wait for GitHub Copilot to finish running the prompt, then refresh the app in the Fabric portal (or click the open in Fabric link provided in the response in GitHub Copilot).
+
+	> [!NOTE]
+	> The screenshot below is one example of what the updated visual could look like. Because the simple prompt leaves design and implementation details open, your result will likely look different from this example and from the results generated for other participants.
+
+	![Example interactive scatter plot with point, rectangle, lasso, and clear selection controls](resources/img/fabric-app-interactive-scatter-example.png)
 3. Test selecting one store, selecting multiple stores with rectangle and lasso selection, and clearing the selection. Confirm that each selection cross-filters the entire app and that **Clear Selection** restores the unfiltered view.
+
+
 
 	> [!TIP]
 	> This exercise demonstrates how customizable the visuals and experiences in a Fabric Data App can be, all through simple natural-language prompts.
@@ -228,7 +244,13 @@ You should now have:
 	Add in-app coaching notes for stores. Allow the ability within this app to create, view, and track notes, action items, and next steps for individual stores, with a historical log of entries. Support adding notes to multiple selected stores at once.
 	```
 
-2. Wait for GitHub Copilot to finish running the prompt, then refresh the app in the Fabric portal.
+2. Wait for GitHub Copilot to finish running the prompt, then refresh the app in the Fabric portal (or click the open in Fabric link provided in the response in GitHub Copilot).
+
+	> [!NOTE]
+	> The screenshot below is one example of the coaching-notes behavior this prompt could create. Because the simple prompt leaves design and implementation details open, your result will likely look different from this example and from the results generated for other participants.
+
+	![Example store coaching notes, action items, next steps, and history](resources/img/fabric-app-coaching-notes-example.png)
+
 3. Confirm that the app provides options to view and add coaching notes. Test creating a note for one store and for multiple selected stores, then verify that the notes, action items, and next steps appear in the historical log.
 
 	> [!TIP]
@@ -243,7 +265,14 @@ You should now have:
 	Restyle the sales dashboard to align with the attached Contoso brand guide while preserving all functionality. Allow users to switch the app background to any color from the brand palette, with each theme automatically adjusting colors, contrast, and visuals to remain readable, cohesive, and on-brand.
 	```
 
-4. After GitHub Copilot finishes running the prompt and all approved tool calls, refresh the app in the Fabric portal and test every available brand-palette background. Confirm that text, controls, and visuals remain readable and cohesive and that the scatter-plot interactions and coaching notes still work.
+3. Wait for GitHub Copilot to finish running the prompt, then refresh the app in the Fabric portal (or click the open in Fabric link provided in the response in GitHub Copilot).
+
+	> [!NOTE]
+	> The screenshot below is one example of how the app could look after applying the Contoso brand guide. Because the simple prompt leaves design and implementation details open, your result will likely look different from this example and from the results generated for other participants.
+
+	![Example Fabric App styled with the Contoso brand guide](resources/img/fabric-app-contoso-brand-example.png)
+
+4. Test every available brand-palette background. Confirm that text, controls, and visuals remain readable and cohesive and that the scatter-plot interactions and coaching notes still work.
 
 	> [!TIP]
 	> This exercise showcases how easily you can adjust the theme and styling of a Fabric Data App. Adding images, PDFs, or other files to the chat gives GitHub Copilot valuable visual and business context, helping it produce changes that more closely match your design requirements.
@@ -259,7 +288,7 @@ The refreshed Fabric Data App should include:
 * Brand-palette background options that preserve readable contrast and cohesive visuals
 * All functionality from the first app iteration
 
-## 5. Explore and customize
+## 3. Explore and customize
 
 ✅ **Goal**: Experiment with a new scenario or design change and refine the app through natural-language prompts.
 
