@@ -99,7 +99,7 @@ All participants should use the workshop-provided model rather than selecting th
 	![fabric-copilot-allow-changes](resources/img/fabric-copilot-allow-changes.png)
 
 > [!IMPORTANT]
-> Selecting **Allow** gives Copilot permission to change the open semantic model for the entire chat session. Power BI creates a restore checkpoint when you grant permission, which you can use to return the model to its state at the start of the session. For more details, see [Controlled model updates](https://learn.microsoft.com/power-bi/transform-model/copilot-web-modeling#controlled-model-updates).
+> Selecting **Allow** gives Copilot permission to make changes to the open semantic model for the entire chat session. Power BI creates a restore checkpoint when you grant permission, which you can use to return the model to its state at the start of the session. For more details, see [Controlled model updates](https://learn.microsoft.com/power-bi/transform-model/copilot-web-modeling#controlled-model-updates).
 
 8. Review Copilot's response and compare it with the tables, relationships, columns, and measures shown in the model.
 9. Ask a question about a specific model object to learn more about its value in the model. For example:
@@ -133,8 +133,8 @@ In this exercise, you will ask Copilot to review the measures and recommend impr
 
 	![fabric-copilot-clear-session](resources/img/fabric-copilot-clear-session.png)
 
-	> [!TIP]
-	> Start a new Copilot session when you no longer need the previous conversation. Removing irrelevant context reduces token usage and helps Copilot focus on the current task, which can produce more relevant responses.
+> **Tip**
+> Start a new Copilot session when you no longer need the previous conversation. Removing irrelevant context reduces token usage and helps Copilot focus on the current task, which can produce more relevant responses.
 
 2. Enter the following prompt:
 
