@@ -508,27 +508,28 @@ You first review the full implementation plan. After you approve it, the agent c
 #### Steps
 
 1. Create an empty folder on your laptop, for example `C:\FabCon\Lab2_Part2`.
-2. In the **GitHub Copilot app**, select **+** > **Open folder**, then open the folder you created.
+2. Open the **GitHub Copilot app**
+3. In **Projects**, select the **+** > **Open folder**, then open the folder you created.
 
 	![gh-app-add-folder](resources/img/gh-app-add-folder.png)
 
 > [!TIP]
 > A working folder gives the agent a defined project boundary. It can discover project instructions, use folder-specific MCP settings, and keep related sessions together. Opening a folder does not automatically add every file to the context. The agent reads files as needed.
 
-3. Start a **New session** under the working folder. Set the session mode to **Plan** and select the `GPT-5.6 Sol` model and effort `Medium`.
+4. Start a **New session** under the working folder. Set the session mode to **Plan** and select the `GPT-5.6 Sol` model and effort `Medium`.
 	
 	![gh-app-new-session](resources/img/gh-app-new-session.png)
 
 > [!TIP]
 > **Plan** mode lets Copilot inspect the available context and propose an implementation approach before creating anything. You can correct assumptions and agree on the complete solution before implementation begins. For details, see [Use the GitHub Copilot plan agent](https://learn.microsoft.com/en-us/visualstudio/ide/copilot-plan-agent?view=visualstudio).
 
-4. Add [resources/team-rules.md](resources/team-rules.md) and [resources/contoso-design-standards.png](resources/contoso-design-standards.png) to the session context.	
+5. Add [resources/team-rules.md](resources/team-rules.md) and [resources/contoso-design-standards.png](resources/contoso-design-standards.png) to the session context.	
 
 	![gh-app-add-context-file](resources/img/gh-app-add-context-file.png)
 
 	**Note:** You can also copy these files into the working folder (`C:\FabCon\Lab2_Part2`) and simply refer their name in the prompt.
 
-5. Enter and run the following prompt, replacing the [YOUR_WORKSPACE_NAME] with the name of your workspace:
+6. Enter and run the following prompt, replacing the [YOUR_WORKSPACE_NAME] with the name of your workspace:
 
 	```text
 	Create a Direct Lake semantic model named **Sales Model** using lakehouse **Lakehouse_01** in workspace **[YOUR_WORKSPACE_NAME]**.
@@ -567,11 +568,11 @@ You first review the full implementation plan. After you approve it, the agent c
 	- The plan creates the semantic model before the reports and prevents report work from changing the completed model.
 	- The plan assigns one isolated subagent to each report style so both variations can be built in parallel.	
 
-6. Review the plan. Confirm that it follows the team rules, uses the requested tables, creates both report styles, and includes validation for the model and reports.	
+7. Review the plan. Confirm that it follows the team rules, uses the requested tables, creates both report styles, and includes validation for the model and reports.	
 
 	![gh-app-plan-review](resources/img/gh-app-plan-review.png)
 
-7. Adjust the plan if needed, then approve it to start the implementation.
+8. Adjust the plan if needed, then approve it to start the implementation.
 
 	**Expected implementation outcome**
 
@@ -586,7 +587,7 @@ You first review the full implementation plan. After you approve it, the agent c
 > [!TIP]
 > Subagents run in separate, isolated contexts. Each subagent can focus on one report style without mixing its work with the parent agent or the other subagent. Learn more in [Agents and Subagents](https://awesome-copilot.github.com/learning-hub/agents-and-subagents/).
 
-8. Review the session transcripts.
+9. Review the session transcripts.
 
 	Notice how the parent agent first creates the model in the Fabric Lakehouse using the Power BI Authoring MCP server:
 
@@ -604,17 +605,17 @@ You first review the full implementation plan. After you approve it, the agent c
 
 	![gh-app-nested-sessions-rp-preview](resources/img/gh-app-nested-sessions-rp-preview.png)
 
-9. Open `Sales Model` in the Fabric workspace. Confirm that the tables, relationships, hidden base columns, explicit measures, and `About` table follow the team rules.
+10. Open `Sales Model` in the Fabric workspace. Confirm that the tables, relationships, hidden base columns, explicit measures, and `About` table follow the team rules.
 
 	![fabric-created-semantic-model](resources/img/fabric-created-semantic-model.png)
 
-10. Open both reports in the Fabric portal. Confirm that each report has one page, follows the assigned layout, and uses the provided design standards. Compare the two variations.
+11. Open both reports in the Fabric portal. Confirm that each report has one page, follows the assigned layout, and uses the provided design standards. Compare the two variations.
     
 	| Style 1 | Style 2 |
 	| --- | --- |
 	| ![Report style 1](resources/img/fabric-created-report-style-1.png) | ![Report style 2](resources/img/fabric-created-report-style-2.png) |
 
-11. Select the session name at the top of the window to review the total spend and token usage for the parent session and its subagents.
+12. Select the session name at the top of the window to review the total spend and token usage for the parent session and its subagents.
 	
 	![gh-app-session-context](resources/img/gh-app-session-context.png)
 

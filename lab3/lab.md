@@ -59,7 +59,7 @@ All participants should use the workshop-provided **Contoso Sales** semantic mod
 
 ### Upload the workshop model
 
-1. Download the workshop [Contoso Sales PBIX file](resources/Contoso%20Sales.pbix) and save it to your **Downloads** folder.
+1. Download the workshop [resources/Contoso Sales.pbix](resources/Contoso%20Sales.pbix) and save it to your **Downloads** folder.
 2. In your new workspace, select **Import** from the workspace toolbar.
 3. Select **Report, Paginated Report or Workbook**.
 4. Select **From this computer**.
@@ -109,26 +109,29 @@ All participants should use the workshop-provided **Contoso Sales** semantic mod
 1. In File Explorer, create a local folder you'd like to use for the project such as the following example:
 
 	```text
-	C:\playground\FabCon26
+	C:\FabCon\Lab3
 	```
 
 2. Open the **GitHub Copilot app**.
-3. In **Projects**, select the **+** button.
-4. Select **Open folder**.
-5. Browse to and select the folder you created in step 1 ex: `C:\playground\FabCon26`.
-6. Confirm the folder selection.
-7. In the chat pane, open the model selector.
-8. Set **Model** to **GPT-5.6 Sol**.
-9. Set **Effort** to **Medium**.
+3. In **Projects**, select the **+** > **Open folder**, then open the folder you created in step 1 (e.g. `C:\FabCon\Lab3`).
+	
+	![gh-app-add-folder](resources/img/gh-app-add-folder.png)
+
+4. Confirm the folder selection.
+5. In the chat pane, open the model selector.
+6. Set **Model** to **GPT-5.6 Sol**.
+7. Set **Effort** to **Medium**.
 
 	![Configure the GitHub Copilot model and effort](resources/img/copilot-model-settings.png)
 
 ### Scaffold and start the Fabric app
 
 1. Return to your Fabric App in the Fabric portal.
-2. In **Getting started**, locate step 2 and copy the provided scaffolding command.
-3. Return to the GitHub Copilot app and confirm that your local folder project is open.
-4. In the upper-right corner of the GitHub Copilot app, select **Toggle panel**.
+2. In **Getting started**, locate **step 2** and copy the provided scaffolding command.
+   
+	![fabric-app-scaffolding-step](resources/img/fabric-app-scaffolding-step.png)
+
+3. Return to the **GitHub Copilot app**, open the session of the project folder and select select **Toggle panel** (`CTRL+ALT+B`) in the upper-right corner.
 
 	![Toggle the panel in the GitHub Copilot app](resources/img/copilot-toggle-panel.png)
 
@@ -136,22 +139,28 @@ All participants should use the workshop-provided **Contoso Sales** semantic mod
 
 	![Select Terminal in the GitHub Copilot app panel](resources/img/copilot-panel-terminal.png)
 
-5. A PowerShell terminal will open within the GitHub Copilot app. Paste the scaffolding command directly into this terminal and press **Enter**.  For example:
+5. A PowerShell terminal will open within the GitHub Copilot app. Paste the copied scaffolding command directly into this terminal and press **Enter**. 
+
+	![fabric-app-terminal-scaffolding](resources/img/fabric-app-terminal-scaffolding.png)
+
+	**Note:** Use the command generated for your Fabric App. The app name, workspace name, and base API URL should differ from the example.
+
+	If prompted, approve any permissions, confirmation or sign-in steps required for the command to run.
+
+	![fabric-app-terminal-scaffolding-running](resources/img/fabric-app-terminal-scaffolding-running.png)
+
+6. After scaffolding finishes, run the following command directly in the same PowerShell terminal pane to open the generated project directory and start the app:
+
+	![fabric-app-terminal-scaffolding-done](resources/img/fabric-app-terminal-scaffolding-done.png)
 
 	```powershell
-	npm create @microsoft/rayfin@latest -- "Contoso Sales App" --template dataapp --workspace "FabCon EU 2026" --base-api-url https://fabric.microsoft.com
-	```
-	If prompted, approve any permissions or confirmation steps required for the command to run.
-
-> **Important**
-> Use the command generated for your Fabric App. The app name, workspace name, and base API URL should differ from the example.
-
-6. After scaffolding finishes, run the following commands directly in the same PowerShell terminal pane to open the generated project directory and start the app:
-
-	```powershell
-	cd "Contoso Sales App"
+	cd contoso-sales-app
 	npm run dev
 	```
+
+	![fabric-app-terminal-npm-dev](resources/img/fabric-app-terminal-npm-dev.png)
+
+	If prompted, approve any permissions, confirmation steps required for the command to run.
 
 ### Expected result
 
@@ -161,7 +170,6 @@ You should now have:
 * The Contoso Sales report and semantic model in the workspace
 * A new Fabric App with the **Data App** template selected
 * A project in the GitHub Copilot app
-* **GPT-5.6 Sol** selected as the model and **Effort** set to **Medium**
 * A scaffolded Fabric Data App project running locally
 
 ## 1. Create the first iteration of the Fabric app
@@ -170,11 +178,13 @@ You should now have:
 
 ### Steps
 
-1. Open the **Contoso Sales** semantic model in the Fabric web portal and copy its full URL from the browser address bar. Paste the URL into the GitHub Copilot chat pane as plain text, add the following instruction, and run the prompt:
+1. Open the **Contoso Sales** semantic model in the Fabric web portal and copy its full URL from the browser address bar. Paste the URL into the **GitHub Copilot App** chat pane as plain text, add the following instruction, and run the prompt:
 
 	```text
-	connect my data app to this semantic model : [insert URL to semantic model]
+	connect my data app to this semantic model : [URL_TO_YOUR_SEMANTIC_MODEL]
 	```
+
+	![fabric-app-prompt-connect-model](resources/img/fabric-app-prompt-connect-model.png)
 
 > **Important**
 > Confirm that the full URL is visible as text in the chat pane rather than appearing only as a generic **Power BI** link. The URL contains the semantic model ID and workspace ID that GitHub Copilot needs to connect the app to the correct model.
