@@ -1,6 +1,6 @@
 # Lab - Agentic Web Modeling with Copilot
 
-⏱️ **Total duration:** 75 minutes
+⏱️ **Total duration:** 60 minutes
 
 ## Overview
 
@@ -183,6 +183,9 @@ In this exercise, you will ask Copilot to review the measures and recommend impr
 	- Existing DAX expressions remain unchanged.
   
 	![fabric-copilot-model-after](resources/img/fabric-copilot-model-after.png)
+
+> [!IMPORTANT]
+> Copilot in Power BI web modeling changes only the semantic model. It does not update downstream items that depend on the model, such as reports. Renaming or removing a table, column, or measure can break visuals, filters, calculations, and other dependencies.
 
 5. Review the changes made by Copilot. Measure names should be consistent, business friendly with business domain display folders.
 

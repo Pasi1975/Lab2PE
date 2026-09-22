@@ -1,6 +1,6 @@
 # Lab - Personalized Power BI Agents
 
-⏱️ **Total duration:** 90 minutes
+⏱️ **Total duration:** 120 minutes
 
 ## Overview
 
@@ -69,6 +69,8 @@ Clone or download as zip the entire repository to your machine, for example unde
 ![clone-repository](../resources/img/clone-repository.png)
   
 If you downloaded the repository as a ZIP file, extract it.
+
+![cloned-repo](resources/img/cloned-repo.png)
 
 The resources for this lab are in `./lab2/resources`.
 
@@ -204,7 +206,11 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 
 #### Steps
 
-1. Copy the file [resources/AGENTS.md](resources/AGENTS.md), folder [`resources/.github`](resources/.github) and file [resources/company-context-md](resources/company-context.md) from this lab resources folder into the root of your PBIP project folder.
+1. In the repository folder you cloned or downloaded in [Prepare the environment](#prepare-the-environment), for example `C:\FabCon\repo`, open `lab2/resources`. Copy the following items to the root of your PBIP project folder:
+   
+	- [resources/AGENTS.md](resources/AGENTS.md)
+	- [resources/company-context.md](resources/company-context.md)
+	- The [resources/.github](resources/.github) folder
 
 2. Confirm that your folder looks like this:
 	

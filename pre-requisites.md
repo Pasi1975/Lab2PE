@@ -1,15 +1,16 @@
-# FabCon Barcelona 2026: Power BI Meets Agentic AI prerequisites
+# FabCon Barcelona 2026: Power BI Meets Agentic AI Prerequisites
 
 If you have access before the workshop, complete these prerequisites one or two days in advance because new software versions might be available. Otherwise, you can complete them on the day of the workshop.
 
-## Technical Knowledge
+## Technical knowledge
 
 Participants should have practical Power BI experience. No prior knowledge of agentic development, GitHub Copilot, or MCP servers is required.
 
 Participants should be able to:
--	Use Power BI Desktop to connect to data and build a report
--	Understand core Power BI semantic model concepts such as tables, relationships, measures, and DAX
--	Navigate the Power BI interface and common authoring workflows
+
+- Use Power BI Desktop to connect to data and build a report
+- Understand core Power BI semantic model concepts such as tables, relationships, measures, and DAX
+- Navigate the Power BI interface and common authoring workflows
 
 ## Laptop
 
@@ -28,7 +29,7 @@ Install the following software on the laptop that you will use during the worksh
 - [Node.js and npm](https://nodejs.org/en/download/)
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest&pivots=winget)
 
-You can install each application manually by using the links above. Alternatively, download and run the [resources/install-prerequisites.ps1](resources/install-prerequisites.ps1) PowerShell script to install everything automatically.
+You can install each application manually by using the links above. Alternatively, download and run the [resources/install-prerequisites.ps1](resources/install-prerequisites.ps1) PowerShell script to install all the applications automatically.
 
 1. Download the script to your computer. You can also create a file named `install-prerequisites.ps1` and paste the script into it.
 2. Open a terminal in the folder that contains the script, and run:
@@ -46,7 +47,7 @@ You can install each application manually by using the links above. Alternativel
 3. Review the installation details and final status summary in the console. The script attempts every installation, even if one package fails.
 
   > [!NOTE]
-  > You might see some installation errors for sofware that is already installed. You can ignore these errors if you have confirmed that the requirement is available on your computer and up to date.
+   > You might see installation errors for software that is already installed. You can ignore these errors if you have confirmed that the required software is available on your computer and up to date.
 
 
 ## Fabric account and tenant
@@ -66,38 +67,56 @@ If you want to use your own Fabric tenant, ensure that the following tenant sett
 
 We will provide a GitHub Copilot license for the workshop. You can use your own license if you prefer.
 
+> [!WARNING]
+> Joining a workshop organization can affect an existing GitHub Copilot license on your account.
+>
+> - If you have a **GitHub Copilot Individual** subscription, your individual license will be cancelled and refunded after being added to the organization. Consider creating and using a separate GitHub account for workshop participation if you want to avoid impacting your current setup.
+> - If you already have a **GitHub Copilot Business** or **GitHub Copilot Enterprise** license, you can choose which enterprise account should receive your Copilot charges in your Copilot settings: https://github.com/settings/copilot
+
 To request a GitHub Copilot license for the workshop:
 
-1. Use a **personal GitHub account**. Enterprise Managed User accounts won't work. If you don't have a personal account, [sign up for GitHub](https://github.com/signup).
-2. Submit the [GitHub Copilot license request form](https://forms.cloud.microsoft/r/AaJCQCKwAZ) for your personal GitHub account.
-3. Look for an invitation by email a few days before or on the day of the workshop. Then follow the steps in [Enable the GitHub Copilot license](#enable-the-github-copilot-license).
+1. Open a browser and authenticate with a **personal GitHub account**. Enterprise Managed User accounts won't work. If you don't have a personal account, [sign up for GitHub](https://github.com/signup).
+2. Open the [GitHub Copilot self-signup](https://polite-glacier-0ea2cfe0f.7.azurestaticapps.net/#token=eyJ2IjoyLCJpc3N1ZSI6NTc0LCJvcmciOiJoYWNrYXRob24tcGluay1maXNoLTM2IiwiZXZlbnQiOiJGYWJjb24gRXVyb3BlIDI2IC0gUG93ZXIgQkkgTWVldHMgQWdlbnRpYyBBSSIsImRhdGUiOiIyMDI2LTA5LTI4Iiwib3JnYW5pemVycyI6WyJydWlyb21hbm8iXSwiZXhwIjoxNzkwODEyODAwfQ.5ee-eZ9mhO0T1zqN8At0b-FX7RsO3QkZpFxlwmlgRM8) and select **Sign in with GitHub**.
+
+   ![gh-license-self-sign-up](resources/img/gh-license-self-sign-up.png)
+
+3. Follow the instructions, then select **Request organization invitation**.
+4. Accept the organization invitation from your email or the self-signup page.
+   
+   ![join organization](resources/img/gh-license-join-organization.png)
+5. After joining the organization, open [Copilot features](https://github.com/settings/copilot/features) and verify that 10,000 AI credits are available.
+
+   ![copilot-ai-credits-page](resources/img/copilot-ai-credits-page.png)
+
+--- 
+
+If the steps above don't work, submit the [GitHub Copilot license request form](https://forms.cloud.microsoft/r/AaJCQCKwAZ) with the username of your personal GitHub account.
 
 > [!IMPORTANT]
 > The GitHub Copilot license will only be valid on the day of the workshop. Your access will be removed a few days later.
 
 ### Enable the GitHub Copilot license
 
-1. Check the **email associated with your GitHub account** for an invitation to join the workshop organization.
-2. Select **Ask for a Copilot seat**.
-
-   ![join organization](resources/img/join-organization.png)
-
-3. Wait a few moments for the seat to be provisioned.
-4. Close all **Visual Studio Code** windows.
-5. Open **Visual Studio Code**.
-6. Open **GitHub Copilot Chat** (`Ctrl+Alt+I`).
-7. Select **Sign in** in the lower-right corner. Sign in with the GitHub account that you entered in the license request form.
+1. Join the workshop GitHub organization.
+2. Close all **Visual Studio Code** windows.
+3. Open **Visual Studio Code**.
+4. Open **GitHub Copilot Chat** (`Ctrl+Alt+I`).
+5. Select **Sign in** in the VS Code status bar and use the GitHub account you associated with the workshop GitHub organization.
 
    ![vscode-github-copilot-signin](resources/img/vscode-github-copilot-signin.png)
 
-   > [!NOTE]
-   > You might need to sign out and sign back in for the new Copilot license to take effect.
+> [!IMPORTANT]
+> You might already be signed in with another account. Sign out, then sign in with the account that you used to join the workshop GitHub organization.
+>
+> ![gh-account-sign-out](resources/img/gh-account-sign-out.png)
 
-8. You should see the Copilot icon in the VS Code status bar (bottom of the window).
-
+6. Click the Copilot icon in the VS Code status bar (bottom of the window).
+   
    ![vscode-github-copilot-credits](resources/img/vscode-github-copilot-credits.png)
 
-9. Confirm that you can select a reasoning model provided for the workshop.
+7. Confirm that you can select a reasoning model provided for the workshop.
 
    ![vscode-github-copilot-models](resources/img/vscode-github-copilot-models.png)
 
+> [!NOTE]
+> You might need to sign out, sign in again, and restart Visual Studio Code before the AI credits take effect.
