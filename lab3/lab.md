@@ -285,7 +285,8 @@ You should now have:
 2. Give **GitHub Copilot** the following prompt:
 
 	```text
-	Restyle the sales dashboard to align with the attached Contoso brand guide while preserving all functionality. Allow users to switch the app background to any color from the brand palette, with each theme automatically adjusting colors, contrast, and visuals to remain readable, cohesive, and on-brand.
+	Restyle the sales dashboard to align with the attached Contoso brand guide while preserving all functionality.
+	Allow users to switch the app background to any color from the brand palette, with each theme automatically adjusting colors, contrast, and visuals to remain readable, cohesive, and on-brand.
 	```
 
 3. Wait for **GitHub Copilot** to finish running the prompt, then refresh the app in the Fabric portal (or click the open in Fabric link provided in the response in **GitHub Copilot**).
