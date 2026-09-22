@@ -281,7 +281,7 @@ You should now have:
 
 ### Apply the Contoso brand guide
 
-1. Download the existing [Contoso design standards board](resources/img/contoso-design-standards.png). You can upload an image or PDF to **GitHub Copilot** by dragging the file from File Explorer into the chat pane. Alternatively, select the **+** button in the chat pane, select **Files**, and then select the downloaded Contoso design standards file.
+1. Download the existing [resources/contoso-design-standards.png](resources/contoso-design-standards.png). You can upload an image or PDF to **GitHub Copilot** by dragging the file from File Explorer into the chat pane. Alternatively, select the **+** button in the chat pane, select **Files**, and then select the downloaded Contoso design standards file.
 2. Give **GitHub Copilot** the following prompt:
 
 	```text
