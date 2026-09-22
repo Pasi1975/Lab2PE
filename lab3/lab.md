@@ -208,6 +208,10 @@ You should now have:
 * A deployed app that opens in the Fabric portal
 * Store-performance insights that highlight top performers, outliers, and improvement opportunities
 
+### Reflection
+
+* How long would it take you to manually create a similar report or dashboard?
+
 ## 2. Iterate on the Fabric app
 
 ✅ **Goal**: Refine the first app iteration by adding interactive selection, store coaching notes, and flexible Contoso themes.
@@ -228,13 +232,13 @@ You should now have:
 ![Example interactive scatter plot with point, rectangle, lasso, and clear selection controls](resources/img/fabric-app-interactive-scatter-example.png)
 3. Test selecting one store, selecting multiple stores with rectangle and lasso selection, and clearing the selection. Confirm that each selection cross-filters the entire app and that **Clear Selection** restores the unfiltered view.
 
-
-
-> **Tip**
-> This exercise demonstrates how customizable the visuals and experiences in a Fabric Data App can be, all through simple natural-language prompts.
-
 > **Note**
 > If you encounter errors, unexpected behavior, or anything you want to change, prompt GitHub Copilot with a clear description of the undesired behavior and the result you want instead. Copilot should be able to help diagnose the issue and implement the requested changes.
+
+#### Reflection
+
+* What steps and skills would be needed to build a visual with this level of customization in Power BI reports today?
+* What other customized visual interaction patterns could you create easily using natural-language prompts in Fabric Apps?
 
 ### Add store coaching notes
 
@@ -253,8 +257,10 @@ You should now have:
 
 3. Confirm that the app provides options to view and add coaching notes. Test creating a note for one store and for multiple selected stores, then verify that the notes, action items, and next steps appear in the historical log.
 
-> **Tip**
-> This exercise shows how easily Fabric Data Apps can support write-back scenarios, allowing users not only to view and analyze data but also to take action directly within the app.
+#### Reflection
+
+* How does adding write-back change the app beyond just an analytical experience into an operational tool?
+* What other useful write-back actions could users take directly within a Fabric Data App?
 
 ### Apply the Contoso brand guide
 
@@ -274,8 +280,11 @@ You should now have:
 
 4. Test every available brand-palette background. Confirm that text, controls, and visuals remain readable and cohesive and that the scatter-plot interactions and coaching notes still work.
 
-> **Tip**
-> This exercise showcases how easily you can adjust the theme and styling of a Fabric Data App. Adding images, PDFs, or other files to the chat gives GitHub Copilot valuable visual and business context, helping it produce changes that more closely match your design requirements.
+#### Reflection
+
+* How closely did GitHub Copilot match the attached brand guide, and what would you refine in another prompt?
+* How did providing a visual reference improve the context available to GitHub Copilot?
+* What other files or business context could help GitHub Copilot produce a more tailored app?
 
 ### Expected result
 
