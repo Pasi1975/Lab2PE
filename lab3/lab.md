@@ -341,11 +341,11 @@ Your deployed app should include:
 
 You've now:
 
-* Uploaded the Contoso Sales semantic model and created a Fabric Data App
-* Used **GitHub Copilot** and Rayfin to scaffold, run, and deploy the app
-* Connected the app to semantic model data and built an analytical experience through iterative prompting
-* Applied company design standards using a visual reference and natural-language prompting
-* Explored how quickly Fabric Apps can be refined for different users, scenarios, and creative ideas
+* Used **GitHub Copilot** to create a Fabric data app
+* Connected the app to the semantic model and generated a sales analytics experience for a Global Sales Manager
+* Customized the app by adding an interactive store selection and cross-filtering across the app
+* Added coaching notes, action items, next steps, and history for individual and multiple stores
+* Personalized the app using a personal Contoso brand guide and tested accessible themes across the brand palette
 
 ## Key takeaways
 
