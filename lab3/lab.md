@@ -99,7 +99,7 @@ All participants should use the workshop-provided **Contoso Sales** semantic mod
 
 	![Select the Data App template](resources/img/fabric-data-app-template.png)
 
-> **Note**
+> [!Note]
 > You should now see your Fabric App **Overview** page. Confirm that it displays a **Getting started** section with steps to open a terminal, set up your project, edit the app, and publish your changes. A live URL may also appear at the top of the page. Do not run or copy any of these commands yet; the next steps in this lab will walk you through the setup in the correct order.
 
 ![Fabric App Overview page with Getting started steps](resources/img/fabric-app-overview.png)
@@ -186,21 +186,25 @@ You should now have:
 
 	![fabric-app-prompt-connect-model](resources/img/fabric-app-prompt-connect-model.png)
 
-> **Important**
+> [!Important]
 > Confirm that the full URL is visible as text in the chat pane rather than appearing only as a generic **Power BI** link. The URL contains the semantic model ID and workspace ID that GitHub Copilot needs to connect the app to the correct model.
 
 2. Once that process finishes, enter the following prompt directly in GitHub Copilot chat for your project and ask it to run the required commands:
 
 	```text
-	Build and deploy a polished sales analytics app for a Global Sales Manager using the connected semantic model. Analyze store performance with KPIs for Total Sales, Gross Profit, Gross Margin %, Units Sold, and Sales per Unit. Create a responsive store-level scatter plot of Sales per Unit vs. Gross Margin %, with labeled performance quadrants. Highlight top performers, outliers, and improvement opportunities, then deploy the app to Fabric.
+	Build and deploy a polished sales analytics app for a Global Sales Manager using the connected semantic model. 
+	Analyze store performance with KPIs for Total Sales, Gross Profit, Gross Margin %, Units Sold, and Sales per Unit. 
+	Create a responsive store-level scatter plot of Sales per Unit vs. 
+	Gross Margin %, with labeled performance quadrants. 
+	Highlight top performers, outliers, and improvement opportunities, then deploy the app to Fabric.
 	```
 
-> **Note**
+> [!NOTE]
 > If you forget a PowerShell command, GitHub Copilot can often determine and run the appropriate command on your behalf. For example, the prompt above does not explicitly mention `npx rayfin up`, but Copilot can infer that command from the request to deploy the app to Fabric. Consider the trade-off when choosing an approach: natural-language prompts offer convenience, while running known PowerShell commands directly can reduce token consumption.
 
-3. When GitHub Copilot displays the option to open the app in the Fabric portal, select it.
+3. When **GitHub Copilot** displays the option to open the app in the Fabric portal, select it.
 
-> **Note**
+> [!NOTE]
 > The screenshot below is one example of an app that this prompt could create. Because the prompt leaves some design and implementation choices open, your app may look different from this example and from the apps generated for other participants. Vague prompts can produce useful Fabric Apps quickly, but you can fine-tune the experience through iterations such as:
 >
 > 1. Writing a detailed Markdown specification that describes the app's requirements and provides additional context.
@@ -228,22 +232,25 @@ You should now have:
 
 ### Add interactive scatter-plot selection
 
-1. Give GitHub Copilot the following prompt:
+1. Give **GitHub Copilot** the following prompt:
 
 	```text
-	Make the scatter plot fully interactive. Allow selecting individual stores or multiple stores using rectangle and lasso selection, and use those selections to cross-filter the entire app. Include a Clear Selection action alongside the selection actions so users can quickly return to the unfiltered view. Keep the look and feel of the scatter plot clean and not too busy.
+	Make the scatter plot fully interactive. 
+	Allow selecting individual stores or multiple stores using rectangle and lasso selection, and use those selections to cross-filter the entire app. 
+	Include a Clear Selection action alongside the selection actions so users can quickly return to the unfiltered view. 
+	Keep the look and feel of the scatter plot clean and not too busy.
 	```
 
-2. Wait for GitHub Copilot to finish running the prompt, then refresh the app in the Fabric portal (or click the open in Fabric link provided in the response in GitHub Copilot).
+2. Wait for **GitHub Copilot** to finish running the prompt, then refresh the app in the Fabric portal (or click the open in Fabric link provided in the response in **GitHub Copilot**).
 
-> **Note**
+> [!NOTE]
 > The screenshot below is one example of what the updated visual could look like. Because the simple prompt leaves design and implementation details open, your result will likely look different from this example and from the results generated for other participants.
 
 ![Example interactive scatter plot with point, rectangle, lasso, and clear selection controls](resources/img/fabric-app-interactive-scatter-example.png)
 3. Test selecting one store, selecting multiple stores with rectangle and lasso selection, and clearing the selection. Confirm that each selection cross-filters the entire app and that **Clear Selection** restores the unfiltered view.
 
-> **Note**
-> If you encounter errors, unexpected behavior, or anything you want to change, prompt GitHub Copilot with a clear description of the undesired behavior and the result you want instead. Copilot should be able to help diagnose the issue and implement the requested changes.
+> [!NOTE]
+> If you encounter errors, unexpected behavior, or anything you want to change, prompt **GitHub Copilot** with a clear description of the undesired behavior and the result you want instead. Copilot should be able to help diagnose the issue and implement the requested changes.
 
 #### Reflection
 
@@ -252,15 +259,15 @@ You should now have:
 
 ### Add store coaching notes
 
-1. Give GitHub Copilot the following prompt:
+1. Give **GitHub Copilot** the following prompt:
 
 	```text
 	Add in-app coaching notes for stores. Allow the ability within this app to create, view, and track notes, action items, and next steps for individual stores, with a historical log of entries. Support adding notes to multiple selected stores at once.
 	```
 
-2. Wait for GitHub Copilot to finish running the prompt, then refresh the app in the Fabric portal (or click the open in Fabric link provided in the response in GitHub Copilot).
+2. Wait for **GitHub Copilot** to finish running the prompt, then refresh the app in the Fabric portal (or click the open in Fabric link provided in the response in **GitHub Copilot**).
 
-> **Note**
+> [!NOTE]
 > The screenshot below is one example of the coaching-notes behavior this prompt could create. Because the simple prompt leaves design and implementation details open, your result will likely look different from this example and from the results generated for other participants.
 
 ![Example store coaching notes, action items, next steps, and history](resources/img/fabric-app-coaching-notes-example.png)
@@ -274,16 +281,16 @@ You should now have:
 
 ### Apply the Contoso brand guide
 
-1. Download the existing [Contoso design standards board](resources/img/contoso-design-standards.png). You can upload an image or PDF to GitHub Copilot by dragging the file from File Explorer into the chat pane. Alternatively, select the **+** button in the chat pane, select **Files**, and then select the downloaded Contoso design standards file.
-2. Give GitHub Copilot the following prompt:
+1. Download the existing [Contoso design standards board](resources/img/contoso-design-standards.png). You can upload an image or PDF to **GitHub Copilot** by dragging the file from File Explorer into the chat pane. Alternatively, select the **+** button in the chat pane, select **Files**, and then select the downloaded Contoso design standards file.
+2. Give **GitHub Copilot** the following prompt:
 
 	```text
 	Restyle the sales dashboard to align with the attached Contoso brand guide while preserving all functionality. Allow users to switch the app background to any color from the brand palette, with each theme automatically adjusting colors, contrast, and visuals to remain readable, cohesive, and on-brand.
 	```
 
-3. Wait for GitHub Copilot to finish running the prompt, then refresh the app in the Fabric portal (or click the open in Fabric link provided in the response in GitHub Copilot).
+3. Wait for **GitHub Copilot** to finish running the prompt, then refresh the app in the Fabric portal (or click the open in Fabric link provided in the response in **GitHub Copilot**).
 
-> **Note**
+> [!NOTE]
 > The screenshot below is one example of how the app could look after applying the Contoso brand guide. Because the simple prompt leaves design and implementation details open, your result will likely look different from this example and from the results generated for other participants.
 
 ![Example Fabric App styled with the Contoso brand guide](resources/img/fabric-app-contoso-brand-example.png)
@@ -292,9 +299,9 @@ You should now have:
 
 #### Reflection
 
-* How closely did GitHub Copilot match the attached brand guide, and what would you refine in another prompt?
-* How did providing a visual reference improve the context available to GitHub Copilot?
-* What other files or business context could help GitHub Copilot produce a more tailored app?
+* How closely did **GitHub Copilot** match the attached brand guide, and what would you refine in another prompt?
+* How did providing a visual reference improve the context available to **GitHub Copilot**?
+* What other files or business context could help **GitHub Copilot** produce a more tailored app?
 
 ### Expected result
 
@@ -317,7 +324,7 @@ One of the benefits of Fabric Apps is their flexibility and customizability. Use
 
 1. Browse the [Fabric Apps Gallery](https://community.fabric.microsoft.com/category/pbi_comm_galleries/discussions/pbi_fabricappsgallery) for inspiration.
 2. Choose another scenario or a unique change that interests you.
-3. Ask GitHub Copilot to update and deploy your Fabric App.
+3. Ask **GitHub Copilot** to update and deploy your Fabric App.
 4. Test the change and continue to iterate
 
 ### Expected result
@@ -334,7 +341,7 @@ Your deployed app should include:
 You've now:
 
 * Uploaded the Contoso Sales semantic model and created a Fabric Data App
-* Used GitHub Copilot and Rayfin to scaffold, run, and deploy the app
+* Used **GitHub Copilot** and Rayfin to scaffold, run, and deploy the app
 * Connected the app to semantic model data and built an analytical experience through iterative prompting
 * Applied company design standards using a visual reference and natural-language prompting
 * Explored how quickly Fabric Apps can be refined for different users, scenarios, and creative ideas
