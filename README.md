@@ -9,11 +9,13 @@ Walk away ready to apply agentic development to your Power BI projects with conf
 ## Get started
 
 - Review and complete the [workshop prerequisites](pre-requisites.md) before starting the labs.
-- Download or clone the entire repository to your machine, for example under `C:\FabCon`. Keep the folder structure intact so you can find every file referenced in the lab exercises and resource links.
+- Download or clone the entire repository to your machine, for example under `C:\FabCon\repo`. Keep the folder structure intact so you can find every file referenced in the lab exercises and resource links.
   
     ![clone-repository](resources/img/clone-repository.png)
   
-    Unzip the folder to a location of your choice. You will use the resource files in this folder throughout the labs.
+    Unzip the folder to a location of your choice. Your cloned/download folder should like like this:
+
+    ![clone-repository](resources/img/cloned-repo.png)
 
 - From the GitHub repository page, open each lab using the [links below](#labs). GitHub renders the instructions and images in a browser-friendly format with friendly navigation panel.
 
