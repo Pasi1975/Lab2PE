@@ -89,12 +89,6 @@ Clone or download as zip the entire repository to your machine, for example unde
 	copilot plugin install powerbi-authoring@fabric-collection
 	```
 
-3. **IMPORTANT: (Microsoft only)**
-   Open a terminal and run the following:
-   ```
-   npx skills add https://github.com/azure-data-intelligence-platform/pbi-report-authoring-skill --skill powerbi-report-cli -y -a github-copilot
-   ```
-
 > [!TIP]
 > There are several ways to install skills and plugins. You can install them directly in Visual Studio Code, using [NPX Skills](https://github.com/vercel-labs/skills), [Agent Package Manager](https://microsoft.github.io/apm/) or simply copy them into your workspace or Copilot folder. Installing the plugin through GitHub Copilot CLI is a simple way to make its skills and MCP server available across GitHub Copilot CLI, Visual Studio Code, and the GitHub Copilot app without installing duplicate copies.
 >
@@ -229,6 +223,8 @@ Writing documentation from scratch and keeping it current both take time. AI can
 > * **Sol:** Best suited for more complex tasks that require deeper reasoning, planning, or validation.
 >
 > You can also adjust the **thinking effort** independently. Higher thinking effort can improve results on complex tasks, but can also increase cost.
+>
+> See [Models and pricing for GitHub Copilot](https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing)
 >
 > **Rule of thumb:** Start with the least expensive model and thinking effort that can reliably complete the task, and scale up when the task requires more reasoning or validation.
 >
