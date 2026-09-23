@@ -280,7 +280,9 @@ You should now have:
 1. Give **GitHub Copilot** the following prompt:
 
 	```text
-	Add in-app coaching notes for stores. Allow the ability within this app to create, view, and track notes, action items, and next steps for individual stores, with a historical log of entries. Support adding notes to multiple selected stores at once.
+	Add in-app coaching notes for stores.
+	Allow the ability within this app to create, view, and track notes, action items, and next steps for individual stores, with a historical log of entries.
+	Support adding notes to multiple selected stores at once.
 	```
 
 2. Wait for **GitHub Copilot** to finish running the prompt, then refresh the app in the Fabric portal (or click the open in Fabric link provided in the response in **GitHub Copilot**).
