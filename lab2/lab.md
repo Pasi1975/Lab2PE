@@ -78,7 +78,10 @@ Clone or download as zip the entire repository to your machine, for example unde
 
 ### Install the Power BI authoring plugin
 
-1. Open a terminal.
+1. Open a terminal (`Win + X` > **Terminal**`).
+   
+   ![open-terminal-windows](resources/img/open-terminal-windows.png)
+
 2. Run the following commands:
 
 	```powershell
@@ -125,7 +128,7 @@ Clone or download as zip the entire repository to your machine, for example unde
     
 ### Sign in to Azure CLI
 
-1. Open a terminal.
+1. Open a terminal
 2. Sign in with your Fabric account:
 
 	```powershell

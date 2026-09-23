@@ -19,7 +19,8 @@ Participants should be able to:
 
 ## Software
 
-Install the following software on the laptop that you will use during the workshop:
+> [!NOTE]
+> **Recommended:** Follow [Prerequisites auto setup](#prerequisites-auto-setup) to install everything with a script. Alternatively, use the links below to install each application manually.
 
 - [GitHub Copilot CLI](https://github.com/features/copilot/cli/)
 - [GitHub Copilot App](https://github.com/features/ai/github-app)
@@ -29,25 +30,30 @@ Install the following software on the laptop that you will use during the worksh
 - [Node.js and npm](https://nodejs.org/en/download/)
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest&pivots=winget)
 
-You can install each application manually by using the links above. Alternatively, download and run the [resources/install-prerequisites.ps1](resources/install-prerequisites.ps1) PowerShell script to install all the applications automatically.
+### Prerequisites auto setup
 
-1. Download the script to your computer. You can also create a file named `install-prerequisites.ps1` and paste the script into it.
-2. Open a terminal in the folder that contains the script, and run:
+1. Download the [resources/install-prerequisites.ps1](resources/install-prerequisites.ps1) powershell script to your computer. You can also create a file named `install-prerequisites.ps1` and paste the script into it.
+2. Open a terminal (`Win + X` > **Terminal**`) in the folder that contains the script, and run:
 
-  ```powershell
-  powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\install-prerequisites.ps1
-  ```
+   ![open terminal](resources/img/open-terminal-from-folder.png)
 
-  If you use PowerShell 7, run the script with `pwsh.exe` instead:
+   ```powershell
+   powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\install-prerequisites.ps1
+   ```
 
-  ```powershell
-  pwsh.exe -NoProfile -File .\install-prerequisites.ps1
-  ```
+   If you use PowerShell 7, run the script with `pwsh.exe` instead:
+
+   ```powershell
+   pwsh.exe -NoProfile -File .\install-prerequisites.ps1
+   ```
+
+> [!TIP]
+> You might see installation errors for software that is already installed. You can ignore these errors if you have confirmed that the required software is available on your computer and up to date.
 
 3. Review the installation details and final status summary in the console. The script attempts every installation, even if one package fails.
 
-  > [!NOTE]
-   > You might see installation errors for software that is already installed. You can ignore these errors if you have confirmed that the required software is available on your computer and up to date.
+> [!NOTE]
+> You might see installation errors for software that is already installed. You can ignore these errors if you have confirmed that the required software is available on your computer and up to date.
 
 
 ## Fabric account and tenant
