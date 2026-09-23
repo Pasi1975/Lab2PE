@@ -211,15 +211,14 @@ Writing documentation from scratch and keeping it current both take time. AI can
 #### Steps
 
 1. In **Visual Studio Code**, open **GitHub Copilot Chat** (`CTRL+ALT+I`).
-2. Set the chat mode to **Agent** and in the model picker, select the reasoning model `GPT-5.6 Terra` and thinking effort `Medium`.	
+2. Set the chat mode to **Agent** and in the model picker, select the reasoning model `GPT-6 Sol` and thinking effort `Low`.	
 
 	![vscode-copilot-chat](resources/img/vscode-copilot-chat-2.png)	
 
 > [!IMPORTANT]
 > **Choose the model and thinking effort based on the complexity of the task.**
-> Example using GPT-5.6 models:
+> Example using GPT-6 models:
 > * **Luna:** Fast and cost-efficient for simple, high-volume tasks, but less suitable for complex Power BI development and reasoning.
-> * **Terra:** A good workhorse for most Power BI tasks, including documentation, descriptions, and straightforward model or report changes.
 > * **Sol:** Best suited for more complex tasks that require deeper reasoning, planning, or validation.
 >
 > You can also adjust the **thinking effort** independently. Higher thinking effort can improve results on complex tasks, but can also increase cost.
@@ -274,7 +273,7 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 #### Steps
 
-1. Start a **new chat session** in GitHub Copilot Chat and choose `GPT-5.6 Terra` model and thinking effort `Low`.
+1. Start a **new chat session** in GitHub Copilot Chat and choose `GPT-6 Luna` model and thinking effort `Medium`.
 
 > [!TIP]
 > Start a new session when moving to a different task. A clean session prevents decisions, assumptions, and tool results from the previous task from influencing the next one. You can also reuse an existing sessions to keep the session context. For example, you could reuse the documentation session to update the docs after making changes to the semantic models or reports.
@@ -327,10 +326,10 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 #### Steps
 
-1. Start a **new chat session** and pick `GPT-5.6 Sol` model and thinking effort `Medium`.
+1. Start a **new chat session** and pick `GPT-6 Sol` model and thinking effort `Medium`.
 
 > [!IMPORTANT]
-> Use the `GPT-5.6 Sol` model for this task because it requires more than a straightforward model edit. The agent must inspect a new data source, infer its schema, design a calculation group, and write the required DAX expressions. These steps benefit from a model with stronger reasoning than `GPT-5.6 Terra`.
+> Use the `GPT-6 Sol` model for this task because it requires more than a straightforward model edit like setting descriptions. The agent must inspect a new data source, infer its schema, design a calculation group, and write the required DAX expressions. These steps benefit from a model with stronger reasoning than `GPT-6 Luna`.
 
 2. Enter the following prompt:
 
@@ -371,7 +370,7 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 2. Select **Save** in **Power BI Desktop** to ensure there are no pending changes. The agent will modify the PBIR files and reload the report automatically, but Power BI Desktop blocks the reload if it has unsaved changes.
    
-3. Start a **new chat session** and pick model `GPT-5.6 Terra`.
+3. Start a **new chat session** and pick model `GPT-6 Sol` and thinking effort `Low`.
 
 4. Enter the following prompt to use AI to help you make changes to the report.
 
@@ -494,7 +493,7 @@ You first review the full implementation plan. After you approve it, the agent c
 > [!TIP]
 > A working folder gives the agent a defined project boundary. It can discover project instructions, use folder-specific MCP settings, and keep related sessions together. Opening a folder does not automatically add every file to the context. The agent reads files as needed.
 
-4. Start a **New session** under the working folder. Set the session mode to **Plan** and select the `GPT-5.6 Sol` model and effort `Medium`.
+4. Start a **New session** under the working folder. Set the session mode to **Plan** and select the `GPT-6 Sol` model and effort `Medium`.
 	
 	![gh-app-new-session](resources/img/gh-app-new-session.png)
 
