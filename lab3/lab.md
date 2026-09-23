@@ -36,9 +36,27 @@ Before beginning the lab, confirm that you have:
 * A GitHub account with an active GitHub Copilot license
 * The [GitHub Copilot app](https://github.com/features/ai/github-app) installed on your computer
 * [Node.js and npm](https://nodejs.org/en/download/) installed on your computer
-
+* Azure CLI
 
 All participants should use the workshop-provided **Contoso Sales** semantic model rather than selecting their own model. This ensures that the prompts, expected results, and validation steps remain consistent across the workshop.
+
+## Prepare the environment
+
+### Sign in to Azure CLI
+
+1. Open a terminal.
+2. Sign in with your Fabric account:
+
+	```powershell
+	az login
+	```
+3. Follow the browser prompts and return to the terminal when the sign-in completes.
+3. Confirm that the correct account is active
+
+	```powershell
+	az account show
+	```
+	![az-account-show](resources/img/az-account-show.png)
 
 ## 0. Create workspace, app and upload sample model (prep the environment)
 
