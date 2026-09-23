@@ -198,15 +198,15 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 	
 	![vscode-pbip-folder](resources/img/vscode-pbip-folder.png)
 
-3. Open **Source Control** (`CTRL+SHIFT+G`) and commit the new files.
-   - **Tip:** You can use Copilot to generate analyze the changes and generate the commit message for you by clicking on **Generate commit message** in the top right corner of the textbox.
-
 > [!IMPORTANT]
 > [`AGENTS.md`](https://agents.md/) is an important part of agentic development. It lets you define codebase-level rules, context, and constraints that agents need to understand and respect when working on the project. Because the file is stored with the codebase and read automatically, the same guidance applies consistently across chat sessions and team members.
 >
 > The `AGENTS.md` file in this workshop is a simple example. It reinforces that the agent always loads the appropriate Power BI authoring skills and directs it to use the Power BI Authoring MCP server when editing the semantic model. The agent can work with TMDL files directly, but using the MCP tools provides a more reliable authoring path less likely to break things.
 >
 > This workshop uses Microsoft-provided agent skills installed through the `powerbi-authoring` plugin. Skills give the agent context about processes and preferred ways of working. Teams can keep project-specific skills in source control to capture business practices and help developers produce consistent results. The [`powerbi-documentation` skill](resources/.github/skills/powerbi-documentation/SKILL.md) is an example of a repository-local skill that lives alongside the codebase. Skills can also be shared through private or public repositories and marketplaces.
+
+3. Open **Source Control** (`CTRL+SHIFT+G`) and commit the new files.
+   - **Tip:** You can use Copilot to generate analyze the changes and generate the commit message for you by clicking on **Generate commit message** in the top right corner of the textbox.
 
 ### 1.3 Generate documentation for the model and report
 
