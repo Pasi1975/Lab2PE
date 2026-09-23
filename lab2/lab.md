@@ -66,7 +66,7 @@ This lab requires the following:
 
 Clone or download as zip the entire repository to your machine, for example under `C:\FabCon\repo`. The lab exercises refer to several resource files by their location in the repository, so downloading the complete repository is easier than downloading each file separately.
   
-1. Go to the root of this repository and select **Download Zip**
+1. Go to the [root](../) of this repository and select **Download Zip**
    
 	![clone-repository](../resources/img/clone-repository.png)
   
