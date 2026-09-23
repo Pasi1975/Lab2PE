@@ -640,3 +640,6 @@ You've now learned how to:
 * [Tabular Editor - Get Started with Agentic Development](https://tabulareditor.com/blog/how-to-get-started-with-agentic-development-for-business-intelligence)
 * [Tabular Editor - Pick the right AI model](https://tabulareditor.com/blog/picking-the-ai-model-for-the-task)
 * [Tabular Editor - LLMs for data professionals](https://tabulareditor.com/blog/practical-introduction-to-llms-for-data-professionals)
+* [Git Will Finally Make Sense After This](https://www.youtube.com/watch?si=h_hAniLBVfO05X7A&v=Ala6PHlYjmw&feature=youtu.be)
+* [Introduction to Git in Visual Studio Code](https://code.visualstudio.com/docs/sourcecontrol/overview)
+* [Git cheat-sheet](https://git-scm.com/cheat-sheet)
