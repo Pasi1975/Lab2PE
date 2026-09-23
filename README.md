@@ -9,7 +9,7 @@ Walk away ready to apply agentic development to your Power BI projects with conf
 ## Get started
 
 - Review and complete the [workshop prerequisites](pre-requisites.md) before starting the labs.
-- Download or clone the [entire repository](/) to your machine, for example under `C:\FabCon\repo`. 
+- Download or clone the entire repository to your machine, for example under `C:\FabCon\repo`. 
   
     ![clone-repository](resources/img/clone-repository.png)
   

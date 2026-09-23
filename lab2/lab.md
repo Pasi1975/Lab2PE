@@ -66,13 +66,15 @@ This lab requires the following:
 
 Clone or download as zip the entire repository to your machine, for example under `C:\FabCon\repo`. The lab exercises refer to several resource files by their location in the repository, so downloading the complete repository is easier than downloading each file separately.
   
-![clone-repository](../resources/img/clone-repository.png)
+1. Go to the root of this repository and select **Download Zip**
+   
+	![clone-repository](../resources/img/clone-repository.png)
   
-If you downloaded the repository as a ZIP file, extract it.
+	If you downloaded the repository as a ZIP file, extract it.
 
-![cloned-repo](resources/img/cloned-repo.png)
+	![cloned-repo](resources/img/cloned-repo.png)
 
-The resources for this lab are in `./lab2/resources`.
+	The resources for this lab are in `./lab2/resources`.
 
 ### Install the Power BI authoring plugin
 
