@@ -86,6 +86,7 @@ The resources for this lab are in `./lab2/resources`.
 	```powershell	
 	copilot plugin install powerbi-authoring@fabric-collection
 	```
+
 3. **IMPORTANT: (Microsoft only)**
    Open a terminal and run the following:
    ```
@@ -93,46 +94,39 @@ The resources for this lab are in `./lab2/resources`.
    ```
 
 > [!TIP]
-> There are several ways to install skills and plugins. You can install them in Visual Studio Code, using [NPX Skills](https://github.com/vercel-labs/skills), [Agent Package Manager](https://microsoft.github.io/apm/) or simply copy them into your workspace or Copilot folder. Installing the plugin through GitHub Copilot CLI is a simple way to make its skills and MCP server available across GitHub Copilot CLI, Visual Studio Code, and the GitHub Copilot app without installing duplicate copies.
+> There are several ways to install skills and plugins. You can install them directly in Visual Studio Code, using [NPX Skills](https://github.com/vercel-labs/skills), [Agent Package Manager](https://microsoft.github.io/apm/) or simply copy them into your workspace or Copilot folder. Installing the plugin through GitHub Copilot CLI is a simple way to make its skills and MCP server available across GitHub Copilot CLI, Visual Studio Code, and the GitHub Copilot app without installing duplicate copies.
 >
 > Learn more in [`powerbi-authoring-plugin`](https://learn.microsoft.com/en-us/power-bi/developer/agentic/power-bi-agentic-overview#get-started) documentation page.
 
-### Sign in to GitHub Copilot
+### Ensure Visual Studio Code is ready
 
-1. Start GitHub Copilot CLI:
+1. Open **Visual Studio Code**.
+2. Select [Open the AI features setting](vscode://settings/chat.disableAIFeatures) and ensure that **Disable AI Features** is cleared.
+	- **Note:** If the link does not open from your Markdown viewer, open **Settings** in Visual Studio Code and search for `chat.disableAIFeatures`.
+3. Open **GitHub Copilot Chat** (`CTRL+ALT+I`) and confirm that the chat view is accessible.
+4. You may need to sign-in with your GitHub Copilot account.
+	
+	![vscode-github-copilot-signin](resources/img/vscode-github-copilot-signin.png)	
 
-	```powershell
-	copilot
-	```
-
-2. Sign in to your GitHub Copilot account:
-
-	```text
-	/login
-	```
-
-    If asked for account type, choose **GitHub.com**
-    
-3. Follow the browser prompts and return to the terminal when the sign-in completes.
+5. Open the chat settings and confirm the `powerbi-authoring` plugin is installed.
    
-    Your console should look like this:
+	![vscode-chat-plugin-installed](resources/img/vscode-chat-plugin-installed.png)	
 
-    ![gh-copilot-signedin](resources/img/gh-copilot-signedin.png)
+### Ensure GitHub Copilot App is ready
 
-### Confirm that the skills and MCP server are ready
+1. Open the **GitHub Copilot App**
+2. Sign-in with your GitHub account
+   
+	![gh-app-sign-in](resources/img/gh-app-sign-in.png)
 
-1. In the GitHub Copilot CLI session, enter the following prompt:
+	Make sure you are signed in with the GitHub account you plan to use at the workshop.
 
-	```text
-	List the Power BI skills and MCP servers you have available.
-	```
+	![gh-app-signed-in](resources/img/gh-app-signed-in.png)
 
-	**Expected outcome**
+3. Check if the `powerbi-authoring` plugin is installed. Open **Customize** > **Plugins**.
 
-	- The response lists the Power BI authoring skills that came with the plugin, including `semantic-model-authoring` and `powerbi-report-authoring`.
-	- The response lists the Power BI Authoring MCP server as available.
-	- If either list is empty, the plugin installation did not complete. Re-run the plugin install commands before continuing.
-
+	![gh-app-plugin-installed](resources/img/gh-app-plugin-installed.png)
+    
 ### Sign in to Azure CLI
 
 1. Open a terminal.
@@ -151,20 +145,6 @@ The resources for this lab are in `./lab2/resources`.
 
 > [!IMPORTANT]
 > The Power BI report authoring tools use the Azure CLI token to reach Fabric. If the wrong account is active, later exercises fail with authorization errors.
-
-### Ensure GitHub Copilot is enabled in Visual Studio Code
-
-1. Open **Visual Studio Code**.
-2. Select [Open the AI features setting](vscode://settings/chat.disableAIFeatures) and ensure that **Disable AI Features** is cleared.
-	- **Note:** If the link does not open from your Markdown viewer, open **Settings** in Visual Studio Code and search for `chat.disableAIFeatures`.
-3. Open **GitHub Copilot Chat** (`CTRL+ALT+I`) and confirm that the chat view is accessible.
-4. You may need to sign-in with your GitHub Copilot account.
-	
-	![vscode-github-copilot-signin](resources/img/vscode-github-copilot-signin.png)	
-
-5. Open the chat settings and confirm the `powerbi-authoring` plugin is installed.
-   
-	![vscode-chat-plugin-installed](resources/img/vscode-chat-plugin-installed.png)	
 
 ---
 
