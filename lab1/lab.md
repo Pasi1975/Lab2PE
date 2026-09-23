@@ -2,6 +2,9 @@
 
 ⏱️ **Total duration:** 60 minutes
 
+> [!IMPORTANT]
+> This lab uses prompts with AI tools. Responses may vary from the examples shown, even when you use the same prompt. After each exercise, review the **Expected outcome** and compare it with your results before continuing.
+
 ## Overview
 
 In this lab, you inherit the **ManufacturingOps** semantic model from another analyst. You are not familiar with the model, its structure, or the business logic behind it. Before making any changes, you will use [**Copilot in Power BI web modeling**](https://learn.microsoft.com/power-bi/transform-model/copilot-web-modeling) to explore the model and understand how its tables, relationships, and measures support the Sales, Inventory, Procurement, and Production business domains.

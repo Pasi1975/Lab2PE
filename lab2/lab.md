@@ -2,6 +2,9 @@
 
 ⏱️ **Total duration:** 120 minutes
 
+> [!IMPORTANT]
+> This lab uses prompts with AI tools. Responses may vary from the examples shown, even when you use the same prompt. After each exercise, review the **Expected outcome** and compare it with your results before continuing.
+
 ## Overview
 
 In this lab you learn how to use a personalized agentic Power BI development using [GitHub Copilot](https://github.com/copilot) and Power BI agentic tools.

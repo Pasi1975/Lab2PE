@@ -2,6 +2,9 @@
 
 ⏱️ **Total duration:** 90 minutes
 
+> [!IMPORTANT]
+> This lab uses prompts with AI tools. Responses may vary from the examples shown, even when you use the same prompt. After each exercise, review the **Expected outcome** and compare it with your results before continuing.
+
 ## Overview
 
 This lab takes agentic development beyond model authoring and into application creation. Starting from an existing semantic model, you will use **Fabric Data Apps** and natural-language prompts to generate, customize, and refine highly personalized analytical applications with rich customization and flexibility.
