@@ -465,7 +465,7 @@ There are no local files in this part. The **GitHub Copilot app** is a good fit 
    
 	![fabric-notebook-lakehouse-create](resources/img/fabric-notebook-lakehouse-create.png)
 
-9. Refresh the workspace and confirm that a Lakehouse named `Lakehouse_01` was created.
+9. Go back to the workspace and confirm that a Lakehouse named `Lakehouse_01` was created.
 10. Open the Lakehouse and confirm that it contains the following tables:
 
 	* `dimension_city`
@@ -500,7 +500,7 @@ There are no local files in this part. The **GitHub Copilot app** is a good fit 
 	![gh-app-pbi-local-mcp-disabled](resources/img/gh-app-pbi-local-mcp-disabled.png)
 
 > [!IMPORTANT]
-> The Power BI Authoring MCP server is available in local and remote (hosted) versions. Use the local server with Power BI Desktop or PBIP files. Use the remote server with semantic models in Fabric because it requires no local installation. For details, see [Power BI Authoring MCP server](https://learn.microsoft.com/power-bi/developer/mcp/power-bi-authoring-mcp).
+> The Power BI Authoring MCP server is available in local and remote (hosted) versions. You must use the local server with Power BI Desktop or PBIP files. But when working against semantic models in Fabric, you should use remote server with semantic models in Fabric because it requires no local installation and is managed by Microsoft. For more details, see [Power BI Authoring MCP server](https://learn.microsoft.com/power-bi/developer/mcp/power-bi-authoring-mcp).
 > 
 > The `powerbi-authoring` plugin you installed previously ships with the local version to support both local development and remote. **You should avoid enabling both local and remote versions at the same time**. The agent then sees two overlapping tool sets, which makes routing ambiguous and consumes extra tokens on every request. Pick one: the hosted server when you work against semantic models in Fabric workspaces, and the local server when you work against Power BI Desktop or Power BI Project files on your machine.
 
@@ -524,7 +524,7 @@ You first review the full implementation plan. After you approve it, the agent c
 
 4. Start a **New session** under the working folder. Set the session mode to **Plan** and select the `GPT-6 Sol` model and effort `Medium`.
 	
-	![gh-app-new-session](resources/img/gh-app-new-session.png)
+	![gh-app-new-session](resources/img/gh-app-new-session.png)	
 
 > [!TIP]
 > **Plan** mode lets Copilot inspect the available context and propose an implementation approach before creating anything. You can correct assumptions and agree on the complete solution before implementation begins. For details, see [Use the GitHub Copilot plan agent](https://learn.microsoft.com/en-us/visualstudio/ide/copilot-plan-agent?view=visualstudio).
@@ -535,7 +535,7 @@ You first review the full implementation plan. After you approve it, the agent c
 
 	**Note:** You can also copy these files into the working folder (`C:\FabCon\Lab2_Part2`) and simply refer their name in the prompt.
 
-6. Enter and run the following prompt, replacing the [YOUR_WORKSPACE_NAME] with the name of your workspace:
+6. Enter and run the following prompt, replacing the [YOUR_WORKSPACE_NAME] with the name of your workspace created previously:
 
 	```text
 	Create a Direct Lake semantic model named **Sales Model** using lakehouse **Lakehouse_01** in workspace **[YOUR_WORKSPACE_NAME]**.
@@ -568,8 +568,9 @@ You first review the full implementation plan. After you approve it, the agent c
 
 	**Expected planning outcome**
 
-	- The agent loads the semantic model and report authoring skills required for the task.
+	- The agent loads the semantic model and report authoring skills for guidance.
 	- The agent uses [`team-rules.md`](resources/team-rules.md) for semantic model standards and [`contoso-design-standards.png`](resources/contoso-design-standards.png) for report design guidance.
+	- The agent uses available tools such as **AZ CLI** to confirm the existence of the Fabric workspace, lakehouse and analyze its schema.
 	- The agent produces a plan for the complete solution without creating any Fabric items.
 	- The plan creates the semantic model before the reports and prevents report work from changing the completed model.
 	- The plan assigns one isolated subagent to each report style so both variations can be built in parallel.	
@@ -584,7 +585,7 @@ You first review the full implementation plan. After you approve it, the agent c
 
 	- The agent discovers the Fabric workspace, lakehouse, and required metadata.
 	- The agent uses the Power BI Authoring MCP server to create the `Sales Model` Direct Lake semantic model over the selected lakehouse tables.
-	- The model follows `team-rules.md`, including friendly table names, explicit measures, hidden base columns, relationships, and the `About` table.
+	- The model follows `team-rules.md`, including friendly table names, explicit measures, hidden base columns, relationships, and the `About` table from the `team-rules.md` instructions.
 	- After the model is complete, the agent starts two subagents in isolated background sessions, one for each report style.
 	- Each subagent uses the completed semantic model without modifying it and saves a separate single-page report in the workspace.
 		
