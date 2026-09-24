@@ -556,7 +556,7 @@ You first review the full implementation plan. After you approve it, the agent c
 	- **Style 1:** KPI cards across the top; trends and category breakdowns below.
 	- **Style 2:** KPI cards on the left; trends and category breakdowns on the right.
 
-	Assign one subagent to each report style as nested sessions. Save both reports separately in the workspace for my review in the workspace.
+	Assign one subagent to each report style as nested sessions. In the end, publish both reports separately to the Fabric workspace for my review.
 
 	Do not modify the semantic model after creation. Use the available fields and measures, applying best judgment to select the most relevant executive insights.
 
