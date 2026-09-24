@@ -53,7 +53,7 @@ This lab requires the following:
 
 * GitHub Copilot CLI
 * GitHub Copilot app
-* Power BI Desktop
+* Power BI Desktop (August 2026 or later release)
 * Visual Studio Code
 * Git for Windows
 * Node.js and npm
@@ -170,9 +170,13 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
    
 	![pbid-open-vscode](resources/img/pbid-open-vscode.png)
 
-   Confirm that the folder contains the `sales.SemanticModel` and `sales.Report` folders.
+   	Confirm that the folder contains the `sales.SemanticModel` and `sales.Report` folders.
 
 	![vscode-pbip](resources/img/vscode-pbip.png)
+
+	If prompted, **Trust** the folder.
+
+	![vscode-trust-folder](resources/img/vscode-trust-folder.png)
 
 5. Click the **Source Control** (`CTRL+SHIFT+G`) tab and select **Initialize Repository**. 
 6. Commit your changes with a message of your choice. For example: `Initial PBIP baseline`
@@ -217,9 +221,16 @@ Writing documentation from scratch and keeping it current both take time. AI can
 #### Steps
 
 1. In **Visual Studio Code**, open **GitHub Copilot Chat** (`CTRL+ALT+I`).
-2. Set the chat mode to **Agent** and in the model picker, select the reasoning model `GPT-6 Sol` and thinking effort `Medium`.	
+2. Choose the **Copilot** harness in **Set session target**
+   
+   ![vscode-copilot-harness](resources/img/vscode-copilot-harness.png)
 
-	![vscode-copilot-chat](resources/img/vscode-copilot-chat-2.png)	
+> [!NOTE]
+> Use the **Copilot** harness for this workshop. It provides a more consistent experience with other GitHub Copilot surfaces, including GitHub Copilot CLI and the GitHub Copilot app, so the agent behavior, skills, plugins, MCP tools, and model choices remain familiar as you move between them. Use the **Local** harness when a task specifically requires VS Code extension tools or a model configured locally in VS Code. For more information, see [Choose and use an agent harness](https://code.visualstudio.com/docs/agents/run/agent-harnesses).
+
+2. Set the chat mode to **Agent**, select the model `GPT-6 Sol` and thinking effort `Medium`.	
+
+	![vscode-copilot-chat-model-pick](resources/img/vscode-copilot-chat-model-pick.png)	
 
 > [!IMPORTANT]
 > **Choose the model and thinking effort based on the complexity of the task.**
@@ -246,6 +257,7 @@ Writing documentation from scratch and keeping it current both take time. AI can
 	- The agent reads `AGENTS.md` and loads the local `powerbi-documentation` skill. LLMs load skills on demand, and the instruction in `AGENTS.md` reinforces this requirement for certain tasks.
 	- The agent follows the documentation structure and standards defined by the `powerbi-documentation` skill.
 	- The agent loads semantic model and report skills from `powerbi-authoring` plugin. The skills include guidance on how to properly read and analyze semantic model and report metadata.		
+	- The agent uses the Power BI Authoring MCP tools to inspect the semantic model metadata.
 	- The agent uses the Power BI report CLI tools to capture screenshots from the report open in Power BI Desktop.
 	- A `docs/` folder is created with a catalog and one Markdown file for each semantic model and report in the codebase.
 	- The generated documentation includes the model structure, measures, report flow, filters, and a screenshot of every report page.
@@ -257,14 +269,24 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 	![vscode-copilot-tool-permissions-1](resources/img/vscode-copilot-tool-permissions-1.png)	
 
-	You can **Allow all** tools or switch the agent mode to **Autopilot** and **Allow all** permissions so it can run the required tools and continue until the task is complete without prompting you at every step.
+	![vscode-copilot-tool-permissions-2](resources/img/vscode-copilot-tool-permissions-2.png)
+
+	You can **Allow** individually and be in control of what the agent executes at granular level. Or switch the agent mode to **Autopilot** and **Allow all** permissions so it can run the required tools and continue until the task is complete without prompting you at every step.
 
 	![vscode-copilot-chat-auto-pilot](resources/img/vscode-copilot-chat-auto-pilot.png)
 
-> [!IMPORTANT]
-> **Autopilot** is an agent mode, not a permission level. It lets the agent work autonomously until the task is complete by auto-approving tools, retrying errors, and answering questions that would otherwise block progress. **Allow all** and **Autopilot** skip confirmation for potentially destructive actions, including file edits, terminal commands, and external tool calls. Use Autopilot or Allow All only in a trusted workspace and when you understand the security implications. For details, see [How Autopilot works](https://code.visualstudio.com/docs/agents/run/approvals#_how-autopilot-works).
+	**Interactive vs. Autopilot**
 
-5. Open the generated documentation Markdown files in `docs/` and preview them with **Ctrl+Shift+V**.
+	- **Interactive:** The agent pauses for your approval or input as it works. For example: `Agent → action → ask you → Agent → action → ask you`. You can inspect each tool call before it runs.
+	- **Autopilot:** The agent keeps working through the task, including retries and validation, without stopping at each approval or question. For example: `Agent → action → action → error → fix → action → validate → done`.
+
+	Both modes still need you to review the final documentation and changes. **Allow all** removes tool approval prompts, but is not the same as switching to Autopilot mode.
+
+
+> [!IMPORTANT]
+> **Autopilot** is an agent mode, not a permission level. It lets the agent work autonomously until the task is complete by auto-approving tools, retrying errors, and answering questions that would otherwise block progress. **Allow all** and **Autopilot** skip confirmation, including file edits, terminal commands, and external tool calls. Use Autopilot or Allow All only in a trusted workspace and when you understand the security implications. For details, see [How Autopilot works](https://code.visualstudio.com/docs/agents/run/approvals#_how-autopilot-works).
+
+5. Open and review the generated documentation Markdown files in `docs/` and preview them with **Ctrl+Shift+V**.
 6. Open the **Source Control** (`CTRL+SHIFT+G`) and commit all changes.
 
 #### Reflection
@@ -313,6 +335,8 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 > [!TIP]
 > **Apply external changes** shipped with the August 2026 Power BI Desktop release. It detects and reloads PBIP files changed outside Power BI Desktop, whether those changes were made manually in Visual Studio Code or generated by AI agents and tools. Learn more in [Edit Power BI Desktop project files in Visual Studio Code](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-external-editing).
+>
+> If you don't see the **Apply external changes** banner, make sure that **Enable external tool access to Power BI Desktop through secure local APIs** is enabled under **File** > **Options** > **Security**. In Power BI Desktop releases earlier than September 2026, this option is under **Preview features**.
 
 4. Select a measure in the model view and review the AI generated description infused with context from the [`company-context.md`](resources/company-context.md).
 5. Open the **Source Control tab** in Visual Studio Code (`CTRL+SHIFT+G`) and review the Git diffs. Confirm that the changed lines are description properties only, and that no DAX expression was modified. In the end **Commit** the changes to the repo.
@@ -324,14 +348,13 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 #### Reflection
 
-* Which descriptions would you keep as written, and which would you rewrite? Could you include context in [`AGENTS.md`](resources/AGENTS.md) or [`company-context.md`](resources/company-context.md) to make it better?
 * What other team knowledge would be worth storing as a context file in the repository?
 * Without Git, how would you determine exactly what the agent changed?
 * How would you safely and quickly revert an agent change that produced the wrong result?
 
 ### 1.5 Add currency conversion with a calculation group
 
-✅ **Goal**: Extend the semantic model with a new source table and a calculation group so sales can be analyzed in multiple currencies.
+✅ **Goal**: Extend the semantic model with a new source table from a CSV file and a calculation group so sales can be analyzed in multiple currencies.
 
 #### Steps
 
@@ -374,9 +397,12 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
     ![pbi-desktop-current-report](resources/img/pbi-desktop-current-report.png)
 
-2. Select **Save** in **Power BI Desktop** to ensure there are no pending changes. The agent will modify the PBIR files and reload the report automatically, but Power BI Desktop blocks the reload if it has unsaved changes.
+2. Select **Save** in **Power BI Desktop** to ensure there are no pending changes.
+
+> [!IMPORTANT]
+> The agent might refuse to reload the report if the Power BI Desktop CLI reports `unsavedChanges`. This usually means that Power BI Desktop contains changes that have not been saved to the PBIP files. Stopping prevents the agent from overwriting your work. In this exercise we know that agent is the only one modifying the report and because of that we state explicitly in the prompt that it can proceed despite the warning.
    
-3. Start a **new chat session** and pick model `GPT-6 Sol` and thinking effort `Medium`.
+3. Start a **new chat session** in **Visual Studio Code**, pick model `GPT-6 Sol` and thinking effort `Medium`.
 
 4. Enter the following prompt to use AI to help you make changes to the report.
 
@@ -393,16 +419,13 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 	- The agent loads the `powerbi-report-cli` skill.
 	- The agent reads and modify the PBIR *.json files
-	- The agent uses both the `powerbi-report-author` CLI to validate schema changes and preview the report with screenshots in **Power BI Desktop** for validation.
-
-> [!IMPORTANT]
-> The agent might refuse to reload the report if the Power BI Desktop CLI reports `unsavedChanges`. This usually means that Power BI Desktop contains changes that have not been saved to the PBIP files. Stopping prevents the agent from overwriting your work. In this exercise we know that agent is the only one modifying the report and because of that we state explicitly in the prompt that it can proceed despite the warning.
+	- The agent uses the `powerbi-report-author` CLI to validate schema changes and preview the report with screenshots using the [Power BI Desktop Bridge](https://learn.microsoft.com/en-us/power-bi/developer/agentic/power-bi-desktop-bridge-overview)
 
 5. Switch to **Power BI Desktop** and confirm that titles are removed and the visuals are aligned.
    
 	The report should look like the following. But not necessarily the same.
 
-	![pbi-desktop-after-report](resources/img/pbi-desktop-after-report.png)
+	![pbi-desktop-after-report](resources/img/pbi-desktop-after-report.png)	
 
 6. Open **Source Control** (`CTRL+SHIFT+G`) and commit the changes.
 

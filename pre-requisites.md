@@ -24,7 +24,7 @@ Participants should be able to:
 
 - [GitHub Copilot CLI](https://github.com/features/copilot/cli/)
 - [GitHub Copilot App](https://github.com/features/ai/github-app)
-- [Power BI Desktop](https://pbi.onl/download)
+- [Power BI Desktop (August 2026 or later release)](https://pbi.onl/download)
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - [Git for Windows](https://gitforwindows.org/)
 - [Node.js and npm](https://nodejs.org/en/download/)
