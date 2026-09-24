@@ -140,9 +140,8 @@ All participants should use the workshop-provided **Contoso Sales** semantic mod
 
 4. Confirm the folder selection.
 5. In the chat pane, open the model selector.
-6. Set **Model** to **GPT-6 Sol**.
-7. Set **Effort** to **Medium**.
-
+6. Set **Model** to **GPT-6 Sol** and **Effort** to **Medium**.
+	
 	![Configure the GitHub Copilot model and effort](resources/img/copilot-model-settings.png)
 
 ### Scaffold and start the Fabric app
