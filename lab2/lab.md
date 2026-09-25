@@ -640,7 +640,9 @@ You first review the full implementation plan. After you approve it, the agent c
 
 * How did the time and cost of using the agent compare with completing the entire task yourself?
 * What additional instructions would you add to the prompt, `team-rules.md`, or another context file to help the agent meet your development quality standards?
+* The agent needs to understand the data source before it can build a useful model. In this exercise, it can inspect the Lakehouse schema through Fabric APIs. With other data sources, give the agent a way to connect to and inspect the source, or provide context such as a Markdown or CSV file describing its tables, columns, and relationships.
 * For real projects, point agents to a development workspace and use [Fabric Git integration](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration) and [Fabric CI/CD](https://learn.microsoft.com/en-us/fabric/cicd/cicd-overview) to promote reviewed changes. Do not point agents directly at a production workspace.
+
 
 ## ✅ Wrap-up
 
