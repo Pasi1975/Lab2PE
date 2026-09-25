@@ -189,6 +189,10 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
 
 	![vscode-init-git-pbip](resources/img/vscode-init-git-pbip.png)
 
+	You may get a popup to stage your changes first, select **Always**:
+
+	![vscode-git-stage-popup](resources/img/vscode-git-stage-popup.png)
+
 > [!IMPORTANT]
 > PBIP stores the semantic model as TMDL files and the report as PBIR files. Both are plain text, so Git can show you exactly what the agent changed. This is your safety net: review the diff after every prompt, keep what you want, and discard the rest with **Discard changes** in the Source Control view.    	
 
