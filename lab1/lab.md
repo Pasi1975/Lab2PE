@@ -1,4 +1,4 @@
-# Lab - Agentic Web Modeling with Copilot
+# Lab 1 - Agentic Web Modeling with Copilot
 
 ⏱️ **Total duration:** 60 minutes
 

@@ -1,4 +1,4 @@
-# Lab - Personalized Power BI Agents
+# Lab 2 - Personalized Power BI Agents
 
 ⏱️ **Total duration:** 120 minutes
 
@@ -103,14 +103,20 @@ Clone or download as zip the entire repository to your machine, for example unde
 ### Ensure Visual Studio Code is ready
 
 1. Open **Visual Studio Code**.
-2. Select [Open the AI features setting](vscode://settings/chat.disableAIFeatures) and ensure that **Disable AI Features** is cleared.
-	- **Note:** If the link does not open from your Markdown viewer, open **Settings** in Visual Studio Code and search for `chat.disableAIFeatures`.
+2. Click the gear icon in the lower-left corner > **Settings** (`CTRL+,`), search for `Disable AI Features` and make sure Disable AI Features is unchecked (off).
+   
+	![vs-code-disable-ai-features](resources/img/vs-code-disable-ai-features.png)
+
 3. Open **GitHub Copilot Chat** (`CTRL+ALT+I`) and confirm that the chat view is accessible.
 4. You may need to sign-in with your GitHub Copilot account.
 	
 	![vscode-github-copilot-signin](resources/img/vscode-github-copilot-signin.png)	
 
-5. Open the chat settings and confirm the `powerbi-authoring` plugin is installed.
+5. In **GitHub Copilot Chat** pane, click the gear icon in the top-right to open the **Agent customizations**
+
+	![vscode-github-copilot-agent-customizations](resources/img/vscode-github-copilot-agent-customizations.png)
+   
+6. Select **Plugins** tab and confirm the `powerbi-authoring` plugin is installed.
    
 	![vscode-chat-plugin-installed](resources/img/vscode-chat-plugin-installed.png)	
 
@@ -170,13 +176,13 @@ In this part you work with an existing Power BI report. You convert it to PBIP, 
    
 	![pbid-open-vscode](resources/img/pbid-open-vscode.png)
 
-   	Confirm that the folder contains the `sales.SemanticModel` and `sales.Report` folders.
-
-	![vscode-pbip](resources/img/vscode-pbip.png)
-
 	If prompted, **Trust** the folder.
 
 	![vscode-trust-folder](resources/img/vscode-trust-folder.png)
+
+   	Confirm that the folder contains the `sales.SemanticModel` and `sales.Report` folders.
+
+	![vscode-pbip](resources/img/vscode-pbip.png)
 
 5. Click the **Source Control** (`CTRL+SHIFT+G`) tab and select **Initialize Repository**. 
 6. Commit your changes with a message of your choice. For example: `Initial PBIP baseline`
@@ -559,11 +565,6 @@ You first review the full implementation plan. After you approve it, the agent c
 	Assign one subagent to each report style as nested sessions. In the end, publish both reports separately to the Fabric workspace for my review.
 
 	Do not modify the semantic model after creation. Use the available fields and measures, applying best judgment to select the most relevant executive insights.
-
-	IMPORTANT:
-		When calling `powerbi-report-author preview` with `--host service` and the preview renders an empty/blank report. Stop and apply the following patch:
-
-		The bundled powerbi-client drops `reportDefinition`, idempotently patch the installed CLI `dist\cli.js` and `dist\preview\index.js` before `service.createReport(...)` by wrapping `Create.prototype.create` and copying `this.config.reportDefinition` to `this.createConfig.reportDefinition`.
 	```
 
 	**Expected planning outcome**

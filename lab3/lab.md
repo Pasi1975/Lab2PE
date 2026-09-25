@@ -1,4 +1,4 @@
-# Lab - Build Data Apps with Fabric
+# Lab 3 - Build Data Apps with Fabric
 
 ⏱️ **Total duration:** 90 minutes
 
