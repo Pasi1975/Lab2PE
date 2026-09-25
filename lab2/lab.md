@@ -548,7 +548,7 @@ You first review the full implementation plan. After you approve it, the agent c
 6. Enter and run the following prompt, replacing the [YOUR_WORKSPACE_NAME] with the name of your workspace created previously:
 
 	```text
-	Create a Direct Lake semantic model named **Sales Model** using lakehouse **Lakehouse_01** in workspace **[YOUR_WORKSPACE_NAME]**.
+	Create a Direct Lake semantic model named `Sales Model` using lakehouse `Lakehouse_01` in workspace `[YOUR_WORKSPACE_NAME]`.
 
 	Include these tables:
 
@@ -569,6 +569,8 @@ You first review the full implementation plan. After you approve it, the agent c
 	Assign one subagent to each report style as nested sessions. In the end, publish both reports separately to the Fabric workspace for my review.
 
 	Do not modify the semantic model after creation. Use the available fields and measures, applying best judgment to select the most relevant executive insights.
+
+	Store the report preview screenshots in current working folder in folder `./_screenshots/`
 	```
 
 	**Expected planning outcome**
