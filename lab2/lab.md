@@ -622,17 +622,21 @@ You first review the full implementation plan. After you approve it, the agent c
 
 	![gh-app-nested-sessions-rp-preview](resources/img/gh-app-nested-sessions-rp-preview.png)
 
-10. Open `Sales Model` in the Fabric workspace. Confirm that the tables, relationships, hidden base columns, explicit measures, and `About` table follow the team rules.
+10. At this stage you should have the model and the two reports published to your workspace. 
+
+	![fabric-workspace-model-reports](resources/img/fabric-workspace-model-reports.png)
+
+11. Open `Sales Model` in the Fabric workspace. Confirm that the tables, relationships, hidden base columns, explicit measures, and `About` table follow the team rules.
 
 	![fabric-created-semantic-model](resources/img/fabric-created-semantic-model.png)
 
-11. Open both reports in the Fabric portal. Confirm that each report has one page, follows the assigned layout, and uses the provided design standards. Compare the two variations.
+12. Open both reports in the Fabric portal. Confirm that each report has one page, follows the assigned layout, and uses the provided design standards. Compare the two variations.
     
 	| Style 1 | Style 2 |
 	| --- | --- |
 	| ![Report style 1](resources/img/fabric-created-report-style-1.png) | ![Report style 2](resources/img/fabric-created-report-style-2.png) |
 
-12. Select the session name at the top of the window to review the total spend and token usage for the parent session and its subagents.
+13. Select the session name at the top of the window to review the total spend and token usage for the parent session and its subagents.
 	
 	![gh-app-session-context](resources/img/gh-app-session-context.png)
 
