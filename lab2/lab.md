@@ -451,7 +451,7 @@ Writing documentation from scratch and keeping it current both take time. AI can
 
 In this part you start from nothing. You create a Fabric workspace, load a Lakehouse with a notebook, and then build a Direct Lake semantic model and two reports using the **GitHub Copilot app**.
 
-There are no local files in this part. The **GitHub Copilot app** is a good fit for that: it is more approachable than Visual Studio Code or the CLI. Underneath it is the same GitHub Copilot orchestrator, the same skills, and the same MCP capabilities, so the experience stays consistent. Which surface you use is a matter of preference.
+There are no PBIP files or Code IDE in this part. The **GitHub Copilot app** is more approachable than Visual Studio Code or the CLI. Underneath it is the same GitHub Copilot orchestrator, the same skills, and the same MCP capabilities, so the experience stays consistent. Which surface you use is a matter of preference.
 
 ### 2.1 Prepare the Fabric Workspace
 
@@ -475,7 +475,10 @@ There are no local files in this part. The **GitHub Copilot app** is a good fit 
    
 	![fabric-notebook-lakehouse-create](resources/img/fabric-notebook-lakehouse-create.png)
 
-9. Go back to the workspace and confirm that a Lakehouse named `Lakehouse_01` was created.
+9. Go back to the workspace, refresh the page and confirm that a Lakehouse named `Lakehouse_01` was created.
+    
+	![fabric-workspace-lakehouse-created](resources/img/fabric-workspace-lakehouse-created.png)
+
 10. Open the Lakehouse and confirm that it contains the following tables:
 
 	* `dimension_city`
@@ -537,7 +540,7 @@ You first review the full implementation plan. After you approve it, the agent c
 	![gh-app-new-session](resources/img/gh-app-new-session.png)	
 
 > [!TIP]
-> **Plan** mode lets Copilot inspect the available context and propose an implementation approach before creating anything. You can correct assumptions and agree on the complete solution before implementation begins. For details, see [Use the GitHub Copilot plan agent](https://learn.microsoft.com/en-us/visualstudio/ide/copilot-plan-agent?view=visualstudio).
+> **Plan** mode lets Copilot inspect the available context, ask clarifying questions and propose an implementation approach before creating anything. You can correct assumptions and agree on the complete solution before implementation begins. For details, see [Use the GitHub Copilot plan agent](https://learn.microsoft.com/en-us/visualstudio/ide/copilot-plan-agent?view=visualstudio).
 
 5. Add [resources/team-rules.md](resources/team-rules.md) and [resources/contoso-design-standards.png](resources/contoso-design-standards.png) to the session context.	
 
@@ -592,7 +595,7 @@ You first review the full implementation plan. After you approve it, the agent c
 
 	- The agent discovers the Fabric workspace, lakehouse, and required metadata.
 	- The agent uses the Power BI Authoring MCP server to create the `Sales Model` Direct Lake semantic model over the selected lakehouse tables.
-	- The model follows `team-rules.md`, including friendly table names, explicit measures, hidden base columns, relationships, and the `About` table from the `team-rules.md` instructions.
+	- The model follows `team-rules.md`, including friendly table names, explicit measures, hidden base columns, relationships, and the `About` table from the `team-rules.md` instructions if you decided to keep it.
 	- After the model is complete, the agent starts two subagents in isolated background sessions, one for each report style.
 	- Each subagent uses the completed semantic model without modifying it and saves a separate single-page report in the workspace.
 		
