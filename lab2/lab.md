@@ -573,7 +573,7 @@ You first review the full implementation plan. After you approve it, the agent c
 
 	Do not modify the semantic model after creation. Use the available fields and measures, applying best judgment to select the most relevant executive insights.
 
-	Store the report preview screenshots in current working folder in folder `./_screenshots/`
+	Use the `powerbi-report-author` headless browser for screenshots and save them in the working folder `./_screenshots/`.
 	```
 
 	**Expected planning outcome**
