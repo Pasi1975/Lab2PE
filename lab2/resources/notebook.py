@@ -6,12 +6,12 @@ GITHUB_BASE_URL = "https://raw.githubusercontent.com/RuiRomano/workshop-fabcon-2
 
 # File paths relative to the repository root
 CSV_FILES = [
-    "assets/sample-data/dimension_city.csv",
-    "assets/sample-data/dimension_customer.csv",    
-    "assets/sample-data/fact_sale.csv",    
-    "assets/sample-data/dimension_employee.csv",    
-    "assets/sample-data/dimension_stock_item.csv",    
-    "assets/sample-data/dimension_date.csv",    
+    "resources/sample-data/dimension_city.csv",
+    "resources/sample-data/dimension_customer.csv",    
+    "resources/sample-data/fact_sale.csv",    
+    "resources/sample-data/dimension_employee.csv",    
+    "resources/sample-data/dimension_stock_item.csv",    
+    "resources/sample-data/dimension_date.csv",    
 ]
 
 import re
