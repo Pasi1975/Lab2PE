@@ -2,7 +2,7 @@
 LAKEHOUSE_NAME = "Lakehouse_01"
 
 # GitHub repository containing the CSV files
-GITHUB_BASE_URL = "https://raw.githubusercontent.com/RuiRomano/powerbi-agentic-plugins/main"
+GITHUB_BASE_URL = "https://raw.githubusercontent.com/RuiRomano/workshop-fabcon-26-bcn/main"
 
 # File paths relative to the repository root
 CSV_FILES = [
