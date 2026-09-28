@@ -1,6 +1,7 @@
 table Store
 	lineageTag: 54d5f884-12db-4e03-a120-08cd725db2c4
 
+	/// Counts store records in the current filter context. Use it to compare the active retail footprint across countries and store formats, including the footprint used for monthly Sales per Square Meter reviews.
 	measure '# Stores' = COUNTROWS('Store')
 		formatString: #,##0
 		lineageTag: 868df9c8-f579-47d1-a776-3d29121df7c7
