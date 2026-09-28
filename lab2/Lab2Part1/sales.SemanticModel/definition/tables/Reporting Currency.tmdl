@@ -1,0 +1,117 @@
+table 'Reporting Currency'
+
+	/// Converts additive monetary sales measures to EUR, USD, or GBP using the latest available exchange rate on or before each sales date. Non-monetary and non-additive measures are left unchanged.
+	calculationGroup
+		precedence: 10
+
+		/// Preserves the selected measure when multiple reporting currencies are selected.
+		multipleOrEmptySelectionExpression = SELECTEDMEASURE()
+
+			formatStringDefinition = SELECTEDMEASUREFORMATSTRING()
+
+		/// Preserves the selected measure when no reporting currency is selected.
+		noSelectionExpression = SELECTEDMEASURE()
+
+			formatStringDefinition = SELECTEDMEASUREFORMATSTRING()
+
+		/// Converts Sales Amount, Margin, and Cost to euros using the latest available rate on or before each sales date.
+		calculationItem EUR =
+				VAR _TargetCurrency = "EUR"
+				RETURN
+				    IF (
+				        ISSELECTEDMEASURE ( [Sales Amount], [Margin], [Cost] ),
+				        SUMX (
+				            SUMMARIZE ( 'Sales', 'Sales'[Order Date], 'Sales'[Currency Code] ),
+				            VAR _SalesDate = 'Sales'[Order Date]
+				            VAR _SourceCurrency = 'Sales'[Currency Code]
+				            VAR _ExchangeRate =
+				                MAXX (
+				                    TOPN (
+				                        1,
+				                        FILTER (
+				                            ALL ( 'Currency Exchange' ),
+				                            'Currency Exchange'[From Currency] = _SourceCurrency
+				                                && 'Currency Exchange'[To Currency] = _TargetCurrency
+				                                && 'Currency Exchange'[Date] <= _SalesDate
+				                        ),
+				                        'Currency Exchange'[Date], DESC
+				                    ),
+				                    'Currency Exchange'[Exchange Rate]
+				                )
+				            RETURN
+				                CALCULATE ( SELECTEDMEASURE () ) * _ExchangeRate
+				        ),
+				        SELECTEDMEASURE ()
+				    )
+
+			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Sales Amount], [Margin], [Cost] ), "€ #,##0.00;(€ #,##0.00);€ #,##0.00", SELECTEDMEASUREFORMATSTRING () )
+
+		/// Converts Sales Amount, Margin, and Cost to US dollars using the latest available rate on or before each sales date.
+		calculationItem USD =
+				VAR _TargetCurrency = "USD"
+				RETURN
+				    IF (
+				        ISSELECTEDMEASURE ( [Sales Amount], [Margin], [Cost] ),
+				        SUMX (
+				            SUMMARIZE ( 'Sales', 'Sales'[Order Date], 'Sales'[Currency Code] ),
+				            VAR _SalesDate = 'Sales'[Order Date]
+				            VAR _SourceCurrency = 'Sales'[Currency Code]
+				            VAR _ExchangeRate =
+				                MAXX (
+				                    TOPN (
+				                        1,
+				                        FILTER (
+				                            ALL ( 'Currency Exchange' ),
+				                            'Currency Exchange'[From Currency] = _SourceCurrency
+				                                && 'Currency Exchange'[To Currency] = _TargetCurrency
+				                                && 'Currency Exchange'[Date] <= _SalesDate
+				                        ),
+				                        'Currency Exchange'[Date], DESC
+				                    ),
+				                    'Currency Exchange'[Exchange Rate]
+				                )
+				            RETURN
+				                CALCULATE ( SELECTEDMEASURE () ) * _ExchangeRate
+				        ),
+				        SELECTEDMEASURE ()
+				    )
+
+			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Sales Amount], [Margin], [Cost] ), "$ #,##0.00;($ #,##0.00);$ #,##0.00", SELECTEDMEASUREFORMATSTRING () )
+
+		/// Converts Sales Amount, Margin, and Cost to British pounds using the latest available rate on or before each sales date.
+		calculationItem GBP =
+				VAR _TargetCurrency = "GBP"
+				RETURN
+				    IF (
+				        ISSELECTEDMEASURE ( [Sales Amount], [Margin], [Cost] ),
+				        SUMX (
+				            SUMMARIZE ( 'Sales', 'Sales'[Order Date], 'Sales'[Currency Code] ),
+				            VAR _SalesDate = 'Sales'[Order Date]
+				            VAR _SourceCurrency = 'Sales'[Currency Code]
+				            VAR _ExchangeRate =
+				                MAXX (
+				                    TOPN (
+				                        1,
+				                        FILTER (
+				                            ALL ( 'Currency Exchange' ),
+				                            'Currency Exchange'[From Currency] = _SourceCurrency
+				                                && 'Currency Exchange'[To Currency] = _TargetCurrency
+				                                && 'Currency Exchange'[Date] <= _SalesDate
+				                        ),
+				                        'Currency Exchange'[Date], DESC
+				                    ),
+				                    'Currency Exchange'[Exchange Rate]
+				                )
+				            RETURN
+				                CALCULATE ( SELECTEDMEASURE () ) * _ExchangeRate
+				        ),
+				        SELECTEDMEASURE ()
+				    )
+
+			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Sales Amount], [Margin], [Cost] ), "£ #,##0.00;(£ #,##0.00);£ #,##0.00", SELECTEDMEASUREFORMATSTRING () )
+
+	column 'Reporting Currency'
+		dataType: string
+
+	partition 'Partition_Reporting Currency' = calculationGroup
+
