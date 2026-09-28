@@ -4,8 +4,8 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 0,
-        "y": 6.6860465116279073
+        "x": 490.75581395348837,
+        "y": 510.81395348837208
       },
       "nodes": [
         {
@@ -72,6 +72,31 @@
             "width": 234
           },
           "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1157.9309059858797,
+            "y": 570.66709433333369
+          },
+          "nodeIndex": "Currency Exchange",
+          "nodeLineageTag": "37ffb5db-66e4-4f31-8c94-0531a31ef55a",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1441.9309059858797,
+            "y": 606.66709433333369
+          },
+          "nodeIndex": "Reporting Currency",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",
