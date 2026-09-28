@@ -1,4 +1,5 @@
 table 'Reporting Currency'
+	lineageTag: 28aa66fb-f30f-4102-a446-f0ae4eead86f
 
 	/// Converts additive monetary sales measures to EUR, USD, or GBP using the latest available exchange rate on or before each sales date. Non-monetary and non-additive measures are left unchanged.
 	calculationGroup
@@ -112,6 +113,7 @@ table 'Reporting Currency'
 
 	column 'Reporting Currency'
 		dataType: string
+		lineageTag: d77d1ba4-e250-4e70-81b5-791cc51b14c5
 
 	partition 'Partition_Reporting Currency' = calculationGroup
 
